@@ -1,0 +1,31 @@
+{
+  "name": "katheryne",
+  "version": "1.0.0",
+  "description": "A Discord BOT that supports connecting, gaming, and remote computer management via Discord. Currently, it only supports Linux. ",
+  "keywords": [
+    "nodejs",
+    "discord-bot"
+  ],
+  "homepage": "https://github.com/Serena1432/Katheryne#readme",
+  "bugs": {
+    "url": "https://github.com/Serena1432/Katheryne/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Serena1432/Katheryne.git"
+  },
+  "license": "MIT",
+  "author": "Serena1432",
+  "type": "commonjs",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/main.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.18.0",
+    "dotenv": "^16.4.7",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}
