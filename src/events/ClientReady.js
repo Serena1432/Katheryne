@@ -1,4 +1,5 @@
 const { REST, Routes, Client } = require('discord.js');
+const Computer = require('../classes/Computer');
 
 /**
  * 
@@ -17,4 +18,10 @@ module.exports = async (client) => {
             console.error(error);
         }
     })();
+    
+    // Initialize computer integrations
+    Computer.initialize();
+    console.log(`${Computer.hostname} (${Computer.xdgSessionType}) integrated`);
+    if (!Computer.isRoot()) console.warn("No root access provided for this process. Some process will not be able to run.");
+    console.log(Computer.inputDevices());
 };

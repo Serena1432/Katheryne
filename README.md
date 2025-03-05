@@ -47,7 +47,6 @@ To protect privacy, some features will only be available when a **whitelisted ga
 Commands marked with (*) will require root permissions to execute. You can do one of these ways below:
 
 * Running the BOT with `sudo` permissions
-* Type the sudo password with the `SUDO_PASSWORD` environment variable (**NOT RECOMMENDED!**)
 * Grant the permissions for specific commands used by the BOT
 * Or don't use these commands at all
 
