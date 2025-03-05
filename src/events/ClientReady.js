@@ -21,7 +21,6 @@ module.exports = async (client) => {
     
     // Initialize computer integrations
     Computer.initialize();
-    console.log(`${Computer.hostname} (${Computer.xdgSessionType}) integrated`);
-    if (!Computer.isRoot()) console.warn("No root access provided for this process. Some process will not be able to run.");
-    console.log(Computer.inputDevices());
+    console.log(`${Computer.hostname} (${Computer.xdgSessionType}) integrated as user "${Computer.user}", ${Computer.isRoot() ? "with" : "without"} root access.`);
+    if (!Computer.isRoot()) console.warn("No root access provided for this process. Some features will not be able to run.");
 };

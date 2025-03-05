@@ -1,5 +1,7 @@
 const child_process = require("child_process");
 const os = require("os");
+const si = require("systeminformation");
+const osu = require("node-os-utils");
 
 var Computer = {
     _inputLockInterval: null,
@@ -61,10 +63,10 @@ var Computer = {
         if (xinput.error || xinput.stderr.toString().split("\n")[0]) throw new Error(`"xinput list" command threw an unexpected error:\n${xinput.error || xinput.stderr.toString()}`);
         var lines = xinput.stdout.toString().split("\n");
         for (var line of lines) {
-            const match = line.toString().match(/⎜?\s*(.+?)\s+id=(\d+).*?\[(slave|master)\s+(keyboard|pointer)/i);
+            const match = line.toString().match(/⎜?\s*(.+?)\s+id=(\d+).*?\[(slave|master|floating)\s+(keyboard|pointer|slave)/i);
             if (match) {
-                const [, name, id, , type] = match;
-                devices.push({id: Number(id), name: name.substring(2), type: type === "keyboard" ? "keyboard" : "mouse"});
+                const [, name, id, status, type] = match;
+                devices.push({id: Number(id), name: name.substring(2), type: status == "floating" ? "floating" : (type === "keyboard" ? "keyboard" : "mouse")});
             }
         }
         return devices;
@@ -145,7 +147,7 @@ var Computer = {
      * @param {number} id event ID of the device (/dev/input/event*)
      */
     lockWaylandInputCmd: function(id) {
-        return `sudo evtest --grab /dev/input/event2 >/dev/null`
+        return `sudo evtest --grab /dev/input/event${id} >/dev/null`;
     },
     /**
      * Lock the computer's physical input devices. Requires root permissions if using Wayland.
@@ -191,9 +193,104 @@ var Computer = {
             }
         }
     },
+    /**
+     * Set the computer's display brightness.
+     * @param {number} pc % of the brightness you want to set
+     */
+    setBrightness: function(pc) {
+        this.execSync(`brightnessctl set ${pc}%`);
+    },
+    /**
+     * Check if a service is active.
+     * @param {string} name The service name
+     */
+    checkServiceActive: function(name) {
+        var result = this.spawnSync(`sudo`, ["-u", this.user, "-E", "systemctl", "--user", "is-active", "--quiet", name]);
+        return (result.status == 0);
+    },
+    /**
+     * Check the audio system the computer is using. This function is not thoroughly tested.
+     */
+    audioSystem: function() {
+        var services = ["pipewire", "pulseaudio"];
+        for (var service of services) {
+            if (this.checkServiceActive(service)) return service;
+        }
+        return "alsa";
+    },
+    setVolume: function(value) {
+        var command = `wpctl set-volume @DEFAULT_AUDIO_SINK@ ${value}%`;
+        switch (this.audioSystem()) {
+            case "pulseaudio": {
+                command = `pactl set-sink-volume @DEFAULT_SINK@ ${value}%`;
+                break;
+            }
+            case "alsa": {
+                command = `amixer set Master ${value}%`;
+                break;
+            }
+        }
+        this.execSync(command);
+    },
+    /**
+     * Get computer statictics
+     */
+    stats: async function() {
+        var system = await si.system(),
+            cpu = await si.cpu(),
+            cpuTemp = await si.cpuTemperature(),
+            memory = await si.mem(),
+            battery = await si.battery(),
+            graphics = await si.graphics(),
+            os = await si.osInfo();
+        var stats = {
+            model: `${system.manufacturer} ${system.model}`,
+            cpu: {
+                name: `${cpu.manufacturer} ${cpu.brand} @ ${cpu.speed} GHz`,
+                cores: cpu.physicalCores,
+                threads: cpu.cores,
+                temperature: cpuTemp.main,
+                governor: cpu.governor,
+                usage: await osu.cpu.usage()
+            },
+            memory: {
+                total: memory.total,
+                used: memory.active
+            },
+            gpu: graphics.controllers.map(gpu => {
+                return {
+                    model: `${gpu.vendor} ${gpu.model}`,
+                    vram: gpu.vram
+                }
+            }),
+            os: `${os.distro} ${os.release} ${os.kernel} (${os.arch})`
+        };
+        if (battery.hasBattery) stats.battery = {
+            percent: battery.percent,
+            charging: battery.acConnected
+        };
+        return stats;
+    },
+    /**
+     * Get detailed battery information
+     */
+    battery: async function() {
+        const battery = await si.battery();
+        if (!battery.hasBattery) return null;
+        return {
+            charging: battery.acConnected,
+            maxMwh: battery.maxCapacity,
+            currentMwh: battery.currentCapacity,
+            percent: battery.percent
+        }
+    },
+    /**
+     * Initialize functions
+     */
     initialize: function() {
         this.isReady = false;
         this.hostname = os.hostname();
+        this.user = process.env.SUDO_USER || process.env.USER;
         this.xdgSessionType = process.env.XDG_SESSION_TYPE;
         if (!this.xdgSessionType) throw new Error(`XDG_SESSION_TYPE not found. If you're running this process as root using sudo, please also pass the variable using "sudo -E" instead of just "sudo"`);
     }
