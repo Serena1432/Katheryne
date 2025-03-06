@@ -233,6 +233,36 @@ var Computer = {
         this.execSync(command);
     },
     /**
+     * Get the detailed GPU info
+     * @param {si.Systeminformation.GraphicsControllerData} gpu The GPU info from systeminformation
+     */
+    gpuInfo: function(gpu) {
+        try {
+            // For NVIDIA dGPU
+            if (gpu.vendor.includes("NVIDIA")) {
+                const result = this.spawnSync("nvidia-smi",  ["--query-gpu=utilization.gpu,temperature.gpu", "--format=csv,noheader,nounits"]);
+                if (result.error || result.stderr.split("\n")[0].toString()) return null;
+                const [usage, temperature] = result.stdout.split(", ").map(Number);
+                return {usage, temperature};
+            }
+            // For AMD iGPU/dGPU?
+            else if (gpu.vendor.includes("AMD")) {
+                // I don't have any AMD computers so I don't know how to. I'm very welcome to all of you to do this one for me.
+                return null;
+            }
+            else if (gpu.vendor.includes("Intel")) {
+                const result = this.spawnSync(`timeout`, ["0.5", "sudo", "intel_gpu_top", "-J", "-s", "2000"]);
+                var data = JSON.parse(result.stdout.toString().slice(1));
+                return {usage: data.engines["Render/3D"].busy, temperature: null};
+            }
+        }
+        catch (err) {
+            console.error(err);
+            return null;
+        }
+        return null;
+    },
+    /**
      * Get computer statictics
      */
     stats: async function() {
@@ -260,10 +290,11 @@ var Computer = {
             gpu: graphics.controllers.map(gpu => {
                 return {
                     model: `${gpu.vendor} ${gpu.model}`,
-                    vram: gpu.vram
+                    vram: gpu.vram,
+                    data: Computer.gpuInfo(gpu)
                 }
             }),
-            os: `${os.distro} ${os.release} ${os.kernel} (${os.arch})`
+            os: `${os.distro} ${os.release} (${os.arch})`
         };
         if (battery.hasBattery) stats.battery = {
             percent: battery.percent,

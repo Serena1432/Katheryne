@@ -50,6 +50,16 @@ Commands marked with (*) will require root permissions to execute. You can do on
 * Grant the permissions for specific commands used by the BOT
 * Or don't use these commands at all
 
+## Required applications
+
+### General
+
+* brightnessctl
+
+### Intel GPUs
+
+* intel-gpu-tools
+
 ### Additional Features for BOT (Computer) Owners
 
 - [ ] Execute any command on your computer remotely
