@@ -2,7 +2,7 @@
 
 **Katheryne** is a work-in-progress Discord BOT designed for remote gameplay, computer management, and connectivity via Discord.
 
-Currently, it only supports Linux, with BOTh X11 and Wayland compatibility. KDE Plasma is recommended since it's my development environment.
+Currently, it only supports Linux, with both X11 and Wayland compatibility. KDE Plasma is recommended since it's my development environment.
 
 ## Disclaimer
 
@@ -24,8 +24,8 @@ Intel CPUs + NVIDIA GPUs are also recommended. I haven't tested AMD CPUs/GPUs, s
 
 ### Supported Remote Play Applications
 
-✅ Steam Link / Remote Play (official support)
-⚠️ Moonlight and other tools can be launched via remote execution but are **not officially supported**—you have to run the commands manually.
+✅ Steam Link / Remote Play (official support)<br>
+⚠️ Moonlight and other tools can be launched via remote execution but are **not officially supported**—you have to run the commands manually.<br>
 ❌ Parsec is not supported (no Linux hosting support).
 
 ## Features
