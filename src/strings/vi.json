@@ -4,7 +4,10 @@
     "noUserPermissions": "Bạn không có quyền để thực hiện lệnh này.\nLệnh này yêu cầu bạn cần có những quyền sau đây:\n`%1`",
     "noBOTPermissions": "BOT không có quyền để thực hiện lệnh này.\nLệnh này yêu cầu BOT cần có những quyền sau đây:\n`%1`",
     "ownerOnly": "Chỉ có chủ sở hữu BOT mới dùng được lệnh này.",
-    "responseTime": "✅ **Thời gian phản hồi:** %1ms",
     "cores": "nhân",
-    "threads": "luồng"
+    "threads": "luồng",
+    "ping": {
+        "description": "Kiểm tra thời gian phản hồi của BOT.",
+        "responseTime": "✅ **Thời gian phản hồi:** %1ms"
+    }
 }

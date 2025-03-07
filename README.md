@@ -55,6 +55,7 @@ These features can be used directly in a Discord server, provided you have the r
 | Remotely shutdown the computer | 🔴 | 🔴 | ❓ | ❓ |
 | Set the fan speed | ❓ | ❓ | 🔴 | 🔴 |
 | Set the CPU governor | 🔴 | 🔴 | 🔴 | ❓ |
+| Check the running process | ✅ | ✅ | ❓ | ❓ |
 
 ✅ Fully supported without root permissions<br>
 🔴 Supported but requires root permissions<br>
@@ -62,7 +63,7 @@ These features can be used directly in a Discord server, provided you have the r
 ❌ Totally not supported<br>
 ❓ Not related
 
-Currently, AMD CPUs/GPUs are not properly supported as I don't have any AMD GPUs.
+Currently, AMD CPUs/GPUs are not properly supported as I don't have any AMD computers.
 
 *To protect privacy, some features will only be available when a **whitelisted game/application is running**.*
 
@@ -82,6 +83,7 @@ To run commands that require root permissions, you can do one of these ways belo
 * scrot (for X11 screenshot)
 * grim (for Wayland screenshot)
 * wmctrl (for X11 window focusing)
+* nbfc-linux (for fan control)
 
 ### Intel GPUs
 

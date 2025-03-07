@@ -338,10 +338,22 @@ var Computer = {
     },
     /**
      * 
-     * @param {string} process The process name
+     * @param {string} process Process name
      */
     killProcess: function(process) {
         return this.exec(`killall -9 ${process}`);
+    },
+    /**
+     * Check if a process is running
+     * @param {string} name Process name
+     */
+    isProcessRunning: async function(name) {
+        try {
+            return !!((await this.exec(`pgrep -f "${name}"`)).toString().split("\n")[0]);
+        }
+        catch {
+            return false;
+        }
     },
     /**
      * Send a notification to the computer

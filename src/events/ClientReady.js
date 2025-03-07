@@ -1,5 +1,20 @@
-const { REST, Routes, Client } = require('discord.js');
+const { REST, Routes, Client, ActivityType } = require('discord.js');
 const Computer = require('../classes/Computer');
+const WhitelistedApps = require("../classes/WhitelistedApps");
+
+/**
+ * 
+ * @param {Client} client 
+ */
+async function updateStatus(client) {
+    var runningApps = await WhitelistedApps.running();
+    if (runningApps.length) {
+        client.user.setPresence({activities: [{type: ActivityType.Playing, name: runningApps[0].name}], status: "dnd"});
+    }
+    else {
+        client.user.setPresence({activities: [], status: "online"});
+    }
+}
 
 /**
  * 
@@ -23,4 +38,11 @@ module.exports = async (client) => {
     Computer.initialize();
     console.log(`${Computer.hostname} (${Computer.xdgSessionType}) integrated as user "${Computer.user}", ${Computer.isRoot() ? "with" : "without"} root access.`);
     if (!Computer.isRoot()) console.warn("No root access provided for this process. Some features will not be able to run.");
+
+    // Initialize whitelisted apps
+    WhitelistedApps.add(client.config.whitelisted_apps);
+
+    // Update BOT status
+    updateStatus(client);
+    setInterval(() => updateStatus(client), 10000);
 };

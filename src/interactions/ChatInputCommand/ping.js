@@ -4,7 +4,7 @@ const Language = require("../../classes/Language");
 module.exports = {
     data: new SlashCommandBuilder()
     .setName("ping")
-    .setDescription("Test the BOT's response time."),
+    .setDescription(Language.strings.ping.description),
     config: {
         nodm: false,
         memberPermissions: [],

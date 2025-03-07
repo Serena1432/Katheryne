@@ -1,0 +1,18 @@
+[
+    {
+        "process": "GenshinImpact.exe",
+        "name": "Genshin Impact",
+        "alias": "genshin",
+        "execute": "/home/murasame/StartGenshin_Diamyth.sh",
+        "screenshot": "/mnt/GenshinImpact/ScreenShot",
+        "channel": "1191968934635774034"
+    },
+    {
+        "process": "StarRail.exe",
+        "name": "Honkai: Star Rail",
+        "alias": "hsr",
+        "execute": "/home/murasame/StartHSR_Diamyth.sh",
+        "screenshot": "/mnt/StarRail/ScreenShots",
+        "channel": "1191968934635774034"
+    }
+]

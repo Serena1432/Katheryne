@@ -3,7 +3,8 @@ const Language = require("../classes/Language");
 
 module.exports.config = {
     name: "ping",
-    description: "Kiểm tra khả năng phản hồi của BOT.",
+    usage: "ping",
+    description: Language.strings.ping.description,
     nodm: false,
     memberPermissions: [],
     botPermissions: [],
