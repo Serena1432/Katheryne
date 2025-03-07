@@ -42,9 +42,33 @@ These features can be used directly in a Discord server, provided you have the r
 - [ ] Remotely shut down the computer (only if the owner is away or explicitly allows it)
 - [ ] Notify when the computer isn't plugged in, the battery is low or a driver error, requiring physical intervention
 
-To protect privacy, some features will only be available when a **whitelisted game/application is running**.
+### Commands coverage
 
-Commands marked with (*) will require root permissions to execute. You can do one of these ways below:
+| Feature | X11 | Wayland | Intel | NVIDIA |
+| --- | --- | --- | --- | --- |
+| Taking screenshots | ✅ | ✅ | ✅ | ✅ |
+| Viewing computer stats | ✅ | ✅ | 🔴| ✅ |
+| Locking/disabling physical input | ✅ | 🔴 | ❓ | ❓ |
+| Turn off the physical display | ✅ | ✅ | ✅ | ⭕ |
+| Mute the host audio | ✅ | ✅ | ✅ | ⭕ |
+| Refocus the game window | ✅ | ❌ | ❓ | ❓ |
+| Remotely shutdown the computer | 🔴 | 🔴 | ❓ | ❓ |
+| Set the fan speed | ❓ | ❓ | 🔴 | 🔴 |
+| Set the CPU governor | 🔴 | 🔴 | 🔴 | ❓ |
+
+✅ Fully supported without root permissions
+🔴 Supported but requires root permissions
+⭕ Supported but not tested
+❌ Totally not supported
+❓ Not related
+
+Currently, AMD CPUs/GPUs are not properly supported as I don't have any AMD GPUs.
+
+*To protect privacy, some features will only be available when a **whitelisted game/application is running**.*
+
+### Running root commands
+
+To run commands that require root permissions, you can do one of these ways below:
 
 * Running the BOT with `sudo` permissions
 * Grant the permissions for specific commands used by the BOT
@@ -62,11 +86,6 @@ Commands marked with (*) will require root permissions to execute. You can do on
 ### Intel GPUs
 
 * intel-gpu-tools
-
-### Additional Features for BOT (Computer) Owners
-
-- [ ] Execute any command on your computer remotely
-  - [ ] Provide proper stdin/stdout passthrough for interactive commands
 
 ## Installation
 

@@ -26,7 +26,12 @@ const Language = require("./classes/Language");
 client.interactions = new InteractionManager("./src/interactions");
 client.commandManager = new CommandManager("./src/commands");
 client.commands = client.commandManager.commands;
-client.config = require("../config.json");
+client.config = require("../config/main.json");
+
+fs.readdirSync(path.resolve("./config")).filter(f => (f.endsWith(".json") && f != "main.json")).forEach(config => {
+    client.config[config] = require(path.join(path.resolve("./config"), `${config}.json`));
+});
+
 Language.setLanguage(client.config.language);
 
 fs.readdirSync(path.resolve("./src/events")).filter(f => f.endsWith(".js")).forEach(event => {

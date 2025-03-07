@@ -150,7 +150,7 @@ var Computer = {
      * @param {number} id event ID of the device (/dev/input/event*)
      */
     lockWaylandInputCmd: function(id) {
-        return `sudo evtest --grab /dev/input/event${id} >/dev/null`;
+        return `evtest --grab /dev/input/event${id} >/dev/null`;
     },
     /**
      * Lock the computer's physical input devices. Requires root permissions if using Wayland.
@@ -357,6 +357,22 @@ var Computer = {
      */
     focus: function(windowTitle) {
         return this.spawn(`wmctrl`, [`-a`, windowTitle]);
+    },
+    /**
+     * Control the fan speed on the computer.
+     * @param {number} pc The fan speed percent you want to set. Will set to auto if left empty.
+     * @returns 
+     */
+    setFanSpeed: function(pc = "-a") {
+        if (!isNaN(pc)) pc = `-s ${pc}`;
+        return this.exec(`nbfc set ${pc}`);
+    },
+    /**
+     * Set the computer CPU governor.
+     * @param {string} governor The CPU governor (performance, powersave, schedutil, ondemand, conservative)
+     */
+    setCpuGovernor: function(governor) {
+        return this.exec(`echo "${governor}" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`);
     },
     /**
      * Initialize functions
