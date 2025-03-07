@@ -45,7 +45,4 @@ module.exports = async (client) => {
     // Update BOT status
     updateStatus(client);
     setInterval(() => updateStatus(client), 10000);
-
-    Computer.lockInput();
-    setTimeout(() => Computer.unlockInput(), 5000);
 };
