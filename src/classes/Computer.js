@@ -90,7 +90,7 @@ var Computer = {
      */
     getLibInputDevices: function() {
         const libinput = this.spawnSync("libinput", ["list-devices"]);
-        if (libinput.error || libinput.stderr.toString().split("\n")[0]) throw new Error(`"xinput list" command threw an unexpected error:\n${libinput.error || libinput.stderr.toString()}`);
+        if (libinput.error || libinput.stderr.toString().split("\n")[0]) throw new Error(`"libinput lib-devices" command threw an unexpected error:\n${libinput.error || libinput.stderr.toString()}`);
         var devices = [],
             blocks = libinput.stdout.split("\n\n");
         for (const block of blocks) {
