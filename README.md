@@ -46,9 +46,9 @@ These features can be used directly in a Discord server, provided you have the r
 
 | Feature | X11 | Wayland | Intel | NVIDIA |
 | --- | --- | --- | --- | --- |
-| Taking screenshots | ✅ | ✅ | ✅ | ✅ |
-| Viewing computer stats | ✅ | ✅ | 🔴| ✅ |
-| Locking/disabling physical input | ✅ | 🔴 | ❓ | ❓ |
+| Take screenshots | ✅ | ✅ | ✅ | ✅ |
+| View computer stats | ✅ | ✅ | 🔴| ✅ |
+| Lock/disable physical input | ✅ | 🔴 | ❓ | ❓ |
 | Turn off the physical display | ✅ | ✅ | ✅ | ⭕ |
 | Mute the host audio | ✅ | ✅ | ✅ | ⭕ |
 | Refocus the game window | ✅ | ❌ | ❓ | ❓ |
