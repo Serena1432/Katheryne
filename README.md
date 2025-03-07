@@ -54,7 +54,10 @@ Commands marked with (*) will require root permissions to execute. You can do on
 
 ### General
 
-* brightnessctl
+* brightnessctl (for brightness control)
+* scrot (for X11 screenshot)
+* grim (for Wayland screenshot)
+* wmctrl (for X11 window focusing)
 
 ### Intel GPUs
 

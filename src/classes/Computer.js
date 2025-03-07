@@ -5,6 +5,9 @@ const osu = require("node-os-utils");
 
 var Computer = {
     _inputLockInterval: null,
+    username: "",
+    hostname: "",
+    xdgSessionType: "",
     /**
      * Check if the BOT process is running as root.
      */
@@ -245,13 +248,14 @@ var Computer = {
                 const [usage, temperature] = result.stdout.split(", ").map(Number);
                 return {usage, temperature};
             }
-            // For AMD iGPU/dGPU?
+            // For AMD iGPU/dGPU
             else if (gpu.vendor.includes("AMD")) {
                 // I don't have any AMD computers so I don't know how to. I'm very welcome to all of you to do this one for me.
                 return null;
             }
+            // For Intel iGPU/dGPU
             else if (gpu.vendor.includes("Intel")) {
-                const result = this.spawnSync(`timeout`, ["0.5", "sudo", "intel_gpu_top", "-J", "-s", "2000"]);
+                const result = this.spawnSync(`timeout`, ["0.5", "intel_gpu_top", "-J", "-s", "2000"]);
                 var data = JSON.parse(result.stdout.toString().slice(1));
                 return {usage: data.engines["Render/3D"].busy, temperature: null};
             }
@@ -316,10 +320,48 @@ var Computer = {
         }
     },
     /**
+     * Take a screenshot on the computer.
+     * @param {string} outPath The screenshot output path
+     */
+    screenshot: function(outPath) {
+        switch (this.xdgSessionType.toLowerCase()) {
+            case "x11": {
+                const result = this.spawnSync("scrot", [outPath]);
+                return (result.status == 0);
+            }
+            case "wayland": {
+                const result = this.spawnSync("grim", [outPath]);
+                return (result.status == 0);
+            }
+        }
+        return false;
+    },
+    /**
+     * 
+     * @param {string} process The process name
+     */
+    killProcess: function(process) {
+        return this.exec(`killall -9 ${process}`);
+    },
+    /**
+     * Send a notification to the computer
+     * @param {string} description Notification description
+     * @param {string} title Notification title
+     */
+    sendNotification: function(description, title = "") {
+        return this.spawn(`notify-send`, [title, description]);
+    },
+    /**
+     * Focus on a window with specific title.
+     * @param {string} windowTitle Window title (not process name)
+     */
+    focus: function(windowTitle) {
+        return this.spawn(`wmctrl`, [`-a`, windowTitle]);
+    },
+    /**
      * Initialize functions
      */
     initialize: function() {
-        this.isReady = false;
         this.hostname = os.hostname();
         this.user = process.env.SUDO_USER || process.env.USER;
         this.xdgSessionType = process.env.XDG_SESSION_TYPE;
