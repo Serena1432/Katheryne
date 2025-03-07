@@ -56,10 +56,10 @@ These features can be used directly in a Discord server, provided you have the r
 | Set the fan speed | ❓ | ❓ | 🔴 | 🔴 |
 | Set the CPU governor | 🔴 | 🔴 | 🔴 | ❓ |
 
-✅ Fully supported without root permissions
-🔴 Supported but requires root permissions
-⭕ Supported but not tested
-❌ Totally not supported
+✅ Fully supported without root permissions<br>
+🔴 Supported but requires root permissions<br>
+⭕ Supported but not tested<br>
+❌ Totally not supported<br>
 ❓ Not related
 
 Currently, AMD CPUs/GPUs are not properly supported as I don't have any AMD GPUs.
