@@ -8,6 +8,7 @@ var Computer = {
     username: "",
     hostname: "",
     xdgSessionType: "",
+    currentDesktop: "",
     /**
      * Check if the BOT process is running as root.
      */
@@ -324,17 +325,13 @@ var Computer = {
      * @param {string} outPath The screenshot output path
      */
     screenshot: function(outPath) {
-        switch (this.xdgSessionType.toLowerCase()) {
-            case "x11": {
-                const result = this.spawnSync("scrot", [outPath]);
-                return (result.status == 0);
-            }
-            case "wayland": {
-                const result = this.spawnSync("grim", [outPath]);
-                return (result.status == 0);
-            }
+        var command = `scrot "${outPath}"`;
+        if (this.xdgSessionType == "wayland") {
+            if (this.currentDesktop.toLowerCase().includes("mutter")) command = `gnome-screenshot -f "${outPath}"`
+            else if (this.currentDesktop.toLowerCase().includes("plasma")) command = `spectacle -f -o "${outPath}"`;
+            else command = `grim "${outPath}"`;
         }
-        return false;
+        return this.execSync(command);
     },
     /**
      * 
@@ -393,6 +390,7 @@ var Computer = {
         this.hostname = os.hostname();
         this.user = process.env.SUDO_USER || process.env.USER;
         this.xdgSessionType = process.env.XDG_SESSION_TYPE;
+        this.currentDesktop = this.spawnSync(`wmctrl`, [`-m`]).stdout?.split("\n")[0]?.substring(6);
         if (!this.xdgSessionType) throw new Error(`XDG_SESSION_TYPE not found. If you're running this process as root using sudo, please also pass the variable using "sudo -E" instead of just "sudo"`);
     }
 }

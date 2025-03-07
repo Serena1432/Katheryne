@@ -46,7 +46,7 @@ These features can be used directly in a Discord server, provided you have the r
 
 | Feature | X11 | Wayland | Intel | NVIDIA |
 | --- | --- | --- | --- | --- |
-| Take screenshots | ✅ | ✅ | ✅ | ✅ |
+| Take screenshots | ✅ | ⭕ | ✅ | ✅ |
 | View computer stats | ✅ | ✅ | 🔴| ✅ |
 | Lock/disable physical input | ✅ | 🔴 | ❓ | ❓ |
 | Turn off the physical display | ✅ | ✅ | ✅ | ⭕ |
@@ -81,9 +81,14 @@ To run commands that require root permissions, you can do one of these ways belo
 
 * brightnessctl (for brightness control)
 * scrot (for X11 screenshot)
-* grim (for Wayland screenshot)
 * wmctrl (for X11 window focusing)
 * nbfc-linux (for fan control)
+
+### Taking screenshots in Wayland
+
+* gnome-screenshot (for GNOME-based desktop environments)
+* spectacle (for KDE Plasma)
+* grim (for other desktop environments)
 
 ### Intel GPUs
 
