@@ -1,4 +1,4 @@
-const {Client, Message} = require("discord.js");
+const {Client, Message, ChannelType} = require("discord.js");
 const Language = require("../classes/Language");
 
 /**

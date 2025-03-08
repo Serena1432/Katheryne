@@ -208,8 +208,10 @@ var Computer = {
      * Check if a service is active.
      * @param {string} name The service name
      */
-    checkServiceActive: function(name) {
-        var result = this.spawnSync(`sudo`, ["-u", this.user, "-E", "systemctl", "--user", "is-active", "--quiet", name]);
+    checkServiceActive: function(name, user = true) {
+        var args = ["-u", this.user, "-E", "systemctl", "--user", "is-active", "--quiet", name];
+        if (!user) args = ["-u", this.user, "-E", "systemctl", "is-active", "--quiet", name];
+        var result = this.spawnSync(`sudo`, args);
         return (result.status == 0);
     },
     /**
@@ -382,6 +384,13 @@ var Computer = {
      */
     setCpuGovernor: function(governor) {
         return this.exec(`echo "${governor}" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`);
+    },
+    /**
+     * Set the bluetooth to be enabled or disabled.
+     * @param {boolean} enabled
+     */
+    setBluetooth: function(enabled) {
+        return this.exec(`rfkill ${enabled ? "unblock" : "block"} bluetooth`);
     },
     /**
      * Initialize functions

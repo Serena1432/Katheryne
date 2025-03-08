@@ -85,6 +85,7 @@ To run commands that require root permissions, you can do one of these ways belo
 * nbfc-linux (for fan control)
 * libinput-tools (for input devices management)
 * evtest (for Wayland physical input locking)
+* rfkill (for enabling/disabling Bluetooth)
 
 ### Taking screenshots in Wayland
 

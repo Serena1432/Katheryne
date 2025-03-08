@@ -1,3 +1,10 @@
 {
-    "fan_control": true
+    "fan_control": true,
+    "close_processes": ["winedevice.exe", "wineserver", "electron", "vesktop", "CrRendererMain", "CrGpuMain", "CrBrowserMain", "fdm", "Zalo.exe", "ZaloCall.exe", "ZaloCap.exe", "ibus"],
+    "start_processes": [],
+    "auto_mute": true,
+    "auto_bluetooth_off": true,
+    "auto_performance_governor": true,
+    "auto_max_fan_speed": true,
+    "auto_lock_input": false
 }

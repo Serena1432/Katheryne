@@ -9,5 +9,23 @@
     "ping": {
         "description": "Kiểm tra thời gian phản hồi của BOT.",
         "responseTime": "✅ **Thời gian phản hồi:** %1ms"
+    },
+    "start": {
+        "description": "Khởi động một ứng dụng trong danh sách.",
+        "embedTitle": "Danh sách ứng dụng được phép",
+        "embedDescription": "Dưới đây là những ứng dụng đã được chủ BOT cho phép mọi người chạy thông qua BOT này:\n\n%1\n\nDùng lệnh `%2start <mã ứng dụng>` để khởi động một ứng dụng.",
+        "appNotFound": "❌ **Không tìm thấy ứng dụng có mã là `%1` trong danh sách ứng dụng được cho phép, hãy liên hệ chủ BOT và thử lại.**"
+    },
+    "logs": {
+        "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",
+        "lockingInput": "Khóa bàn phím và chuột vật lý để tránh tác dộng từ bên ngoài...",
+        "closingApps": "Tắt một số ứng dụng đang chạy...",
+        "muteAudio": "Tắt âm thanh ở máy tính vật lý...",
+        "disablingBluetooth": "Tạm thời vô hiệu hóa Bluetooth...",
+        "settingGovernor": "Đặt cấu hình của CPU thành chế độ hiệu năng cao...",
+        "settingFanSpeed": "Chỉnh tốc độ quạt lên tối đa...",
+        "disablingWARP": "Tắt kết nối của CloudFlare WARP...",
+        "disablingKDEConnect": "Tắt KDE Connect...",
+        "startingApp": "Đang khởi động %1..."
     }
 }

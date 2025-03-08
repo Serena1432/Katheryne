@@ -1,6 +1,6 @@
 const { REST, Routes, Client, ActivityType } = require('discord.js');
 const Computer = require('../classes/Computer');
-const WhitelistedApps = require("../classes/WhitelistedApps");
+const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
 
 /**
  * 

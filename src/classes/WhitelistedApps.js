@@ -103,4 +103,7 @@ const WhitelistedAppManager = {
     }
 }
 
-module.exports = WhitelistedAppManager;
+module.exports = {
+    WhitelistedApp,
+    WhitelistedAppManager
+};
