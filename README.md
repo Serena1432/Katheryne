@@ -32,7 +32,7 @@ Intel CPUs + NVIDIA GPUs are also recommended. I haven't tested AMD CPUs/GPUs, s
 
 These features can be used directly in a Discord server, provided you have the required permissions:
 
-- [ ] Run whitelisted applications remotely using commands/built-in integrations
+- [X] Run whitelisted applications remotely using commands/built-in integrations
 - [ ] Take screenshots and monitor system stats
 - [ ] Auto-send in-game screenshots to a Discord channel
 - [ ] Lock the physical keyboard/mouse to prevent interference (I made that as my kids usually interrupt gameplay when my friends are playing)
@@ -49,7 +49,7 @@ These features can be used directly in a Discord server, provided you have the r
 | Take screenshots | ✅ | ⭕ | ✅ | ✅ |
 | View computer stats | ✅ | ✅ | 🔴| ✅ |
 | Lock/disable physical input | ✅ | 🔴 | ❓ | ❓ |
-| Turn off the physical display | ✅ | ✅ | ✅ | ⭕ |
+| Change screen brightness | 🔴 | 🔴 | 🔴 | ⭕ |
 | Mute the host audio | ✅ | ✅ | ✅ | ⭕ |
 | Refocus the game window | ✅ | ❌ | ❓ | ❓ |
 | Remotely shutdown the computer | 🔴 | 🔴 | ❓ | ❓ |

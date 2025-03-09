@@ -1,5 +1,6 @@
 const { REST, Routes, Client, ActivityType } = require('discord.js');
 const Computer = require('../classes/Computer');
+const ScreenshotMonitor = require('../classes/ScreenshotMonitor');
 const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
 
 /**
@@ -41,6 +42,9 @@ module.exports = async (client) => {
 
     // Initialize whitelisted apps
     WhitelistedApps.add(client.config.whitelisted_apps);
+
+    // Start monitoring the screenshots
+    ScreenshotMonitor.start(Array.from(WhitelistedApps.apps.values()));
 
     // Update BOT status
     updateStatus(client);

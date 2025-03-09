@@ -53,7 +53,10 @@ class WhitelistedApp {
      * Initialize the screenshots array.
      */
     initializeScreenshots() {
-        if (!fs.existsSync(this.screenshot)) return console.warn(`"${this.screenshot}" does not exist, ${this.name}'s screenshot folder will not be monitored`);
+        if (!fs.existsSync(this.screenshot)) {
+            this._noScreenshotFolder = true;
+            return console.warn(`"${this.screenshot}" does not exist, ${this.name}'s screenshot folder will not be monitored`);
+        }
         this._oldScreenshots = fs.readdirSync(this.screenshot);
     }
     /**
