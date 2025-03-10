@@ -21,7 +21,8 @@
         "description": "Khởi động Steam trên máy chủ. Nhập chữ exit vào phần user để thoát Steam trong trường hợp Steam đang chạy.",
         "user": "Đăng nhập Steam bằng tên người dùng khác đã đăng nhập trên máy. Chỉ hỗ trợ cho chủ BOT.",
         "noSufficientPermission": "❌ **Chỉ có chủ BOT mới có thể đăng nhập Steam bằng tên người dùng khác.**",
-        "starting": "Đang khởi động Steam..."
+        "starting": "Đang khởi động Steam...",
+        "stopping": "Đang thoát Steam..."
     },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",
@@ -39,6 +40,7 @@
         "restartingApps": "Khởi động lại một số ứng dụng...",
         "startingApp": "Đang khởi động %1...",
         "startMonitoring": "Bắt đầu theo dõi các ảnh chụp màn hình mới trong game...",
-        "startSuccess": "Khởi động thành công."
+        "startSuccess": "Khởi động thành công.",
+        "stopSuccess": "Hoàn tất thực hiện lệnh."
     }
 }
