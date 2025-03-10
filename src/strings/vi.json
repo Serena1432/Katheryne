@@ -17,6 +17,10 @@
         "embedDescription": "Dưới đây là những ứng dụng đã được chủ BOT cho phép mọi người chạy thông qua BOT này:\n\n%1\n\nDùng lệnh `%2start <mã ứng dụng>` để khởi động một ứng dụng.",
         "appNotFound": "❌ **Không tìm thấy ứng dụng có mã là `%1` trong danh sách ứng dụng được cho phép, hãy liên hệ chủ BOT và thử lại.**"
     },
+    "steam": {
+        "description": "Khởi động Steam trên máy chủ. Nhập chữ exit vào phần user để thoát Steam trong trường hợp Steam đang chạy.",
+        "user": "Đăng nhập Steam bằng tên người dùng khác đã đăng nhập trên máy. Chỉ hỗ trợ cho chủ BOT."
+    },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",
         "lockingInput": "Khóa bàn phím và chuột vật lý để tránh tác dộng từ bên ngoài...",

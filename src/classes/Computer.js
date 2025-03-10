@@ -346,9 +346,9 @@ var Computer = {
      * Check if a process is running
      * @param {string} name Process name
      */
-    isProcessRunning: async function(name) {
+    isProcessRunning: function(name) {
         try {
-            return !!((await this.exec(`pgrep -f "${name}"`)).toString().split("\n")[0]);
+            return !!(this.spawnSync(`pgrep`, [`-f`, name]).stdout.split("\n")[0]);
         }
         catch {
             return false;

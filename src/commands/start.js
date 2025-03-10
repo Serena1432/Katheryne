@@ -2,7 +2,7 @@ const { Client, Message } = require("discord.js");
 const Language = require("../classes/Language");
 const Katheryne = require("../classes/Katheryne");
 const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
-const BeforeStartHook = require("../hooks/beforestart");
+const BeforeStartHook = require("../hooks/BeforeStart");
 const Computer = require("../classes/Computer");
 
 module.exports.config = {
