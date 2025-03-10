@@ -1,7 +1,7 @@
 {
     "fan_control": true,
-    "close_processes": ["winedevice.exe", "wineserver", "electron", "vesktop", "CrRendererMain", "CrGpuMain", "CrBrowserMain", "fdm", "Zalo.exe", "ZaloCall.exe", "ZaloCap.exe", "ibus"],
-    "start_processes": [],
+    "close_processes": ["winedevice.exe", "wineserver", "electron", "caprine", "vesktop", "CrRendererMain", "CrGpuMain", "CrBrowserMain", "fdm", "Zalo.exe", "ZaloCall.exe", "ZaloCap.exe"],
+    "start_processes": ["fdm", "vesktop", "caprine"],
     "auto_mute": true,
     "auto_bluetooth_off": true,
     "auto_performance_governor": true,

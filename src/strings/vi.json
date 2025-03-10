@@ -26,6 +26,10 @@
         "settingFanSpeed": "Chỉnh tốc độ quạt lên tối đa...",
         "disablingWARP": "Tắt kết nối của CloudFlare WARP...",
         "disablingKDEConnect": "Tắt KDE Connect...",
+        "unlockingInput": "Tiến hành mở khóa máy tính...",
+        "enablingBluetooth": "Bật lại Bluetooth của máy tính...",
+        "enablingKDEConnect": "Bật lại KDE Connect...",
+        "restartingApps": "Khởi động lại một số ứng dụng...",
         "startingApp": "Đang khởi động %1..."
     }
 }

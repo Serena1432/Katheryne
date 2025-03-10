@@ -16,36 +16,19 @@ const Katheryne = require("../classes/Katheryne");
  * @param {WhitelistedApp} app Whitelisted app information
  */
 module.exports = async function(message, client, app) {
+    await Katheryne.addLog(message, Language.strings.logs.restartingApps);
+    var apps = client.config.computer.start_processes;
+    for (var i = 0; i < apps.length; i++) Computer.spawn(apps[i], [], true);
+    if (client.config.computer.auto_bluetooth_off) {
+        await Katheryne.addLog(message, Language.strings.logs.enablingBluetooth);
+        await Computer.setBluetooth(true);
+    }
+    if (Computer._kdeConnect) {
+        await Katheryne.addLog(message, Language.strings.logs.enablingKDEConnect);
+        Computer.spawn("kdeconnectd", [], true);
+    }
     if (client.config.computer.auto_lock_input) {
         await Katheryne.addLog(message, Language.strings.logs.lockingInput);
         Computer.lockInput();
-    }
-    await Katheryne.addLog(message, Language.strings.logs.closingApps);
-    for (var process of client.config.computer.close_processes) try {await Computer.killProcess(process)} catch {}
-    if (client.config.computer.auto_mute) {
-        await Katheryne.addLog(message, Language.strings.logs.muteAudio);
-        Computer.setVolume(0);
-    }
-    if (client.config.computer.auto_bluetooth_off) {
-        await Katheryne.addLog(message, Language.strings.logs.disablingBluetooth);
-        await Computer.setBluetooth(false);
-    }
-    if (client.config.auto_performance_governor) {
-        await Katheryne.addLog(message, Language.strings.logs.settingGovernor);
-        await Computer.setCpuGovernor("performance");
-    }
-    if (client.config.auto_max_fan) {
-        await Katheryne.addLog(message, Language.strings.logs.settingFanSpeed);
-        await Computer.setFanSpeed(100);
-    }
-    if (Computer.checkServiceActive("warp-svc", false)) {
-        await Katheryne.addLog(message, Language.strings.logs.disablingWARP);
-        try {await Computer.exec(`warp-cli disconnect`)} catch (err) {
-            await Katheryne.addLog(message, err.stack);
-        }
-    }
-    if (await Computer.isProcessRunning("kdeconnectd")) {
-        await Katheryne.addLog(message, Language.strings.logs.disablingKDEConnect);
-        await Computer.killProcess("kdeconnectd");
     }
 }

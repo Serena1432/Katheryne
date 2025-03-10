@@ -45,6 +45,7 @@ module.exports = async function(message, client, app) {
         }
     }
     if (await Computer.isProcessRunning("kdeconnectd")) {
+        Computer._kdeConnect = true;
         await Katheryne.addLog(message, Language.strings.logs.disablingKDEConnect);
         await Computer.killProcess("kdeconnectd");
     }
