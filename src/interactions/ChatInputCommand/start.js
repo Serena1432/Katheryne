@@ -29,7 +29,7 @@ module.exports = {
         const alias = interaction.options.getString("alias");
         await interaction.deferReply();
         if (!alias) {
-            var apps = Array.from(WhitelistedApps.apps.values()).map(app => {
+            var apps = WhitelistedApps.toJSON().map(app => {
                 return `* \`${app.alias}\` - **${app.name}**`;
             });
             return interaction.editReply({embeds: [

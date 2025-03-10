@@ -4,10 +4,11 @@
  */
 
 const { BaseInteraction, Message, Client } = require("discord.js");
-const { WhitelistedApp } = require("../classes/WhitelistedApps");
+const { WhitelistedApp, WhitelistedAppManager } = require("../classes/WhitelistedApps");
 const Language = require("../classes/Language");
 const Computer = require("../classes/Computer");
 const Katheryne = require("../classes/Katheryne");
+const ScreenshotMonitor = require("../classes/ScreenshotMonitor");
 
 /**
  * 
@@ -38,13 +39,14 @@ module.exports = async function(message, client, app) {
         await Katheryne.addLog(message, Language.strings.logs.settingFanSpeed);
         await Computer.setFanSpeed(100);
     }
+    await Katheryne.addLog(message, Language.strings.logs.startMonitoring);
+    ScreenshotMonitor.start(WhitelistedAppManager.toJSON());
     if (Computer.checkServiceActive("warp-svc", false)) {
         await Katheryne.addLog(message, Language.strings.logs.disablingWARP);
         try {await Computer.exec(`warp-cli disconnect`)} catch (err) {
             await Katheryne.addLog(message, err.stack);
         }
     }
-    console.log(Computer.isProcessRunning("kdeconnectd"));
     if (Computer.isProcessRunning("kdeconnectd")) {
         Computer._kdeConnect = true;
         await Katheryne.addLog(message, Language.strings.logs.disablingKDEConnect);

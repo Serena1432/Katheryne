@@ -98,11 +98,14 @@ const WhitelistedAppManager = {
      * @returns {Promise<WhitelistedApp[]>}
      */
     running: async function() {
-        var runningApps = [], apps = Array.from(this.apps.values());
+        var runningApps = [], apps = this.toJSON();
         for (var i = 0; i < apps.length; i++) {
             if (await apps[i].isRunning()) runningApps.push(apps[i]);
         }
         return runningApps;
+    },
+    toJSON: function() {
+        return Array.from(this.apps.values());
     }
 }
 

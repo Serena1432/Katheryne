@@ -44,7 +44,7 @@ var Computer = {
     spawn: function(command, args, detach = false, options = {}) {
         if (detach) {
             options.detached = true;
-            options.stdio = ignore;
+            options.stdio = "ignore";
         }
         var child = child_process.spawn(command, args, options);
         if (detach) child.unref();

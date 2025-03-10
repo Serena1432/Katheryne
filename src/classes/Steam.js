@@ -9,14 +9,13 @@ var Steam = {
     process: null,
     /**
      * Start a Steam session
-     * @param {Computer} computer The computer object
      * @param {string} user Auto login as a specific user (usable for multi-user support)
      */
-    start: function(computer, user = config.default_user) {
-        var args = [];
+    start: async function(user = config.default_user) {
+        var args = ["-u", Computer.user, "steam"];
         if (user) args.push(`-login`, user);
-        if (config.wayland_enable_pipewire && computer.xdgSessionType == "wayland") args.push("-pipewire");
-        this.process = computer.spawn(`steam`, args, config.detach);
+        if (config.wayland_enable_pipewire && Computer.xdgSessionType == "wayland") args.push("-pipewire");
+        this.process = Computer.spawn(`sudo`, args, config.detach);
     },
     stop: function() {
         Computer.exec(`killall steam`);
