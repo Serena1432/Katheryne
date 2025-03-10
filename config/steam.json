@@ -1,0 +1,5 @@
+{
+    "default_user": "harpaedieheilige",
+    "wayland_enable_pipewire": true,
+    "detach": true
+}

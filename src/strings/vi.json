@@ -12,6 +12,7 @@
     },
     "start": {
         "description": "Khởi động một ứng dụng trong danh sách.",
+        "alias": "Mã của ứng dụng trọng danh sách trắng.",
         "embedTitle": "Danh sách ứng dụng được phép",
         "embedDescription": "Dưới đây là những ứng dụng đã được chủ BOT cho phép mọi người chạy thông qua BOT này:\n\n%1\n\nDùng lệnh `%2start <mã ứng dụng>` để khởi động một ứng dụng.",
         "appNotFound": "❌ **Không tìm thấy ứng dụng có mã là `%1` trong danh sách ứng dụng được cho phép, hãy liên hệ chủ BOT và thử lại.**"

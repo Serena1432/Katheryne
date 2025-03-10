@@ -43,12 +43,14 @@ var ScreenshotMonitor = {
         this._interval = setInterval((function() {
             this.refresh();
         }).bind(this), 10000);
+        console.log(`Started monitoring screenshot folders for ${this._apps.length} applications.`);
     },
     /**
      * Stop monitoring the screenshots.
      */
     stop: function() {
         if (this._interval) clearInterval(interval);
+        console.log(`Stopped monitoring screenshot folders for ${this._apps.length} applications.`);
     }
 };
 
