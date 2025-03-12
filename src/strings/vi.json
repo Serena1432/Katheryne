@@ -22,7 +22,9 @@
         "user": "Đăng nhập Steam bằng tên người dùng khác đã đăng nhập trên máy. Chỉ hỗ trợ cho chủ BOT.",
         "noSufficientPermission": "❌ **Chỉ có chủ BOT mới có thể đăng nhập Steam bằng tên người dùng khác.**",
         "starting": "Đang khởi động Steam...",
-        "stopping": "Đang thoát Steam..."
+        "stopping": "Đang thoát Steam...",
+        "notRunning": "❌  **Máy đang không chạy Steam, nên bạn không cần phải làm gì thêm.**",
+        "alreadyRunning": "❌ **Steam hoặc một ứng dụng trong danh sách trắng đang chạy, hãy tắt hết các ứng dụng và thử lại.**"
     },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",

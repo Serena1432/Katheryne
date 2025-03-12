@@ -20,6 +20,9 @@ var Steam = {
     stop: function() {
         Computer.exec(`killall steam`);
         this.process = null;
+    },
+    isRunning: function() {
+        return Computer.isProcessRunning("steam");
     }
 };
 
