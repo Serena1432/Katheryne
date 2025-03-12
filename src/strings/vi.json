@@ -18,7 +18,7 @@
         "appNotFound": "❌ **Không tìm thấy ứng dụng có mã là `%1` trong danh sách ứng dụng được cho phép, hãy liên hệ chủ BOT và thử lại.**"
     },
     "steam": {
-        "description": "Khởi động Steam trên máy chủ. Nhập chữ exit vào phần user để thoát Steam trong trường hợp Steam đang chạy.",
+        "description": "Khởi động Steam trên máy chủ.",
         "user": "Đăng nhập Steam bằng tên người dùng khác đã đăng nhập trên máy. Chỉ hỗ trợ cho chủ BOT.",
         "noSufficientPermission": "❌ **Chỉ có chủ BOT mới có thể đăng nhập Steam bằng tên người dùng khác.**",
         "starting": "Đang khởi động Steam...",

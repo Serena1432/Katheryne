@@ -26,6 +26,7 @@ module.exports = {
      * @returns 
      */
     run: async (client, interaction) => {
+        await interaction.deferReply();
         var user = interaction.options.getString("user");
         if (user == "exit") {
             await interaction.editReply({content: Language.strings.logs.preparing});
