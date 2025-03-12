@@ -42,6 +42,7 @@
         "restartingApps": "Khởi động lại một số ứng dụng...",
         "startingApp": "Đang khởi động %1...",
         "startMonitoring": "Bắt đầu theo dõi các ảnh chụp màn hình mới trong game...",
+        "stopMonitoring": "Dừng theo dõi các ảnh chụp màn hình mới trong game...",
         "startSuccess": "Khởi động thành công.",
         "stopSuccess": "Hoàn tất thực hiện lệnh."
     }

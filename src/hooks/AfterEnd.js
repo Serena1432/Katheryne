@@ -8,6 +8,7 @@ const { WhitelistedApp } = require("../classes/WhitelistedApps");
 const Language = require("../classes/Language");
 const Computer = require("../classes/Computer");
 const Katheryne = require("../classes/Katheryne");
+const ScreenshotMonitor = require("../classes/ScreenshotMonitor");
 
 /**
  * 
@@ -16,6 +17,8 @@ const Katheryne = require("../classes/Katheryne");
  * @param {WhitelistedApp} app Whitelisted app information
  */
 module.exports = async function(message, client, app) {
+    await Katheryne.addLog(message, Language.strings.logs.stopMonitoring);
+    ScreenshotMonitor.stop();
     await Katheryne.addLog(message, Language.strings.logs.restartingApps);
     var apps = client.config.computer.start_processes;
     for (var i = 0; i < apps.length; i++) Computer.spawn(apps[i], [], true);
