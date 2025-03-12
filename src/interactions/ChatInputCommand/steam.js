@@ -44,7 +44,7 @@ module.exports = {
             }
             return;
         }
-        if (Steam.isRunning() || (await WhitelistedApps.running()).length) return interaction.editReply({content: Language.strings.steam.alreadyRunning});
+        if (Steam.isRunning() || (await WhitelistedApps.running()).length) return interaction.editReply({content: Language.strings.logs.alreadyRunning});
         if (user && interaction.user.id != client.config.owner_id) return interaction.editReply({content: Language.steam.noSufficientPermission});
         await interaction.editReply({content: Language.strings.logs.preparing});
         try {

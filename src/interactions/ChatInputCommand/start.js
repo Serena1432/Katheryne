@@ -38,6 +38,7 @@ module.exports = {
                 .setDescription(Language.strings.start.embedDescription.format(apps.join("\n"), client.config.prefix))
             ]});
         }
+        if (Steam.isRunning() || (await WhitelistedApps.running()).length) return interaction.editReply({content: Language.strings.logs.alreadyRunning});
         var app = WhitelistedApps.get(alias);
         if (!app) return interaction.editReply({content: Language.strings.start.appNotFound.format(alias)});
         await interaction.editReply({content: Language.strings.logs.preparing});

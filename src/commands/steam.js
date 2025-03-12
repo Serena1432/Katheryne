@@ -39,7 +39,7 @@ module.exports.run = async function(client, message, args) {
         }
         return;
     }
-    if (Steam.isRunning() || (await WhitelistedApps.running()).length) return message.reply({content: Language.strings.steam.alreadyRunning});
+    if (Steam.isRunning() || (await WhitelistedApps.running()).length) return message.reply({content: Language.strings.logs.alreadyRunning});
     if (user && message.author.id != client.config.owner_id) return message.reply({content: Language.strings.steam.noSufficientPermission});
     var msg = await message.reply({content: Language.strings.logs.preparing});
     try {

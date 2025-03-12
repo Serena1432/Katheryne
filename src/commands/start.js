@@ -32,6 +32,7 @@ module.exports.run = async function(client, message, args) {
             .setDescription(Language.strings.start.embedDescription.format(apps.join("\n"), client.config.prefix))
         ]});
     }
+    if (Steam.isRunning() || (await WhitelistedApps.running()).length) return message.reply({content: Language.strings.logs.alreadyRunning});
     var app = WhitelistedApps.get(args.join(" "));
     if (!app) return message.reply({content: Language.strings.start.appNotFound.format(args.join(" "))});
     var msg = await message.reply({content: Language.strings.logs.preparing});
