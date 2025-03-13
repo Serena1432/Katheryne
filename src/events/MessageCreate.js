@@ -28,6 +28,6 @@ module.exports = function(client, message) {
             if (!message.guild.members.me.permissions.has(PermissionFlagsBits[commandInfo.config.botPermissions[i]])) return message.reply({content: Language.strings.noBOTPermissions.format(commandInfo.config.botPermissions.join(", "))});
         }
     }
-    if (commandInfo.config.ownerOnly && message.user.id != client.config.owner_id) return message.reply({content: Language.strings.ownerOnly});
+    if (commandInfo.config.ownerOnly && message.author.id != client.config.owner_id) return message.reply({content: Language.strings.ownerOnly});
     commandInfo.run(client, message, args);
 }

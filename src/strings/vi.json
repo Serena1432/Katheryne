@@ -6,6 +6,9 @@
     "ownerOnly": "Chỉ có chủ sở hữu BOT mới dùng được lệnh này.",
     "cores": "nhân",
     "threads": "luồng",
+    "noArguments": "❌ **Vui lòng nhập một %1!**",
+    "command": "câu lệnh",
+    "and": "và",
     "ping": {
         "description": "Kiểm tra thời gian phản hồi của BOT.",
         "responseTime": "✅ **Thời gian phản hồi:** %1ms"
@@ -29,6 +32,12 @@
         "notRunning": "❌ **Máy đang không chạy bất kì ứng dụng nào, nên bạn không cần phải làm gì thêm.**",
         "stopping": "Đang thoát %1..."
     },
+    "exec": {
+        "description": "Chạy một câu lệnh bất kì trên máy tính. Chỉ hỗ trợ cho chủ BOT.",
+        "timeout": "Đã hết thời gian chờ, tiến trình sẽ thoát ngay lập tức.",
+        "additionalOptions": "Tùy chọn %1 đã được bật.",
+        "interactive": "câu lệnh có thể tương tác"
+    },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",
         "alreadyRunning": "❌ **Steam hoặc một ứng dụng trong danh sách trắng đang chạy, hãy tắt hết các ứng dụng và thử lại.**",
@@ -48,6 +57,7 @@
         "startMonitoring": "Bắt đầu theo dõi các ảnh chụp màn hình mới trong game...",
         "stopMonitoring": "Dừng theo dõi các ảnh chụp màn hình mới trong game...",
         "startSuccess": "Khởi động thành công.",
-        "stopSuccess": "Hoàn tất thực hiện lệnh."
+        "stopSuccess": "Hoàn tất thực hiện lệnh.",
+        "processExit": "Tiến trình đã hoàn tất với mã %1."
     }
 }

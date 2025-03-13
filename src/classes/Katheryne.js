@@ -33,6 +33,7 @@ module.exports = {
     addLog: async function(message, log) {
         if (!this._logs[message.id]) this._logs[message.id] = [];
         var logs = this._logs[message.id];
+        if (logs.length >= 10) logs.splice(0, 1);
         logs.push(log);
         await this.editMessage(message, {content: `\`\`\`\n${logs.join("\n")}\n\`\`\``});
     },
