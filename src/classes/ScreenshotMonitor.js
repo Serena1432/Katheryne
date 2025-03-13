@@ -40,7 +40,7 @@ var ScreenshotMonitor = {
      */
     start: function(apps) {
         this._apps = apps;
-        this._interval = setInterval((function() {
+        if (!this._interval) this._interval = setInterval((function() {
             this.refresh();
         }).bind(this), 10000);
         console.log(`Started monitoring screenshot folders for ${this._apps.length} applications.`);
@@ -49,7 +49,10 @@ var ScreenshotMonitor = {
      * Stop monitoring the screenshots.
      */
     stop: function() {
-        if (this._interval) clearInterval(interval);
+        if (this._interval) {
+            clearInterval(this._interval);
+            this._interval = null;
+        }
         console.log(`Stopped monitoring screenshot folders for ${this._apps.length} applications.`);
     }
 };

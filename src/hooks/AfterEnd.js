@@ -31,7 +31,7 @@ module.exports = async function(message, client, app) {
         Computer.spawn("kdeconnectd", [], true);
     }
     if (client.config.computer.auto_lock_input) {
-        await Katheryne.addLog(message, Language.strings.logs.lockingInput);
-        Computer.lockInput();
+        await Katheryne.addLog(message, Language.strings.logs.unlockingInput);
+        Computer.unlockInput();
     }
 }

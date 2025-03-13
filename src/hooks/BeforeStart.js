@@ -17,10 +17,10 @@ const ScreenshotMonitor = require("../classes/ScreenshotMonitor");
  * @param {WhitelistedApp} app Whitelisted app information
  */
 module.exports = async function(message, client, app) {
-    // if (client.config.computer.auto_lock_input) {
-    //     await Katheryne.addLog(message, Language.strings.logs.lockingInput);
-    //     Computer.lockInput();
-    // }
+    if (client.config.computer.auto_lock_input) {
+        await Katheryne.addLog(message, Language.strings.logs.lockingInput);
+        Computer.lockInput();
+    }
     await Katheryne.addLog(message, Language.strings.logs.closingApps);
     for (var process of client.config.computer.close_processes) try {await Computer.killProcess(process)} catch {}
     if (client.config.computer.auto_mute) {
