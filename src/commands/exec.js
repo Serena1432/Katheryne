@@ -33,7 +33,7 @@ module.exports.run = async function(client, message, args) {
     var msg = await message.reply({content: Language.strings.logs.preparing});
     try {
         if (options.length) await Katheryne.addLog(msg, Language.strings.exec.additionalOptions.format(options.join(Language.strings.and)));
-        var session = new ExecSession(msg, args.join(" "));
+        var session = new ExecSession(msg, args.join(" "), message.author);
         session.interactive = interactive;
         session.execute();
     }

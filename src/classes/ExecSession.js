@@ -9,10 +9,10 @@ class ExecSession {
      * @param {Message|ChatInputCommandInteraction} message Discord message or interaction object
      * @param {string} command Execute command
      */
-    constructor(message, command) {
+    constructor(message, command, author) {
         this.message = message;
         this.command = command;
-        this.author = message.constructor.name.toLowerCase().includes("interaction") ? message.user : message.author;
+        this.author = author;
         this.process = null;
         this.collector = null;
         this.interactive = false;
@@ -70,6 +70,7 @@ class ExecSession {
         collector = this.collector = channel.createMessageCollector({filter});
         collector.on("collect", (function(message) {
             if (message.content.toLowerCase() == "cancel") {
+                message.delete();
                 collector.stop();
                 this.exit();
                 return;
@@ -102,13 +103,13 @@ class ExecSession {
      */
     write(content) {
         this.updateTimestamp();
-        this.process.write(content);
+        if (this.process) this.process.write(`${content}\r`);
     }
     /**
      * Exit the process.
      */
     exit() {
-        this.process.kill("SIGTERM");
+        if (this.process) this.process.kill("SIGTERM");
     }
 }
 
