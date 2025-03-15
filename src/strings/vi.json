@@ -10,6 +10,9 @@
     "command": "câu lệnh",
     "and": "và",
     "noRunningPermissions": "❌ **Bạn chỉ được phép thực hiện lệnh này khi máy đang chạy Steam hoặc các ứng dụng khác đã được cho phép.**",
+    "undefined": "Không xác định",
+    "on": "Bật",
+    "off": "Tắt",
     "ping": {
         "description": "Kiểm tra thời gian phản hồi của BOT.",
         "responseTime": "✅ **Thời gian phản hồi:** %1ms"
@@ -64,6 +67,29 @@
         "amount": "Giá trị âm lượng bạn cần đặt.",
         "invalidAmount": "❌ **Vui lòng nhập giá trị âm lượng từ 0 - 100, hoặc `on` (bật) hoặc `off` (tắt).**",
         "success": "✅ **Đã cài đặt âm lượng của máy tính %1 thành %2%.**"
+    },
+    "stats": {
+        "description": "Xem tình trạng hiện tại của máy tính.",
+        "title": "Thông tin máy tính %1",
+        "nodeJSVersion": "Phiên bản Node.JS:",
+        "discordJSVersion": "Phiên bản Discord.JS:",
+        "model": "Mã máy tính:",
+        "os": "Hệ điều hành:",
+        "battery": "Mức pin:",
+        "cpu": "CPU:",
+        "cpuUsage": "Mức sử dụng CPU:",
+        "cpuTemp": "Nhiệt độ CPU:",
+        "gpu": "GPU:",
+        "gpuUsage": "Mức sử dụng GPU:",
+        "gpuTemp": "Nhiệt độ GPU:",
+        "ramUsage": "RAM:",
+        "vramUsage": "VRAM:",
+        "runningApp": "Ứng dụng đang chạy:",
+        "governor": "Đang chạy ở chế độ %1",
+        "governors": {
+            "performance": "hiệu năng cao",
+            "powersave": "tiết kiệm điện"
+        }
     },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",

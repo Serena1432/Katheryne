@@ -9,7 +9,6 @@ module.exports = {
     embed: function(client) {
         return new EmbedBuilder()
         .setAuthor({name: client.user.username, iconURL: client.user.avatarURL({size: 128})})
-        .setThumbnail(client.user.avatarURL({size: 128}))
         .setColor("Random")
         .setTimestamp(new Date());
     },
@@ -20,6 +19,9 @@ module.exports = {
      * @returns {Promise<Message>}
      */
     editMessage: function(message, options) {
+        if (!options.content) options.content = "";
+        if (!options.components) options.components = [];
+        if (!options.embeds) options.embeds = [];
         if (this.isInteraction(message)) return message.editReply(options);
         else return message.edit(options);
     },
@@ -49,6 +51,9 @@ module.exports = {
      * @returns {Promise<Message>}
      */
     reply: async function(message, options) {
+        if (!options.content) options.content = "";
+        if (!options.components) options.components = [];
+        if (!options.embeds) options.embeds = [];
         if (this.isInteraction(message)) return message.editReply(options);
         else return message.reply(options);
     },

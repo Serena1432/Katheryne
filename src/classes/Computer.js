@@ -246,10 +246,11 @@ var Computer = {
         try {
             // For NVIDIA dGPU
             if (gpu.vendor.includes("NVIDIA")) {
-                const result = this.spawnSync("nvidia-smi",  ["--query-gpu=utilization.gpu,temperature.gpu", "--format=csv,noheader,nounits"]);
+                const result = this.spawnSync("nvidia-smi",  ["--query-gpu=utilization.gpu,temperature.gpu,memory.used", "--format=csv,noheader,nounits"]);
                 if (result.error || result.stderr.split("\n")[0].toString()) return null;
-                const [usage, temperature] = result.stdout.split(", ").map(Number);
-                return {usage, temperature};
+                var [usage, temperature, vram] = result.stdout.split(", ").map(Number);
+                vram = Number(vram) * 1048576;
+                return {usage, temperature, vram};
             }
             // For AMD iGPU/dGPU
             else if (gpu.vendor.includes("AMD")) {
@@ -258,9 +259,11 @@ var Computer = {
             }
             // For Intel iGPU/dGPU
             else if (gpu.vendor.includes("Intel")) {
+                // The iGPU temperature is the same as CPU's so we don't need that. About dGPU? I don't know, since I don't have any Intel dGPUs.
+                // I don't know how to get Intel GPU's VRAM usage. I don't even know if it's possible.
                 const result = this.spawnSync(`timeout`, ["0.5", "intel_gpu_top", "-J", "-s", "2000"]);
                 var data = JSON.parse(result.stdout.toString().slice(1));
-                return {usage: data.engines["Render/3D"].busy, temperature: null};
+                return {usage: data.engines["Render/3D"].busy.toFixed(0), temperature: null, vram: null};
             }
         }
         catch (err) {
@@ -296,8 +299,10 @@ var Computer = {
             },
             gpu: graphics.controllers.map(gpu => {
                 return {
-                    model: `${gpu.vendor} ${gpu.model}`,
-                    vram: gpu.vram,
+                    vendor: gpu.vendor,
+                    model: gpu.model,
+                    modelShort: gpu.model.substring(0, gpu.model.indexOf("[") - 1),
+                    vram: gpu.vram * 1048576,
                     data: Computer.gpuInfo(gpu)
                 }
             }),
