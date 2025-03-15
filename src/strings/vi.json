@@ -34,6 +34,7 @@
     },
     "exec": {
         "description": "Chạy một câu lệnh bất kì trên máy tính. Chỉ hỗ trợ cho chủ BOT.",
+        "command": "Câu lệnh bạn cần chạy trên máy tính.",
         "timeout": "Đã hết thời gian chờ, tiến trình sẽ thoát ngay lập tức.",
         "additionalOptions": "Tùy chọn %1 đã được bật.",
         "interactive": "câu lệnh có thể tương tác"

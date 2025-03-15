@@ -24,8 +24,8 @@ module.exports.config = {
  */
 module.exports.run = async function(client, message, args) {
     var runningApps = await WhitelistedApps.running();
-    if (!Steam.isRunning() && !runningApps.length) return message.reply({content: Language.strings.exit.notRunning});
-    var msg = await message.reply({content: Language.strings.logs.preparing});
+    if (!Steam.isRunning() && !runningApps.length) return Katheryne.reply(message, {content: Language.strings.exit.notRunning});
+    var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
         await Katheryne.addLog(msg, Language.strings.steam.stopping);
         Steam.stop();

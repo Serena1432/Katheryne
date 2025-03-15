@@ -18,6 +18,7 @@ module.exports = {
      * @returns 
      */
     run: async (client, interaction) => {
-        interaction.reply(Language.strings.responseTime.format(new Date().getTime() - interaction.createdTimestamp));
+        await interaction.deferReply();
+        await client.commands.get("ping").run(client, interaction, []);
     }
 }

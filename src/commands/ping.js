@@ -1,5 +1,6 @@
 const { Client, Message } = require("discord.js");
 const Language = require("../classes/Language");
+const Katheryne = require("../classes/Katheryne");
 
 module.exports.config = {
     name: "ping",
@@ -18,5 +19,5 @@ module.exports.config = {
  * @param {string[]} args 
  */
 module.exports.run = function(client, message, args) {
-    message.reply({content: Language.strings.responseTime.format(new Date().getTime() - message.createdTimestamp)});
+    Katheryne.reply(message, {content: Language.strings.responseTime.format(new Date().getTime() - message.createdTimestamp)});
 }

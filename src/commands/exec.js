@@ -21,7 +21,7 @@ module.exports.config = {
  * @param {string[]} args 
  */
 module.exports.run = async function(client, message, args) {
-    if (!args[0]) return message.reply(Language.strings.noArguments.format(Language.strings.command));
+    if (!args[0]) return Katheryne.reply(message, Language.strings.noArguments.format(Language.strings.command));
     var interactive = false;
     var interactiveIndex = args.findIndex(arg => arg == "-interactive");
     if (interactiveIndex != -1) {
@@ -30,10 +30,10 @@ module.exports.run = async function(client, message, args) {
     }
     var options = [];
     if (interactive) options.push(Language.strings.exec.interactive);
-    var msg = await message.reply({content: Language.strings.logs.preparing});
+    var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
         if (options.length) await Katheryne.addLog(msg, Language.strings.exec.additionalOptions.format(options.join(Language.strings.and)));
-        var session = new ExecSession(msg, args.join(" "), message.author);
+        var session = new ExecSession(msg, args.join(" "), Katheryne.author(message));
         session.interactive = interactive;
         session.execute();
     }

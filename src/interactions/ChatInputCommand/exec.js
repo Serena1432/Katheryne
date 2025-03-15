@@ -3,17 +3,18 @@ const Language = require("../../classes/Language");
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName("start")
-    .setDescription(Language.strings.start.description)
+    .setName("exec")
+    .setDescription(Language.strings.exec.description)
     .addStringOption(option => option
-        .setName("alias")
-        .setDescription(Language.strings.start.alias)
+        .setName("command")
+        .setDescription(Language.strings.exec.command)
+        .setRequired(true)
     ),
     config: {
         nodm: true,
         memberPermissions: [],
         botPermissions: [],
-        ownerOnly: false
+        ownerOnly: true
     },
     /**
      * 
@@ -22,8 +23,8 @@ module.exports = {
      * @returns 
      */
     run: async (client, interaction) => {
-        const alias = interaction.options.getString("alias") || "";
         await interaction.deferReply();
-        await client.commands.get("start").run(client, interaction, alias.split(" "));
+        var command = interaction.options.getString("command") || "";
+        await client.commands.get("exec").run(client, interaction, command.split(" "));
     }
 }

@@ -25,8 +25,8 @@ module.exports.config = {
 module.exports.run = async function(client, message, args) {
     var user = args[0];
     if (user == "exit") {
-        if (!Steam.isRunning()) return message.reply({content: Language.strings.steam.notRunning});
-        var msg = await message.reply({content: Language.strings.logs.preparing});
+        if (!Steam.isRunning()) return Katheryne.reply(message, {content: Language.strings.steam.notRunning});
+        var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
         try {
             await Katheryne.addLog(msg, Language.strings.steam.stopping);
             Steam.stop();
@@ -39,9 +39,9 @@ module.exports.run = async function(client, message, args) {
         }
         return;
     }
-    if (Steam.isRunning() || (await WhitelistedApps.running()).length) return message.reply({content: Language.strings.logs.alreadyRunning});
-    if (user && message.author.id != client.config.owner_id) return message.reply({content: Language.strings.steam.noSufficientPermission});
-    var msg = await message.reply({content: Language.strings.logs.preparing});
+    if (Steam.isRunning() || (await WhitelistedApps.running()).length) return Katheryne.reply(message, {content: Language.strings.logs.alreadyRunning});
+    if (user && Katheryne.author(message).id != client.config.owner_id) return Katheryne.reply(message, {content: Language.strings.steam.noSufficientPermission});
+    var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
         await BeforeStartHook(msg, client);
         await Katheryne.addLog(msg, Language.strings.steam.starting);

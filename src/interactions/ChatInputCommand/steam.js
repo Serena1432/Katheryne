@@ -1,10 +1,5 @@
 const { SlashCommandBuilder, messageLink, EmbedBuilder, channelLink, User, time, ChatInputCommandInteraction } = require("discord.js");
 const Language = require("../../classes/Language");
-const Katheryne = require("../../classes/Katheryne");
-const Steam = require("../../classes/Steam");
-const BeforeStartHook = require("../../hooks/BeforeStart");
-const AfterEndHook = require("../../hooks/AfterEnd");
-const WhitelistedApps = require("../../classes/WhitelistedApps").WhitelistedAppManager;
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -28,34 +23,7 @@ module.exports = {
      */
     run: async (client, interaction) => {
         await interaction.deferReply();
-        var user = interaction.options.getString("user");
-        if (user == "exit") {
-            if (!Steam.isRunning()) return interaction.editReply({content: Language.strings.steam.notRunning});
-            await interaction.editReply({content: Language.strings.logs.preparing});
-            try {
-                await Katheryne.addLog(interaction, Language.strings.steam.stopping);
-                Steam.stop();
-                await AfterEndHook(interaction, client);
-                await Katheryne.addLog(interaction, Language.strings.logs.stopSuccess);
-            }
-            catch (err) {
-                console.error(err);
-                Katheryne.addLog(interaction, err.stack);
-            }
-            return;
-        }
-        if (Steam.isRunning() || (await WhitelistedApps.running()).length) return interaction.editReply({content: Language.strings.logs.alreadyRunning});
-        if (user && interaction.user.id != client.config.owner_id) return interaction.editReply({content: Language.steam.noSufficientPermission});
-        await interaction.editReply({content: Language.strings.logs.preparing});
-        try {
-            await BeforeStartHook(interaction, client);
-            await Katheryne.addLog(interaction, Language.strings.steam.starting);
-            Steam.start(user);
-            await Katheryne.addLog(interaction, Language.strings.logs.startSuccess);
-        }
-        catch (err) {
-            console.error(err);
-            Katheryne.addLog(interaction, err.stack);
-        }
+        var user = interaction.options.getString("user") || "";
+        await client.commands.get("steam").run(client, interaction, user.split(" "));
     }
 }
