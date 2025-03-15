@@ -43,6 +43,9 @@ module.exports = async (client) => {
     // Initialize whitelisted apps
     WhitelistedApps.add(client.config.whitelisted_apps);
 
+    // Start monitoring screenshots when an application is running
+    if (await (WhitelistedApps.running()).length) ScreenshotMonitor.start(WhitelistedApps.toJSON());
+
     // Update BOT status
     updateStatus(client);
     setInterval(() => updateStatus(client), 10000);

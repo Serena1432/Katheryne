@@ -13,7 +13,7 @@ var ScreenshotMonitor = {
     refresh: function() {
         for (var i = 0; i < this._apps.length; i++) {
             var app = this._apps[i];
-            if (app._noScreenshotFolder) continue;
+            if (app._noScreenshotFolder || app.isRunning()) continue;
             var newScreenshots = app.monitorScreenshots();
             if (newScreenshots?.length) this.emit("screenshot", newScreenshots);
         }
