@@ -4,9 +4,9 @@ const Katheryne = require("../classes/Katheryne");
 const ExecSession = require("../classes/ExecSession");
 
 module.exports.config = {
-    name: "exec",
-    usage: "exec <command> (-interactive) (-stderr)",
-    description: Language.strings.exec.description,
+    name: "eval",
+    usage: "eval <script>",
+    description: Language.strings.eval.description,
     nodm: true,
     memberPermissions: [],
     botPermissions: [],
@@ -21,20 +21,10 @@ module.exports.config = {
  */
 module.exports.run = async function(client, message, args) {
     if (!args[0]) return Katheryne.reply(message, Language.strings.noArguments.format(Language.strings.command));
-    var interactive = false;
-    var interactiveIndex = args.findIndex(arg => arg == "-interactive");
-    if (interactiveIndex != -1) {
-        args.splice(interactiveIndex, 1);
-        interactive = true;
-    }
-    var options = [];
-    if (interactive) options.push(Language.strings.exec.interactive);
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
-        if (options.length) await Katheryne.addLog(msg, Language.strings.exec.additionalOptions.format(options.join(Language.strings.and)));
-        var session = new ExecSession(msg, args.join(" "), Katheryne.author(message));
-        session.interactive = interactive;
-        session.execute();
+        await eval(args.join(" "));
+        Katheryne.editMessage(msg, {content: Language.strings.eval.success});
     }
     catch (err) {
         console.error(err);

@@ -39,6 +39,11 @@
         "additionalOptions": "Tùy chọn %1 đã được bật.",
         "interactive": "câu lệnh có thể tương tác"
     },
+    "eval": {
+        "description": "Chạy câu lệnh JavaScript cho BOT. Chỉ hỗ trợ cho chủ BOT.",
+        "script": "Nội dung script cần chạy.",
+        "success": "✅ **Thực hiện lệnh hoàn tất.**"
+    },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",
         "alreadyRunning": "❌ **Steam hoặc một ứng dụng trong danh sách trắng đang chạy, hãy tắt hết các ứng dụng và thử lại.**",
