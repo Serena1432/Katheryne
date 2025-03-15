@@ -2,6 +2,7 @@ const { REST, Routes, Client, ActivityType } = require('discord.js');
 const Computer = require('../classes/Computer');
 const ScreenshotMonitor = require('../classes/ScreenshotMonitor');
 const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
+const Steam = require("../classes/Steam");
 
 /**
  * 
@@ -44,7 +45,7 @@ module.exports = async (client) => {
     WhitelistedApps.add(client.config.whitelisted_apps);
 
     // Start monitoring screenshots when an application is running
-    if (await (WhitelistedApps.running()).length) ScreenshotMonitor.start(WhitelistedApps.toJSON());
+    if (Steam.isRunning() || (await WhitelistedApps.running()).length) ScreenshotMonitor.start(WhitelistedApps.toJSON());
 
     // Update BOT status
     updateStatus(client);
