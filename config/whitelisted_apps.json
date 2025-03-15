@@ -14,5 +14,11 @@
         "command": "sudo -u murasame /home/murasame/StartHSR_Diamyth.sh",
         "screenshot": "/mnt/StarRail/ScreenShots",
         "channel": "1191968934635774034"
+    },
+    {
+        "process": "anydesk",
+        "name": "AnyDesk",
+        "alias": "anydesk",
+        "command": "sudo -u $USER anydesk"
     }
 ]
