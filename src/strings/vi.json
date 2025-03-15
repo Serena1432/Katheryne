@@ -64,6 +64,7 @@
         "stopMonitoring": "Dừng theo dõi các ảnh chụp màn hình mới trong game...",
         "startSuccess": "Khởi động thành công.",
         "stopSuccess": "Hoàn tất thực hiện lệnh.",
-        "processExit": "Tiến trình đã hoàn tất với mã %1."
+        "processExit": "Tiến trình đã hoàn tất với mã %1.",
+        "checkFailed": "Không đủ điều kiện để tiếp tục chạy, việc khởi động bị huỷ bỏ."
     }
 }

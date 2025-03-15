@@ -5,6 +5,7 @@ const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppMana
 const BeforeStartHook = require("../hooks/BeforeStart");
 const Computer = require("../classes/Computer");
 const Steam = require("../classes/Steam");
+const CheckBeforeStartHook = require("../hooks/CheckBeforeStart");
 
 module.exports.config = {
     name: "start",
@@ -38,6 +39,7 @@ module.exports.run = async function(client, message, args) {
     if (!app) return Katheryne.reply(message, {content: Language.strings.start.appNotFound.format(args.join(" "))});
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
+        if (!await CheckBeforeStartHook(message, client, app)) return Katheryne.addLog(msg, Language.strings.logs.checkFailed);
         await BeforeStartHook(msg, client, app);
         await Katheryne.addLog(msg, Language.strings.logs.startingApp.format(app.name));
         Computer.exec(app.command);

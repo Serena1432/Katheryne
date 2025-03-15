@@ -3,6 +3,7 @@ const Language = require("../classes/Language");
 const Katheryne = require("../classes/Katheryne");
 const BeforeStartHook = require("../hooks/BeforeStart");
 const AfterEndHook = require("../hooks/AfterEnd");
+const CheckBeforeStartHook = require("../hooks/CheckBeforeStart");
 const Steam = require("../classes/Steam");
 const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
 
@@ -43,6 +44,7 @@ module.exports.run = async function(client, message, args) {
     if (user && Katheryne.author(message).id != client.config.owner_id) return Katheryne.reply(message, {content: Language.strings.steam.noSufficientPermission});
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
+        if (!await CheckBeforeStartHook(message, client)) return Katheryne.addLog(msg, Language.strings.logs.checkFailed);
         await BeforeStartHook(msg, client);
         await Katheryne.addLog(msg, Language.strings.steam.starting);
         Steam.start(user);
