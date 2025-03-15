@@ -21,7 +21,7 @@ module.exports = async function(message, client, app) {
     ScreenshotMonitor.stop();
     await Katheryne.addLog(message, Language.strings.logs.restartingApps);
     var apps = client.config.computer.start_processes;
-    for (var i = 0; i < apps.length; i++) Computer.spawn(apps[i], [], true);
+    for (var i = 0; i < apps.length; i++) try {Computer.spawn(apps[i], [], true)} catch {}
     if (client.config.computer.auto_bluetooth_off) {
         await Katheryne.addLog(message, Language.strings.logs.enablingBluetooth);
         await Computer.setBluetooth(true);
