@@ -9,6 +9,7 @@
     "noArguments": "❌ **Vui lòng nhập một %1!**",
     "command": "câu lệnh",
     "and": "và",
+    "noRunningPermissions": "❌ **Bạn chỉ được phép thực hiện lệnh này khi máy đang chạy Steam hoặc các ứng dụng khác đã được cho phép.**",
     "ping": {
         "description": "Kiểm tra thời gian phản hồi của BOT.",
         "responseTime": "✅ **Thời gian phản hồi:** %1ms"
@@ -43,6 +44,14 @@
         "description": "Chạy câu lệnh JavaScript cho BOT. Chỉ hỗ trợ cho chủ BOT.",
         "script": "Nội dung script cần chạy.",
         "success": "✅ **Thực hiện lệnh hoàn tất.**"
+    },
+    "unlock": {
+        "description": "Mở khóa bàn phím và chuột bên ngoài của máy.",
+        "success": "✅ **Đã mở khóa bàn phím và chuột bên ngoài của máy tính %1.**"
+    },
+    "lock": {
+        "description": "Khóa bàn phím và chuột bên ngoài của máy.",
+        "success": "✅ **Đã khóa bàn phím và chuột bên ngoài của máy tính %1.**"
     },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",

@@ -180,7 +180,7 @@ var Computer = {
      * Unlock the computer's physical input devices.
      */
     unlockInput: function() {
-        if (!this._inputLockInterval) clearInterval(this._inputLockInterval);
+        if (this._inputLockInterval) clearInterval(this._inputLockInterval);
         switch (this.xdgSessionType) {
             case "x11": {
                 var devices = this.inputDevices(), commands = [];
