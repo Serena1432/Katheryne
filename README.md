@@ -35,7 +35,7 @@ These features can be used directly in a Discord server, provided you have the r
 - [X] Run whitelisted applications remotely using commands/built-in integrations
 - [ ] Take screenshots and monitor system stats
 - [ ] Auto-send in-game screenshots to a Discord channel
-- [ ] Lock the physical keyboard/mouse to prevent interference (I made that as my kids usually interrupt gameplay when my friends are playing)
+- [X] Lock the physical keyboard/mouse to prevent interference (I made that as my kids usually interrupt gameplay when my friends are playing)
 - [ ] Turn off the physical display and mute audio (for the same reason as above)
 - [ ] Send notifications to the computer (e.g., on-screen messages from Discord)
 - [ ] Refocus the game window if it minimizes unexpectedly
