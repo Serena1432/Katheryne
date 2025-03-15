@@ -53,6 +53,7 @@ class WhitelistedApp {
      * Initialize the screenshots array.
      */
     initializeScreenshots() {
+        if (!this.screenshot) return;
         if (!fs.existsSync(this.screenshot)) {
             this._noScreenshotFolder = true;
             return console.warn(`"${this.screenshot}" does not exist, ${this.name}'s screenshot folder will not be monitored`);
@@ -64,6 +65,7 @@ class WhitelistedApp {
      * @returns {string[]} List of the new screenshot files, with the full path.
      */
     monitorScreenshots() {
+        if (!this.screenshot) return;
         var screenshotPath = this.screenshot;
         if (!fs.existsSync(screenshotPath)) return console.warn(`"${screenshotPath}" does not exist, ${this.name}'s screenshot folder will not be monitored`);
         var arr = fs.readdirSync(screenshotPath), oldScreenshots = this._oldScreenshots,
