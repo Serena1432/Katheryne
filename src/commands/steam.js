@@ -9,7 +9,7 @@ const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppMana
 
 module.exports.config = {
     name: "steam",
-    usage: "start (alias)",
+    usage: "steam <user/exit>",
     description: Language.strings.start.description,
     nodm: true,
     memberPermissions: [],
