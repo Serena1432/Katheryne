@@ -24,6 +24,8 @@ async function updateStatus(client) {
  */
 module.exports = async (client) => {
     console.log(`BOT started as ${client.user.tag}`);
+
+    // Add slash commannds
     const commands = client.interactions.toJSON();
     const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
     (async () => {
@@ -43,6 +45,9 @@ module.exports = async (client) => {
 
     // Initialize whitelisted apps
     WhitelistedApps.add(client.config.whitelisted_apps);
+
+    // Set the client for the screenshot monitor
+    ScreenshotMonitor.setClient(client);
 
     // Start monitoring screenshots when an application is running
     if (Steam.isRunning() || (await WhitelistedApps.running()).length) ScreenshotMonitor.start(WhitelistedApps.toJSON());

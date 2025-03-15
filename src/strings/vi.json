@@ -113,5 +113,9 @@
         "stopSuccess": "Hoàn tất thực hiện lệnh.",
         "processExit": "Tiến trình đã hoàn tất với mã %1.",
         "checkFailed": "Không đủ điều kiện để tiếp tục chạy, việc khởi động bị huỷ bỏ."
+    },
+    "screenshots": {
+        "new": "🖼️ **Một ảnh chụp màn hình của %1 được phát hiện trên máy tính %2 vào lúc %3:**",
+        "description": "Ảnh chụp màn hình của %1"
     }
 }

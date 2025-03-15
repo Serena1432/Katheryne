@@ -12,7 +12,7 @@
         "name": "Honkai: Star Rail",
         "alias": "hsr",
         "command": "sudo -u murasame /home/murasame/StartHSR_Diamyth.sh",
-        "screenshot": "/mnt/StarRail/ScreenShots",
+        "screenshot": "/mnt/StarRail/StarRail_Data/ScreenShots",
         "channel": "1191968934635774034"
     }
 ]

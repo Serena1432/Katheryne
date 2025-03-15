@@ -1,7 +1,10 @@
 const { Client, Message } = require("discord.js");
 const Language = require("../classes/Language");
 const Katheryne = require("../classes/Katheryne");
-const ExecSession = require("../classes/ExecSession");
+const Computer = require('../classes/Computer');
+const ScreenshotMonitor = require('../classes/ScreenshotMonitor');
+const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
+const Steam = require("../classes/Steam");
 
 module.exports.config = {
     name: "eval",

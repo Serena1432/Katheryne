@@ -1,38 +1,63 @@
+const { Client } = require("discord.js");
 const { WhitelistedApp } = require("./WhitelistedApps");
+const path = require("path");
+const Language = require("./Language");
+const Computer = require("./Computer");
 
 var ScreenshotMonitor = {
     /**
      * @type {WhitelistedApp[]}
      */
     _apps: [],
+    /**
+     * @type {NodeJS.Timeout}
+     */
     _interval: null,
-    _handlers: {},
+    /**
+     * @type {Client}
+     */
+    _client: null,
+    /**
+     * Set the Discord client to send the screenshots.
+     * @param {Client} client Discord client object
+     */
+    setClient: function(client) {
+        this._client = client;
+    },
+    /**
+     * Send images to a channel.
+     * @param {string} channelId Discord channel ID
+     * @param {string[]} images Array containing paths of all images you want to send.
+     * @param {string} name The application name (for description)
+     */
+    sendImages: async function(channelId, images, name) {
+        if (!this._client) throw new Error("No client specified");
+        var client = this._client,
+            channel = client.channels.cache.get(channelId);
+        if (!channel) throw new Error(`Invalid channel ${channel}`);
+        for (var i = 0; i < Math.ceil(images.length / 10); i++) {
+            await channel.send({
+                content: Language.strings.screenshots.new.format(name, Computer.hostname, new Date().toUTCString()),
+                files: images.slice(i * 10, Math.min((i + 1) * 10, images.length)).map(filePath => {
+                    return {
+                        attachment: filePath,
+                        name: `${path.basename(filePath)}.${path.extname(filePath)}`,
+                        description: Language.strings.screenshots.description.format(name)
+                    };
+                })
+            })
+        }
+    },
     /**
      * Refresh the screenshot monitoring event.
      */
     refresh: function() {
         for (var i = 0; i < this._apps.length; i++) {
             var app = this._apps[i];
-            if (app._noScreenshotFolder || app.isRunning()) continue;
+            if (app._noScreenshotFolder || !app.isRunning()) continue;
             var newScreenshots = app.monitorScreenshots();
-            if (newScreenshots?.length) this.emit("screenshot", newScreenshots);
+            if (newScreenshots?.length) this.sendImages(app.channel, newScreenshots, app.name);
         }
-    },
-    /**
-     * Register the screenshot monitoring event.
-     * @param {'screenshot'} handler - Event type
-     * @param {(screenshots: string[]) => void} callback - Callback function
-     */
-    on: function(handler, callback) {
-        this._handlers[handler] = callback;
-    },
-    /**
-     * Trigger the monitoring event.
-     * @param {'screenshot'} handler
-     * @param {string[]} message
-     */
-    emit: function(handler, message) {
-        if (this._handlers[handler]) this._handlers[handler](message);
     },
     /**
      * Start monitoring the screenshots.
