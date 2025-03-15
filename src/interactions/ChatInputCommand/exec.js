@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, messageLink, EmbedBuilder, channelLink, User, time, ChatInputCommandInteraction } = require("discord.js");
+const { SlashCommandBuilder, ChatInputCommandInteraction } = require("discord.js");
 const Language = require("../../classes/Language");
 
 module.exports = {
