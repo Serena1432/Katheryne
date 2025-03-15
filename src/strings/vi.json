@@ -59,6 +59,12 @@
         "invalidAmount": "❌ **Vui lòng nhập giá trị độ sáng từ 0 - 100, hoặc `on` (bật) hoặc `off` (tắt).**",
         "success": "✅ **Đã cài đặt độ sáng của máy tính %1 thành %2%.**"
     },
+    "volume": {
+        "description": "Cài đặt âm lượng cho máy. Có thể nhập on để bật hoặc off để tắt tiếng.",
+        "amount": "Giá trị âm lượng bạn cần đặt.",
+        "invalidAmount": "❌ **Vui lòng nhập giá trị âm lượng từ 0 - 100, hoặc `on` (bật) hoặc `off` (tắt).**",
+        "success": "✅ **Đã cài đặt âm lượng của máy tính %1 thành %2%.**"
+    },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",
         "alreadyRunning": "❌ **Steam hoặc một ứng dụng trong danh sách trắng đang chạy, hãy tắt hết các ứng dụng và thử lại.**",
