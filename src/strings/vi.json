@@ -68,6 +68,10 @@
         "invalidAmount": "❌ **Vui lòng nhập giá trị âm lượng từ 0 - 100, hoặc `on` (bật) hoặc `off` (tắt).**",
         "success": "✅ **Đã cài đặt âm lượng của máy tính %1 thành %2%.**"
     },
+    "screenshot": {
+        "description": "Chụp ảnh màn hình máy tính hiện tại.",
+        "success": "🖼️ **Ảnh chụp màn hình máy tính %1 vào lúc %2:**"
+    },
     "stats": {
         "description": "Xem tình trạng hiện tại của máy tính.",
         "title": "Thông tin máy tính %1",

@@ -338,7 +338,7 @@ var Computer = {
             else if (this.currentDesktop.toLowerCase().includes("plasma")) command = `spectacle -f -o "${outPath}"`;
             else command = `grim "${outPath}"`;
         }
-        return this.execSync(command);
+        return this.exec(command);
     },
     /**
      * 

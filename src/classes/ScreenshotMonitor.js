@@ -37,7 +37,7 @@ var ScreenshotMonitor = {
         if (!channel) throw new Error(`Invalid channel ${channel}`);
         for (var i = 0; i < Math.ceil(images.length / 10); i++) {
             await channel.send({
-                content: Language.strings.screenshots.new.format(name, Computer.hostname, new Date().toUTCString()),
+                content: Language.strings.screenshots.new.format(name, Computer.hostname, new Date().toLocaleString()),
                 files: images.slice(i * 10, Math.min((i + 1) * 10, images.length)).map(filePath => {
                     return {
                         attachment: filePath,
