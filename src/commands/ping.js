@@ -19,5 +19,5 @@ module.exports.config = {
  * @param {string[]} args 
  */
 module.exports.run = function(client, message, args) {
-    Katheryne.reply(message, {content: Language.strings.responseTime.format(new Date().getTime() - message.createdTimestamp)});
+    Katheryne.reply(message, {content: Language.strings.ping.responseTime.format(new Date().getTime() - message.createdTimestamp)});
 }
