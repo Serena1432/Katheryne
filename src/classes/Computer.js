@@ -11,6 +11,12 @@ var Computer = {
     xdgSessionType: "",
     currentDesktop: "",
     /**
+     * Return the session environment setting.
+     */
+    sessionEnv: function() {
+        return `--preserve-env=XDG_RUNTIME_DIR,DBUS_SESSION_BUS_ADDRESS`;
+    },
+    /**
      * Check if the BOT process is running as root.
      */
     isRoot: function() {
@@ -58,6 +64,59 @@ var Computer = {
      */
     spawnSync: function(command, args) {
         return child_process.spawnSync(command, args, {encoding: "utf-8"});
+    },
+    /**
+     * Spawn a process as the main user in the target computer.
+     * @param {string} command 
+     * @param {string[]} args 
+     * @param {boolean} detach 
+     * @param {child_process.SpawnOptionsWithoutStdio} options
+     */
+    spawnAsUser: function(command, args, detach = false, options = {}) {
+        if (detach) {
+            options.detached = true;
+            options.stdio = "ignore";
+        }
+        if (this.isRoot()) {
+            args = ["-u", this.username, "-i", this.sessionEnv(), command].concat(args);
+            command = "sudo";
+        }
+        var child = child_process.spawn(command, args, options);
+        if (detach) child.unref();
+        return child;
+    },
+    /**
+     * Spawn a process as the main user in the target computer (synchronous).
+     * @param {string} command 
+     * @param {string[]} args 
+     */
+    spawnSyncAsUser: function(command, args) {
+        if (this.isRoot()) {
+            args = ["-u", this.username, "-i", this.sessionEnv(), command].concat(args);
+            command = "sudo";
+        }
+        return child_process.spawnSync(command, args, {encoding: "utf-8"});
+    },
+    /**
+     * Execute a command as the main user in the target computer.
+     * @param {string} command
+     */
+    execAsUser: async function (command) {
+        if (this.isRoot()) command = `sudo -u ${this.username} -i ${this.sessionEnv()} ${command}`;
+        return new Promise((resolve, reject) => {
+            child_process.exec(command, (error, stdout, stderr) => {
+                if (error) reject(error);
+                resolve({stdout, stderr});
+            })
+        });
+    },
+    /**
+     * Execute a command as the main user in the target computer (synchronous).
+     * @param {string} command
+     */
+    execSyncAsUser: function(command) {
+        if (this.isRoot()) command = `sudo -u ${this.username} -i ${this.sessionEnv()} ${command}`;
+        return child_process.execSync(command);
     },
     /**
      * Get all xinput devices (for X11)
@@ -210,9 +269,9 @@ var Computer = {
      * @param {string} name The service name
      */
     checkServiceActive: function(name, user = true) {
-        var args = ["-u", this.username, "-E", "systemctl", "--user", "is-active", "--quiet", name];
-        if (!user) args = ["-u", this.username, "-E", "systemctl", "is-active", "--quiet", name];
-        var result = this.spawnSync(`sudo`, args);
+        var args = ["--user", "is-active", "--quiet", name];
+        if (!user) args = ["is-active", "--quiet", name];
+        var result = user ? this.spawnSyncAsUser(`systemctl`, args) : this.spawnSync(`systemctl`, args);
         return (result.status == 0);
     },
     /**
@@ -367,7 +426,7 @@ var Computer = {
      * @param {number} time Notification timeout in miliseconds. Default is 15000.
      */
     sendNotification: function(description, title = "", time = 15000) {
-        return this.exec(`sudo -u ${this.username} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${this.userId}/bus" notify-send "${title.replaceAll("\"", "\\\"")}" "${description.replaceAll("\"", "\\\"")}" -t ${time}`);
+        return this.execAsUser(`notify-send "${title.replaceAll("\"", "\\\"")}" "${description.replaceAll("\"", "\\\"")}" -t ${time}`);
     },
     /**
      * Focus on a window with specific title.

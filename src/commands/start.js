@@ -45,7 +45,7 @@ module.exports.run = async function(client, message, args) {
         await BeforeStartHook(msg, client, app);
         await Katheryne.addLog(msg, Language.strings.logs.startingApp.format(app.name));
         SessionManager.set("currentUser", author.id);
-        Computer.exec(app.command);
+        Computer.spawnAsUser("bash", ["-c", app.command], true);
     }
     catch (err) {
         console.error(err);

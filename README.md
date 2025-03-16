@@ -73,8 +73,9 @@ Currently, AMD CPUs/GPUs are not properly supported as I don't have any AMD comp
 
 To run commands that require root permissions, you can do one of these ways below:
 
+* Grant the permissions for specific commands used by the BOT (recommended)
 * Running the BOT with `sudo` permissions
-* Grant the permissions for specific commands used by the BOT
+    * Using this way may cause some unexpected errors, proceed at your own risk.
 * Or don't use these commands at all
 
 ## Required applications
