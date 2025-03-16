@@ -29,5 +29,6 @@ module.exports = function(client, message) {
         }
     }
     if (commandInfo.config.ownerOnly && message.author.id != client.config.owner_id) return message.reply({content: Language.strings.ownerOnly});
+    if (message.author.id != client.config.owner_id && !client.config.whitelist.includes(message.author.id)) return message.reply({content: Language.strings.notInWhitelist});
     commandInfo.run(client, message, args);
 }
