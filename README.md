@@ -37,7 +37,7 @@ These features can be used directly in a Discord server, provided you have the r
 - [X] Auto-send in-game screenshots to a Discord channel
 - [X] Lock the physical keyboard/mouse to prevent interference (I made that as my kids usually interrupt gameplay when my friends are playing)
 - [X] Turn off the physical display and mute audio (for the same reason as above)
-- [ ] Send notifications to the computer (e.g., on-screen messages from Discord)
+- [X] Send notifications (on-screen messages) to the computer from Discord
 - [ ] Refocus the game window if it minimizes unexpectedly
 - [ ] Remotely shut down the computer (only if the owner is away or explicitly allows it)
 - [ ] Notify when the computer isn't plugged in, the battery is low or a driver error, requiring physical intervention
