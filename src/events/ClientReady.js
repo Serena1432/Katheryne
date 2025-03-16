@@ -3,6 +3,7 @@ const Computer = require('../classes/Computer');
 const ScreenshotMonitor = require('../classes/ScreenshotMonitor');
 const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
 const Steam = require("../classes/Steam");
+const SessionManager = require('../classes/SessionManager');
 
 /**
  * 
@@ -15,6 +16,7 @@ async function updateStatus(client) {
     }
     else {
         client.user.setPresence({activities: [], status: "online"});
+        if (!Steam.isRunning() && SessionManager.get("currentUser")) SessionManager.delete("currentUser");
     }
 }
 
@@ -45,6 +47,9 @@ module.exports = async (client) => {
 
     // Initialize whitelisted apps
     WhitelistedApps.add(client.config.whitelisted_apps);
+
+    // Initialize session data
+    SessionManager.initialize();
 
     // Set the client for the screenshot monitor
     ScreenshotMonitor.setClient(client);

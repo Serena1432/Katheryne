@@ -6,6 +6,7 @@ const BeforeStartHook = require("../hooks/BeforeStart");
 const Computer = require("../classes/Computer");
 const Steam = require("../classes/Steam");
 const CheckBeforeStartHook = require("../hooks/CheckBeforeStart");
+const SessionManager = require("../classes/SessionManager");
 
 module.exports.config = {
     name: "start",
@@ -42,6 +43,7 @@ module.exports.run = async function(client, message, args) {
         if (!await CheckBeforeStartHook(message, client, app)) return Katheryne.addLog(msg, Language.strings.logs.checkFailed);
         await BeforeStartHook(msg, client, app);
         await Katheryne.addLog(msg, Language.strings.logs.startingApp.format(app.name));
+        SessionManager.set("currentUser", Katheryne.author(message).id);
         Computer.exec(app.command);
     }
     catch (err) {

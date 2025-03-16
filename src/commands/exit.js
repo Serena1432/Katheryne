@@ -5,6 +5,7 @@ const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppMana
 const AfterEndHook = require("../hooks/AfterEnd");
 const Computer = require("../classes/Computer");
 const Steam = require("../classes/Steam");
+const SessionManager = require("../classes/SessionManager");
 
 module.exports.config = {
     name: "exit",
@@ -25,6 +26,8 @@ module.exports.config = {
 module.exports.run = async function(client, message, args) {
     var runningApps = await WhitelistedApps.running();
     if (!Steam.isRunning() && !runningApps.length) return Katheryne.reply(message, {content: Language.strings.exit.notRunning});
+    var currentUser = SessionManager.get("currentUser");
+    if (currentUser && currentUser != Katheryne.author(message).id && client.config.owner_id != Katheryne.author(message).id) return Katheryne.reply(message, {content: Language.strings.occupied});
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
         await Katheryne.addLog(msg, Language.strings.steam.stopping);
@@ -35,6 +38,7 @@ module.exports.run = async function(client, message, args) {
             await Computer.killProcess(app.process);
         }
         await AfterEndHook(msg, client);
+        SessionManager.delete("currentUser");
         await Katheryne.addLog(msg, Language.strings.logs.stopSuccess);
     }
     catch (err) {

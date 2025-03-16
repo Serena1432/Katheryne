@@ -16,6 +16,7 @@
     "notInWhitelist": "❌ **Bạn không có quyền sử dụng BOT này, hãy liên hệ chủ BOT để thêm quyền cho bạn và thử lại.**",
     "commandNotFound": "❌ **Không thể tìm thấy lệnh này.**",
     "notTheAuthor": "❌ **%1, bạn không có quyền để nhấn vào nút này.** Chỉ có người thực hiện lệnh này, <@%2>, mới có thể nhấn vào nó.",
+    "occupied": "❌ **Yêu cầu kết nối đang được thực hiện bởi một thành viên khác. Chỉ có thành viên đó hoặc chủ BOT mới có thể yêu cầu thoát trong thời điểm hiện tại.**",
     "ping": {
         "description": "Kiểm tra thời gian phản hồi của BOT.",
         "responseTime": "✅ **Thời gian phản hồi:** %1ms"
