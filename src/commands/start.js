@@ -29,7 +29,7 @@ module.exports.run = async function(client, message, args) {
         var apps = WhitelistedApps.toJSON().map(app => {
             return `* \`${app.alias}\` - **${app.name}**`;
         });
-        return Katheryne.reply({message, embeds: [
+        return Katheryne.reply(message, {embeds: [
             Katheryne.embed(client)
             .setTitle(Language.strings.start.embedTitle)
             .setDescription(Language.strings.start.embedDescription.format(apps.join("\n"), client.config.prefix))
