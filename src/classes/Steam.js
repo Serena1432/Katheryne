@@ -12,7 +12,7 @@ var Steam = {
      * @param {string} user Auto login as a specific user (usable for multi-user support)
      */
     start: async function(user = config.default_user) {
-        var args = ["-u", Computer.user, "steam"];
+        var args = ["-u", Computer.username, "steam"];
         if (user) args.push(`-login`, user);
         if (config.wayland_enable_pipewire && Computer.xdgSessionType == "wayland") args.push("-pipewire");
         this.process = Computer.spawn(`sudo`, args, config.detach);

@@ -24,12 +24,13 @@ module.exports.config = {
  * @param {string[]} args 
  */
 module.exports.run = async function(client, message, args) {
-    var runningApps = await WhitelistedApps.running();
+    var runningApps = await WhitelistedApps.running(), author = Katheryne.author(message);
     if (!Steam.isRunning() && !runningApps.length) return Katheryne.reply(message, {content: Language.strings.exit.notRunning});
     var currentUser = SessionManager.get("currentUser");
-    if (currentUser && currentUser != Katheryne.author(message).id && client.config.owner_id != Katheryne.author(message).id) return Katheryne.reply(message, {content: Language.strings.occupied});
+    if (currentUser && currentUser != author.id && client.config.owner_id != author.id) return Katheryne.reply(message, {content: Language.strings.occupied});
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
+        Computer.sendNotification(Language.strings.notifications.stopping.format(author.displayName), client.user.displayName);
         await Katheryne.addLog(msg, Language.strings.steam.stopping);
         Steam.stop();
         for (var i = 0; i < runningApps.length; i++) {

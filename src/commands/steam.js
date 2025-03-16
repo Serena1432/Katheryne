@@ -7,6 +7,7 @@ const CheckBeforeStartHook = require("../hooks/CheckBeforeStart");
 const Steam = require("../classes/Steam");
 const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
 const SessionManager = require("../classes/SessionManager");
+const Computer = require("../classes/Computer");
 
 module.exports.config = {
     name: "steam",
@@ -25,13 +26,14 @@ module.exports.config = {
  * @param {string[]} args 
  */
 module.exports.run = async function(client, message, args) {
-    var user = args[0];
+    var user = args[0], author = Katheryne.author(message);
     if (user == "exit") {
         if (!Steam.isRunning()) return Katheryne.reply(message, {content: Language.strings.steam.notRunning});
         var currentUser = SessionManager.get("currentUser");
-        if (currentUser && currentUser != Katheryne.author(message).id && client.config.owner_id != Katheryne.author(message).id) return Katheryne.reply(message, {content: Language.strings.occupied});
+        if (currentUser && currentUser != author.id && client.config.owner_id != author.id) return Katheryne.reply(message, {content: Language.strings.occupied});
         var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
         try {
+            Computer.sendNotification(Language.strings.notifications.stopping.format(author.displayName), client.user.displayName);
             await Katheryne.addLog(msg, Language.strings.steam.stopping);
             Steam.stop();
             await AfterEndHook(msg, client);
@@ -45,13 +47,14 @@ module.exports.run = async function(client, message, args) {
         return;
     }
     if (Steam.isRunning() || (await WhitelistedApps.running()).length) return Katheryne.reply(message, {content: Language.strings.logs.alreadyRunning});
-    if (user && Katheryne.author(message).id != client.config.owner_id) return Katheryne.reply(message, {content: Language.strings.steam.noSufficientPermission});
+    if (user && author.id != client.config.owner_id) return Katheryne.reply(message, {content: Language.strings.steam.noSufficientPermission});
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
         if (!await CheckBeforeStartHook(message, client)) return Katheryne.addLog(msg, Language.strings.logs.checkFailed);
+        Computer.sendNotification(Language.strings.notifications.starting.format(author.displayName, "Steam"), client.user.displayName);
         await BeforeStartHook(msg, client);
         await Katheryne.addLog(msg, Language.strings.steam.starting);
-        SessionManager.set("currentUser", Katheryne.author(message).id);
+        SessionManager.set("currentUser", author.id);
         Steam.start(user);
         await Katheryne.addLog(msg, Language.strings.logs.startSuccess);
     }

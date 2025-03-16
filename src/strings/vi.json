@@ -100,6 +100,13 @@
             "powersave": "tiết kiệm điện"
         }
     },
+    "send": {
+        "description": "Gửi một tin nhắn với nội dung bất kì tới máy tính.",
+        "message": "Nội dung tin nhắn.",
+        "noArgument": "❌ **Vui lòng nhập nội dung tin nhắn.**",
+        "title": "%1 (thông qua %2)",
+        "success": "✅ **Gửi tin nhắn tới máy tính thành công.**"
+    },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",
         "alreadyRunning": "❌ **Steam hoặc một ứng dụng trong danh sách trắng đang chạy, hãy tắt hết các ứng dụng và thử lại.**",
@@ -122,6 +129,10 @@
         "stopSuccess": "Hoàn tất thực hiện lệnh.",
         "processExit": "Tiến trình đã hoàn tất với mã %1.",
         "checkFailed": "Không đủ điều kiện để tiếp tục chạy, việc khởi động bị huỷ bỏ."
+    },
+    "notifications": {
+        "starting": "%1 đang yêu cầu khởi động %2 trên máy tính này. Bàn phím với chuột cũng sẽ bị khóa để tránh tác động từ bên ngoài.",
+        "stopping": "%1 đang yêu cầu thoát ứng dụng, vui lòng giữ kiên nhẫn để máy tính trở lại bình thường..."
     },
     "screenshots": {
         "new": "🖼️ **Một ảnh chụp màn hình của %1 được phát hiện trên máy tính %2 vào lúc %3:**",

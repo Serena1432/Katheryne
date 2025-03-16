@@ -6,6 +6,7 @@ const osu = require("node-os-utils");
 var Computer = {
     _inputLockInterval: null,
     username: "",
+    userId: -1,
     hostname: "",
     xdgSessionType: "",
     currentDesktop: "",
@@ -209,8 +210,8 @@ var Computer = {
      * @param {string} name The service name
      */
     checkServiceActive: function(name, user = true) {
-        var args = ["-u", this.user, "-E", "systemctl", "--user", "is-active", "--quiet", name];
-        if (!user) args = ["-u", this.user, "-E", "systemctl", "is-active", "--quiet", name];
+        var args = ["-u", this.username, "-E", "systemctl", "--user", "is-active", "--quiet", name];
+        if (!user) args = ["-u", this.username, "-E", "systemctl", "is-active", "--quiet", name];
         var result = this.spawnSync(`sudo`, args);
         return (result.status == 0);
     },
@@ -363,9 +364,10 @@ var Computer = {
      * Send a notification to the computer
      * @param {string} description Notification description
      * @param {string} title Notification title
+     * @param {number} time Notification timeout in miliseconds. Default is 15000.
      */
-    sendNotification: function(description, title = "") {
-        return this.spawn(`notify-send`, [title, description]);
+    sendNotification: function(description, title = "", time = 15000) {
+        return this.exec(`sudo -u ${this.username} DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/${this.userId}/bus" notify-send "${title.replaceAll("\"", "\\\"")}" "${description.replaceAll("\"", "\\\"")}" -t ${time}`);
     },
     /**
      * Focus on a window with specific title.
@@ -402,7 +404,8 @@ var Computer = {
      */
     initialize: function() {
         this.hostname = os.hostname();
-        this.user = process.env.SUDO_USER || process.env.USER;
+        this.username = process.env.SUDO_USER || process.env.USER;
+        this.userId = Number(this.execSync(`id -u ${this.username}`).toString().split("\n")[0]);
         this.xdgSessionType = process.env.XDG_SESSION_TYPE;
         this.currentDesktop = this.spawnSync(`wmctrl`, [`-m`]).stdout?.split("\n")[0]?.substring(6);
         if (!this.xdgSessionType) throw new Error(`XDG_SESSION_TYPE not found. If you're running this process as root using sudo, please also pass the variable using "sudo -E" instead of just "sudo"`);

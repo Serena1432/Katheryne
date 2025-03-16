@@ -38,12 +38,13 @@ module.exports.run = async function(client, message, args) {
     if (Steam.isRunning() || (await WhitelistedApps.running()).length) return Katheryne.reply(message, {content: Language.strings.logs.alreadyRunning});
     var app = WhitelistedApps.get(args.join(" "));
     if (!app) return Katheryne.reply(message, {content: Language.strings.start.appNotFound.format(args.join(" "))});
-    var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
+    var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing}), author = Katheryne.author(message);
     try {
         if (!await CheckBeforeStartHook(message, client, app)) return Katheryne.addLog(msg, Language.strings.logs.checkFailed);
+        Computer.sendNotification(Language.strings.notifications.starting.format(author.displayName, app.name), client.user.displayName);
         await BeforeStartHook(msg, client, app);
         await Katheryne.addLog(msg, Language.strings.logs.startingApp.format(app.name));
-        SessionManager.set("currentUser", Katheryne.author(message).id);
+        SessionManager.set("currentUser", author.id);
         Computer.exec(app.command);
     }
     catch (err) {
