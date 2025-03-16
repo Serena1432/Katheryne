@@ -9,6 +9,7 @@ const Language = require("../classes/Language");
 const Computer = require("../classes/Computer");
 const Katheryne = require("../classes/Katheryne");
 const ScreenshotMonitor = require("../classes/ScreenshotMonitor");
+const SessionManager = require("../classes/SessionManager");
 
 /**
  * 
@@ -21,14 +22,15 @@ module.exports = async function(message, client, app) {
     ScreenshotMonitor.stop();
     await Katheryne.addLog(message, Language.strings.logs.restartingApps);
     var apps = client.config.computer.start_processes;
-    for (var i = 0; i < apps.length; i++) try {Computer.spawn(apps[i], [], true)} catch {}
+    for (var i = 0; i < apps.length; i++) try {Computer.spawnAsUser(apps[i], [], true)} catch {}
     if (client.config.computer.auto_bluetooth_off) {
         await Katheryne.addLog(message, Language.strings.logs.enablingBluetooth);
         await Computer.setBluetooth(true);
     }
-    if (Computer._kdeConnect) {
+    if (SessionManager.get("kdeConnect")) {
         await Katheryne.addLog(message, Language.strings.logs.enablingKDEConnect);
-        Computer.spawn("kdeconnectd", [], true);
+        Computer.spawnAsUser("kdeconnectd", [], true);
+        SessionManager.delete("kdeConnect");
     }
     if (client.config.computer.auto_lock_input) {
         await Katheryne.addLog(message, Language.strings.logs.unlockingInput);

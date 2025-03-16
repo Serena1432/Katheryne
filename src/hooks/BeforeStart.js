@@ -9,6 +9,7 @@ const Language = require("../classes/Language");
 const Computer = require("../classes/Computer");
 const Katheryne = require("../classes/Katheryne");
 const ScreenshotMonitor = require("../classes/ScreenshotMonitor");
+const SessionManager = require("../classes/SessionManager");
 
 /**
  * 
@@ -48,7 +49,7 @@ module.exports = async function(message, client, app) {
         }
     }
     if (Computer.isProcessRunning("kdeconnectd")) {
-        Computer._kdeConnect = true;
+        SessionManager.set("kdeConnect", true);
         await Katheryne.addLog(message, Language.strings.logs.disablingKDEConnect);
         await Computer.killProcess("kdeconnectd");
     }
