@@ -346,7 +346,7 @@ var Computer = {
         var stats = {
             model: `${system.manufacturer} ${system.model}`,
             cpu: {
-                name: `${cpu.manufacturer} ${cpu.brand} @ ${cpu.speed} GHz`,
+                name: `${cpu.manufacturer} ${cpu.brand} @ ${cpu.speed.toFixed(2)} GHz`,
                 cores: cpu.physicalCores,
                 threads: cpu.cores,
                 temperature: cpuTemp.main,
@@ -361,7 +361,7 @@ var Computer = {
                 return {
                     vendor: gpu.vendor,
                     model: gpu.model,
-                    modelShort: gpu.model.substring(0, gpu.model.indexOf("[") - 1),
+                    modelShort: (gpu.model.indexOf("[") != -1) ? gpu.model.substring(0, gpu.model.indexOf("[") - 1) : gpu.model,
                     vram: gpu.vram * 1048576,
                     data: Computer.gpuInfo(gpu)
                 }
