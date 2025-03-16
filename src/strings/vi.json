@@ -37,6 +37,7 @@
         "notRunning": "❌ **Máy đang không chạy Steam, nên bạn không cần phải làm gì thêm.**"
     },
     "exit": {
+        "description": "Thoát toàn bộ các ứng dụng đang chạy.",
         "notRunning": "❌ **Máy đang không chạy bất kì ứng dụng nào, nên bạn không cần phải làm gì thêm.**",
         "stopping": "Đang thoát %1..."
     },
