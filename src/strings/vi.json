@@ -107,6 +107,10 @@
         "title": "%1 (thông qua %2)",
         "success": "✅ **Gửi tin nhắn tới máy tính thành công.**"
     },
+    "focus": {
+        "description": "Hiển thị lại cửa sổ của ứng dụng đang chạy.",
+        "success": "✅ **Đã hiển thị lại cửa sổ của %1 lên màn hình.**"
+    },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",
         "alreadyRunning": "❌ **Steam hoặc một ứng dụng trong danh sách trắng đang chạy, hãy tắt hết các ứng dụng và thử lại.**",
