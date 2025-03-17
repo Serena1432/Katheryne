@@ -1,7 +1,8 @@
 const { Client, EmbedBuilder, Message, BaseInteraction, MessagePayload, User } = require("discord.js");
 
-module.exports = {
+var Katheryne = {
     _logs: {},
+    _events: {},
     /**
      * Create an embed based on the preset.
      * @param {Client} client Discord client
@@ -64,5 +65,46 @@ module.exports = {
      */
     author: function(message) {
         return (this.isInteraction(message) ? message.user : message.author);
+    },
+    /**
+     * Wait until a Katheryne event is triggered.
+     * @param {string} name Event name
+     * @param {number} timeout Wait timeout
+     * @returns {any?} The event data when being triggered. Returns null if timeout.
+     */
+    waitForEvent: function(name, timeout = 30000) {
+        return new Promise((resolve, reject) => {
+            var startTime = new Date().getTime(),
+                interval = setInterval(function() {
+                if (new Date().getTime() - startTime >= timeout) {
+                    clearInterval(interval);
+                    resolve(null);
+                    return;
+                }
+                var data = Katheryne._events[name];
+                if (data) {
+                    clearInterval(interval);
+                    Katheryne.deleteEvent(name);
+                    resolve(data);
+                }
+            }, 500);
+        });
+    },
+    /**
+     * Send data to a Katheryne event. Will trigger the waitForEvent commands using the same name.
+     * @param {string} name Event name
+     * @param {any} value Event data
+     */
+    sendEvent: function(name, value) {
+        Katheryne._events[name] = value;
+    },
+    /**
+     * Delete the data from a Katheryne event.
+     * @param {string} name Event name
+     */
+    deleteEvent: function(name) {
+        delete Katheryne._events[name];
     }
 };
+
+module.exports = Katheryne;
