@@ -44,7 +44,7 @@ module.exports = async function(message, client, app) {
     ScreenshotMonitor.start(WhitelistedAppManager.toJSON());
     if (Computer.checkServiceActive("warp-svc", false)) {
         await Katheryne.addLog(message, Language.strings.logs.disablingWARP);
-        try {await Computer.exec(`warp-cli disconnect`)} catch (err) {
+        try {await Computer.execAsUser(`warp-cli disconnect`)} catch (err) {
             await Katheryne.addLog(message, err.stack);
         }
     }
