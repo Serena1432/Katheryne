@@ -14,7 +14,7 @@ var Computer = {
      * Return the session environment setting.
      */
     sessionEnv: function() {
-        return `--preserve-env=XDG_RUNTIME_DIR,DBUS_SESSION_BUS_ADDRESS`;
+        return `--preserve-env=DISPLAY,XDG_SESSION_TYPE,XDG_RUNTIME_DIR,DBUS_SESSION_BUS_ADDRESS,WAYLAND_DISPLAY,QT_QPA_PLATFORMTHEME,GTK_IM_MODULE,QT_IM_MODULE,XMODIFIERS,TERM,PATH,CUDA_PATH,FREETYPE_PROPERTIES,COLORTERM`;
     },
     /**
      * Check if the BOT process is running as root.
