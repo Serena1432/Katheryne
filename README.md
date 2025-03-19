@@ -76,6 +76,7 @@ To run commands that require root permissions, you can do one of these ways belo
 * Grant the permissions for specific commands used by the BOT (recommended)
 * Running the BOT with `sudo` permissions
     * Using this way may cause some unexpected errors, proceed at your own risk.
+    * Steam and some games will have some glitches, and tends to have a higher ping when Katheryne is running as root (idk why but it's what it is)
 * Or don't use these commands at all
 
 ## Required applications
