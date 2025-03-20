@@ -34,11 +34,11 @@ module.exports = async function(message, client, app) {
     }
     if (client.config.computer.auto_performance_governor) {
         await Katheryne.addLog(message, Language.strings.logs.settingGovernor);
-        await Computer.setCpuGovernor("performance");
+        try {await Computer.setCpuGovernor("performance")} catch (err) {await Katheryne.addLog(message, err.stack)}
     }
     if (client.config.computer.auto_max_fan_speed) {
         await Katheryne.addLog(message, Language.strings.logs.settingFanSpeed);
-        await Computer.setFanSpeed(100);
+        try {await Computer.setFanSpeed(100)} catch (err) {await Katheryne.addLog(message, err.stack)}
     }
     await Katheryne.addLog(message, Language.strings.logs.startMonitoring);
     ScreenshotMonitor.start(WhitelistedAppManager.toJSON());

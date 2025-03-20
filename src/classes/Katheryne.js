@@ -82,7 +82,7 @@ var Katheryne = {
                     return;
                 }
                 var data = Katheryne._events[name];
-                if (data) {
+                if (data != undefined) {
                     clearInterval(interval);
                     Katheryne.deleteEvent(name);
                     resolve(data);

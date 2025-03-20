@@ -17,6 +17,8 @@
     "commandNotFound": "❌ **Không thể tìm thấy lệnh này.**",
     "notTheAuthor": "❌ **%1, bạn không có quyền để nhấn vào nút này.** Chỉ có người thực hiện lệnh này, <@%2>, mới có thể nhấn vào nó.",
     "occupied": "❌ **Yêu cầu kết nối đang được thực hiện bởi một thành viên khác. Chỉ có thành viên đó hoặc chủ BOT mới có thể yêu cầu thoát trong thời điểm hiện tại.**",
+    "yes": "Có",
+    "no": "Không",
     "ping": {
         "description": "Kiểm tra thời gian phản hồi của BOT.",
         "responseTime": "✅ **Thời gian phản hồi:** %1ms"
@@ -111,6 +113,10 @@
         "description": "Hiển thị lại cửa sổ của ứng dụng đang chạy.",
         "success": "✅ **Đã hiển thị lại cửa sổ của %1 lên màn hình.**"
     },
+    "shutdown": {
+        "description": "Tắt máy tính hoàn toàn.",
+        "confirmation": "Máy tinh sẽ được tắt hoàn toàn và BOT này cũng sẽ không thể dùng được nữa, cho tới khi chủ BOT bật máy tính và khởi động BOT trở lại. Đảm bảo là bạn đã hoàn tất toàn bộ những việc bạn đang làm trước khi yêu cẩu tắt máy.\n\nBạn có chắc chắn muốn tắt không?"  
+    },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",
         "alreadyRunning": "❌ **Steam hoặc một ứng dụng trong danh sách trắng đang chạy, hãy tắt hết các ứng dụng và thử lại.**",
@@ -132,14 +138,30 @@
         "startSuccess": "Khởi động thành công.",
         "stopSuccess": "Hoàn tất thực hiện lệnh.",
         "processExit": "Tiến trình đã hoàn tất với mã %1.",
-        "checkFailed": "Không đủ điều kiện để tiếp tục chạy, việc khởi động bị huỷ bỏ."
+        "checkFailed": "Không đủ điều kiện để tiếp tục chạy, việc khởi động bị huỷ bỏ.",
+        "beginShutdown": "Tiến hành tắt máy.",
+        "ownerDeclined": "❌ **Chủ BOT đã từ chối yêu cầu của bạn.**",
+        "cancelled": "❌ **Yêu cầu đã bị hủy bỏ.**"
     },
     "notifications": {
         "starting": "%1 đang yêu cầu khởi động %2 trên máy tính này. Bàn phím với chuột cũng sẽ bị khóa để tránh tác động từ bên ngoài.",
-        "stopping": "%1 đang yêu cầu thoát ứng dụng, vui lòng giữ kiên nhẫn để máy tính trở lại bình thường..."
+        "stopping": "%1 đang yêu cầu thoát ứng dụng, vui lòng giữ kiên nhẫn để máy tính trở lại bình thường...",
+        "shutdown": "%1 đang yêu cầu tắt máy, máy tính sẽ được tắt hoàn toàn trong vài giây nữa..."
     },
     "screenshots": {
         "new": "🖼️ **Một ảnh chụp màn hình của %1 được phát hiện trên máy tính %2 vào lúc %3:**",
         "description": "Ảnh chụp màn hình của %1"
+    },
+    "request": {
+        "approving": "🔁 **Đang đợi chủ BOT chấp nhận yêu cầu của bạn, thời gian tối đa là 30 giây...**",
+        "description": "%1 đang yêu cầu sự cho phép của bạn cho hành động:\n%2\n\nNhấn nút **Chấp nhận** để cho phép yêu cầu, và nhấn nút **Từ chối** để từ chối yêu cầu.",
+        "approveButton": "Chấp nhận",
+        "rejectButton": "Từ chối",
+        "timeout": "❌ **Đã hết thời gian chờ lệnh.**",
+        "approved": "✅ **Đã chấp nhận yêu cầu này.**",
+        "rejected": "✅ **Đã từ chối yêu cầu này.**",
+        "events": {
+            "shutdown": "Tắt máy tính"
+        }
     }
 }

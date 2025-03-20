@@ -86,31 +86,33 @@ This is the list of commands requiring root permissions:
 * **Intel GPU stats:**<br>`intel_gpu_top`
 * **Set display brightness:**<br>`brightnessctl set ${pc}%`
 * **Set CPU governor:**<br>`echo "${governor}" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`
-* **Set fan speed:**<br>`nbfc set ${pc}`
+* **Set fan speed:**<br>`nbfc set -s ${pc}`
 * **Physical input locking (Wayland):**<br>`evtest --grab /dev/input/event${id} >/dev/null`
 * **Physical input device listing (Wayland):**<br>`libinput list-devices`
+
+For security reasons, you have to find a way to allow these commands for your user by yourself.
 
 ## Required applications
 
 ### General
 
-* brightnessctl (for brightness control)
-* scrot (for X11 screenshot)
-* wmctrl (for X11 window focusing)
-* nbfc-linux (for fan control)
-* libinput-tools (for input devices management)
-* evtest (for Wayland physical input locking)
-* rfkill (for enabling/disabling Bluetooth)
+* `brightnessctl` (for brightness control)
+* `scrot` (for X11 screenshot)
+* `wmctrl` (for X11 window focusing)
+* `nbfc-linux` (for fan control)
+* `libinput-tools` (for input devices management)
+* `evtest` (for Wayland physical input locking)
+* `rfkill` (for enabling/disabling Bluetooth)
 
 ### Taking screenshots in Wayland
 
-* gnome-screenshot (for GNOME-based desktop environments)
-* spectacle (for KDE Plasma)
-* grim (for other desktop environments)
+* `gnome-screenshot` (for GNOME-based desktop environments)
+* `spectacle` (for KDE Plasma)
+* `grim` (for other desktop environments)
 
 ### Intel GPUs
 
-* intel-gpu-tools
+* `intel-gpu-tools`
 
 ## Installation
 
