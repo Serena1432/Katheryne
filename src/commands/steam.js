@@ -7,6 +7,7 @@ const CheckBeforeStartHook = require("../hooks/CheckBeforeStart");
 const Steam = require("../classes/Steam");
 const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
 const SessionManager = require("../classes/SessionManager");
+const OwnerApprovalHook = require("../hooks/OwnerApproval");
 const Computer = require("../classes/Computer");
 
 module.exports.config = {
@@ -50,7 +51,8 @@ module.exports.run = async function(client, message, args) {
     if (user && author.id != client.config.owner_id) return Katheryne.reply(message, {content: Language.strings.steam.noSufficientPermission});
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
-        if (!await CheckBeforeStartHook(message, client)) return Katheryne.addLog(msg, Language.strings.logs.checkFailed);
+        if (!await CheckBeforeStartHook(msg, client, author)) return Katheryne.editMessage(msg, {content: Language.strings.logs.checkFailed});
+        if (!await OwnerApprovalHook(msg, client, "start", author, true)) return Katheryne.editMessage(msg, {content: Language.strings.logs.ownerDeclined});
         Computer.sendNotification(Language.strings.notifications.starting.format(author.displayName, "Steam"), client.user.displayName);
         await BeforeStartHook(msg, client);
         await Katheryne.addLog(msg, Language.strings.steam.starting);

@@ -17,6 +17,7 @@ const Katheryne = require("../classes/Katheryne");
  * @param {boolean} defaultValue Default return value if the owner is inactive
  */
 module.exports = async function(message, client, event, originalAuthor, defaultValue = false) {
+    if (originalAuthor.id == client.config.owner_id) return true;
     var owner = message.guild.members.cache.find(member => member?.user?.id == client.config.owner_id);
     if (!owner?.presence || ["invisible", "offline"].includes(owner?.presence?.status)) return defaultValue;
     try {

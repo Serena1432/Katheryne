@@ -6,6 +6,7 @@ const BeforeStartHook = require("../hooks/BeforeStart");
 const Computer = require("../classes/Computer");
 const Steam = require("../classes/Steam");
 const CheckBeforeStartHook = require("../hooks/CheckBeforeStart");
+const OwnerApprovalHook = require("../hooks/OwnerApproval");
 const SessionManager = require("../classes/SessionManager");
 
 module.exports.config = {
@@ -40,7 +41,8 @@ module.exports.run = async function(client, message, args) {
     if (!app) return Katheryne.reply(message, {content: Language.strings.start.appNotFound.format(args.join(" "))});
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing}), author = Katheryne.author(message);
     try {
-        if (!await CheckBeforeStartHook(message, client, app)) return Katheryne.addLog(msg, Language.strings.logs.checkFailed);
+        if (!await CheckBeforeStartHook(msg, client, author, app)) return Katheryne.editMessage(msg, {content: Language.strings.logs.checkFailed});
+        if (!await OwnerApprovalHook(msg, client, "start", author, true)) return Katheryne.editMessage(msg, {content: Language.strings.logs.ownerDeclined});
         Computer.sendNotification(Language.strings.notifications.starting.format(author.displayName, app.name), client.user.displayName);
         await BeforeStartHook(msg, client, app);
         await Katheryne.addLog(msg, Language.strings.logs.startingApp.format(app.name));

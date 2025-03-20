@@ -40,7 +40,7 @@ These features can be used directly in a Discord server, provided you have the r
 - [X] Send notifications (on-screen messages) to the computer from Discord
 - [X] Refocus the game window if it minimizes unexpectedly
 - [X] Remotely shut down the computer (only if the owner is away or explicitly allows it)
-- [ ] Notify when the computer isn't plugged in, the battery is low or a driver error, requiring physical intervention
+- [X] Notify when the computer isn't plugged in, the battery is low, temperature is high or a driver error, requiring physical intervention
 
 * **Note:** Any changes with computer settings (physical input lock, brightness, volume, etc.) will be restored after restarting the computer. So if you encounter any errors when using the BOT, you just need to restart the computer.
 

@@ -310,7 +310,7 @@ var Computer = {
                 if (result.error || result.stderr.split("\n")[0].toString()) return null;
                 var [usage, temperature, vram] = result.stdout.split(", ").map(Number);
                 vram = Number(vram) * 1048576;
-                if (usage && temperature && vram) return {usage, temperature, vram};
+                if (usage != undefined && temperature != undefined && vram != undefined) return {usage, temperature, vram};
                 return null;
             }
             // For AMD iGPU/dGPU
@@ -371,7 +371,8 @@ var Computer = {
         };
         if (battery.hasBattery) stats.battery = {
             percent: battery.percent,
-            charging: battery.acConnected || (battery.percent == 100)
+            charging: battery.acConnected || (battery.percent == 100),
+            remaining: battery.timeRemaining
         };
         return stats;
     },
