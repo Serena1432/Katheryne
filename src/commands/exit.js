@@ -10,7 +10,7 @@ const SessionManager = require("../classes/SessionManager");
 module.exports.config = {
     name: "exit",
     usage: "exit",
-    description: "Thoát Steam và toàn bộ ứng dụng trong danh sách trắng khác đang chạy.",
+    description: Language.strings.exit.description,
     nodm: true,
     memberPermissions: [],
     botPermissions: [],
