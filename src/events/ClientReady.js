@@ -4,6 +4,7 @@ const ScreenshotMonitor = require('../classes/ScreenshotMonitor');
 const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
 const Steam = require("../classes/Steam");
 const SessionManager = require('../classes/SessionManager');
+const Logging = require('../hooks/Logging');
 
 /**
  * 
@@ -60,4 +61,12 @@ module.exports = async (client) => {
     // Update BOT status
     updateStatus(client);
     setInterval(() => updateStatus(client), 10000);
+
+    // Logging
+    if (client.config.logging.log_channel) {
+        var logChannel = client.logChannel = client.channels.cache.get(client.config.logging.log_channel);
+        if (logChannel) setInterval(function() {
+            Logging(client, logChannel);
+        }, 10000);
+    }
 };

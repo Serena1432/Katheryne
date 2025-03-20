@@ -150,7 +150,11 @@
         "checkFailed": "❌ **Không đủ điều kiện để tiếp tục chạy, việc khởi động bị huỷ bỏ.**",
         "beginShutdown": "Tiến hành tắt máy.",
         "ownerDeclined": "❌ **Chủ BOT đã từ chối yêu cầu của bạn.**",
-        "cancelled": "❌ **Yêu cầu đã bị hủy bỏ.**"
+        "cancelled": "❌ **Yêu cầu đã bị hủy bỏ.**",
+        "steamConnected": "➡️ **Một người chơi đã kết nối vào Steam trên máy tính %1.**",
+        "steamDisconnected": "⬅️ **Đã ngắt kết nối khỏi Steam trên máy tính %1.**",
+        "highTemperature": "🔴 **Nhiệt độ %1 của máy tính %2 đang quá cao (%3°C), bạn nên tắt game ngay lập tức để tránh ảnh hưởng tới máy tính.",
+        "lowBattery": "🔴 **Pin của máy tính %1 đang dưới 20%, vui lòng cắm sạc sớm nhất có thể.**"
     },
     "notifications": {
         "starting": "%1 đang yêu cầu khởi động %2 trên máy tính này. Bàn phím với chuột cũng sẽ bị khóa để tránh tác động từ bên ngoài.",

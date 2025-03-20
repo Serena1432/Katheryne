@@ -376,6 +376,16 @@ var Computer = {
         };
         return stats;
     },
+    temperature: async function() {
+        var cpuTemp = await si.cpuTemperature(),
+            graphics = await si.graphics();
+        return {
+            cpu: cpuTemp.main,
+            gpu: graphics.controllers.map(gpu => {
+                return Computer.gpuInfo(gpu)?.temperature;
+            }).filter(temp => temp != null)
+        }
+    },
     /**
      * Get detailed battery information
      */
