@@ -18,13 +18,13 @@ module.exports = async function(client, logChannel) {
     if (await Steam.checkSteamLinkConnection()) {
         if (!SessionManager.get("logging.steam")) {
             SessionManager.set("logging.steam", true);
-            logChannel.send({content: Language.strings.logs.steamConnected});
+            logChannel.send({content: Language.strings.logs.steamConnected.format(Computer.hostname)});
         }
     }
     else {
         if (SessionManager.get("logging.steam")) {
             SessionManager.set("logging.steam", false);
-            logChannel.send({content: Language.strings.logs.steamDisconnected});
+            logChannel.send({content: Language.strings.logs.steamDisconnected.format(Computer.hostname)});
         }
     }
     var stats = await Computer.temperature();

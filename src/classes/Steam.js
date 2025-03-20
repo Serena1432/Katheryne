@@ -26,7 +26,7 @@ var Steam = {
     },
     checkSteamLinkConnection: async function() {
         try {
-            return (await Computer.exec(`ss -tunap | grep -E "\\*:2703.*steam"`))?.stdout?.toString()?.split("\n")[0]?.includes("steam");
+            return (await Computer.exec(`ss -tunap | grep -E "192.*.0.0.0.0:\\*.*steam"`))?.stdout?.toString()?.split("\n")[0]?.includes("steam");
         }
         catch {
             return false;
