@@ -310,7 +310,8 @@ var Computer = {
                 if (result.error || result.stderr.split("\n")[0].toString()) return null;
                 var [usage, temperature, vram] = result.stdout.split(", ").map(Number);
                 vram = Number(vram) * 1048576;
-                return {usage, temperature, vram};
+                if (usage && temperature && vram) return {usage, temperature, vram};
+                return null;
             }
             // For AMD iGPU/dGPU
             else if (gpu.vendor.includes("AMD")) {
@@ -358,19 +359,21 @@ var Computer = {
                 used: memory.active
             },
             gpu: graphics.controllers.map(gpu => {
-                return {
+                var data = {
                     vendor: gpu.vendor,
                     model: gpu.model,
                     modelShort: (gpu.model.indexOf("[") != -1) ? gpu.model.substring(0, gpu.model.indexOf("[") - 1) : gpu.model,
                     vram: gpu.vram * 1048576,
                     data: Computer.gpuInfo(gpu)
                 }
+                console.log(data);
+                return data;
             }),
             os: `${os.distro} ${os.release} (${os.arch})`
         };
         if (battery.hasBattery) stats.battery = {
             percent: battery.percent,
-            charging: battery.acConnected
+            charging: battery.acConnected || (battery.percent == 100)
         };
         return stats;
     },
