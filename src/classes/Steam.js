@@ -12,7 +12,7 @@ var Steam = {
      * @param {string} user Auto login as a specific user (usable for multi-user support)
      */
     start: async function(user = config.default_user) {
-        var args = [];
+        var args = ["-debug", "-console"];
         if (user) args.push(`-login`, user);
         if (config.wayland_enable_pipewire && Computer.xdgSessionType == "wayland") args.push("-pipewire");
         this.process = Computer.spawnAsUser(`steam`, args, config.detach);
@@ -23,6 +23,23 @@ var Steam = {
     },
     isRunning: function() {
         return Computer.isProcessRunning("steam");
+    },
+    checkSteamLinkConnection: async function() {
+        try {
+            return (await Computer.exec(`ss -tunap | grep -E "\\*:2703.*steam"`))?.stdout?.toString()?.split("\n")[0]?.includes("steam");
+        }
+        catch {
+            return false;
+        }
+    },
+    parseSteamPacketInfo: function(str) {
+        const pingMatch = str.match(/Ping:\s*(\d+)ms/);
+        const bitrateMatch = str.match(/IN:\s*([\d.]+)kbit/);
+        const qualityMatch = str.match(/qual\s*([\d.]+)%$/);
+        const ping = pingMatch ? parseInt(pingMatch[1], 10) : null;
+        const bitrate = bitrateMatch ? parseFloat(bitrateMatch[1]) : null;
+        const quality = qualityMatch ? parseFloat(qualityMatch[1]) : null;
+        return {ping, bitrate, quality};
     }
 };
 

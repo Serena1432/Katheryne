@@ -117,6 +117,14 @@
         "description": "Tắt máy tính hoàn toàn.",
         "confirmation": "**Máy tinh sẽ được tắt hoàn toàn và BOT này cũng sẽ không thể dùng được nữa, cho tới khi chủ BOT bật máy tính và khởi động BOT trở lại.** Đảm bảo là bạn đã hoàn tất toàn bộ những việc bạn đang làm trước khi yêu cẩu tắt máy.\n\nBạn có chắc chắn muốn tắt không?"  
     },
+    "steamping": {
+        "description": "Kiểm tra kết nối giữa người chơi và máy tính thông qua Steam.",
+        "notConnected": "❌ **Chưa có ai kết nối vào máy tính của bạn thông qua Steam cả.**",
+        "success": "🔁 **Đang kiểm tra kết nối của Steam trong thời gian thực.** Bạn có thể nhập lệnh `steamping` một lần nữa để dừng việc kiểm tra.",
+        "status": "**Ping:** `%1ms` / **Tốc độ bit:** %2 Kbps / **Chất lượng:** %3%",
+        "timeout": "❌ **Không có phản hồi nào trong vòng 30 giây, vui lòng kiểm tra kết nối và thử lại.**",
+        "stopped": "✅ **Đã dừng việc kiểm tra kết nối Steam trước đó.**"
+    },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",
         "checking": "🔁 **Đang kiểm tra máy tính trước khi khởi động...**",
