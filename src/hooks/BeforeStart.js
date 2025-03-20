@@ -32,11 +32,11 @@ module.exports = async function(message, client, app) {
         await Katheryne.addLog(message, Language.strings.logs.disablingBluetooth);
         await Computer.setBluetooth(false);
     }
-    if (client.config.auto_performance_governor) {
+    if (client.config.computer.auto_performance_governor) {
         await Katheryne.addLog(message, Language.strings.logs.settingGovernor);
         await Computer.setCpuGovernor("performance");
     }
-    if (client.config.auto_max_fan) {
+    if (client.config.computer.auto_max_fan_speed) {
         await Katheryne.addLog(message, Language.strings.logs.settingFanSpeed);
         await Computer.setFanSpeed(100);
     }
