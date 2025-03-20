@@ -79,6 +79,17 @@ To run commands that require root permissions, you can do one of these ways belo
     * Steam and some games will have some glitches, and tends to have a higher ping when Katheryne is running as root (idk why but it's what it is)
 * Or don't use these commands at all
 
+#### List of root commands
+
+This is the list of commands requiring root permissions:
+
+* **Intel GPU stats:**<br>`intel_gpu_top`
+* **Set display brightness:**<br>`brightnessctl set ${pc}%`
+* **Set CPU governor:**<br>`echo "${governor}" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`
+* **Set fan speed:**<br>`nbfc set ${pc}`
+* **Physical input locking (Wayland):**<br>`evtest --grab /dev/input/event${id} >/dev/null`
+* **Physical input device listing (Wayland):**<br>`libinput list-devices`
+
 ## Required applications
 
 ### General
