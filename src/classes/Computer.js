@@ -359,15 +359,13 @@ var Computer = {
                 used: memory.active
             },
             gpu: graphics.controllers.map(gpu => {
-                var data = {
+                return {
                     vendor: gpu.vendor,
                     model: gpu.model,
                     modelShort: (gpu.model.indexOf("[") != -1) ? gpu.model.substring(0, gpu.model.indexOf("[") - 1) : gpu.model,
                     vram: gpu.vram * 1048576,
                     data: Computer.gpuInfo(gpu)
                 }
-                console.log(data);
-                return data;
             }),
             os: `${os.distro} ${os.release} (${os.arch})`
         };
