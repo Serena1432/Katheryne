@@ -2,10 +2,6 @@ const { Client, Message } = require("discord.js");
 const Language = require("../classes/Language");
 const Katheryne = require("../classes/Katheryne");
 const Computer = require("../classes/Computer");
-const Steam = require("../classes/Steam");
-const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
-const path = require("path");
-const fs = require("fs");
 
 module.exports.config = {
     name: "send",

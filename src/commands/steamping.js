@@ -2,7 +2,6 @@ const { Client, Message } = require("discord.js");
 const Language = require("../classes/Language");
 const Katheryne = require("../classes/Katheryne");
 const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
-const AfterEndHook = require("../hooks/AfterEnd");
 const Computer = require("../classes/Computer");
 const Steam = require("../classes/Steam");
 const SessionManager = require("../classes/SessionManager");

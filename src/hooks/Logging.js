@@ -3,10 +3,9 @@
  * You can edit it freely as you want.
  */
 
-const { BaseInteraction, Message, Client, User, ActionRowBuilder, ButtonBuilder, ButtonStyle, TextChannel } = require("discord.js");
+const { Client, TextChannel } = require("discord.js");
 const Language = require("../classes/Language");
 const Computer = require("../classes/Computer");
-const Steam = require("../classes/Steam");
 const SessionManager = require("../classes/SessionManager");
 
 /**

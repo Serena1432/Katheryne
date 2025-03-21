@@ -9,7 +9,6 @@ const { WhitelistedApp } = require("../classes/WhitelistedApps");
 const Language = require("../classes/Language");
 const Computer = require("../classes/Computer");
 const Katheryne = require("../classes/Katheryne");
-const ScreenshotMonitor = require("../classes/ScreenshotMonitor");
 const Confirmation = require("./Confirmation");
 
 /**
