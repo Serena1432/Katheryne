@@ -19,6 +19,7 @@
     "occupied": "❌ **Yêu cầu kết nối đang được thực hiện bởi một thành viên khác. Chỉ có thành viên đó hoặc chủ BOT mới có thể yêu cầu thoát trong thời điểm hiện tại.**",
     "yes": "Có",
     "no": "Không",
+    "none": "Không có",
     "ping": {
         "description": "Kiểm tra thời gian phản hồi của BOT.",
         "responseTime": "✅ **Thời gian phản hồi:** %1ms"
@@ -124,6 +125,17 @@
         "status": "**Ping:** `%1ms` / **Tốc độ bit:** %2 Kbps / **Chất lượng:** %3%",
         "timeout": "❌ **Không có phản hồi nào trong vòng 30 giây, vui lòng kiểm tra kết nối và thử lại.**",
         "stopped": "✅ **Đã dừng việc kiểm tra kết nối Steam trước đó.**"
+    },
+    "help": {
+        "description": "Danh sách câu lệnh của BOT.",
+        "title": "Danh Sách Câu Lệnh",
+        "slogan": "\"Hướng về những ngôi sao và vực sâu! Chào mừng bạn đến với Hiệp Hội Nhà Mạo Hiểm.\"",
+        "invalidCommand": "❌ **Không tìm thấy câu lệnh này.**",
+        "usage": "Cách sử dụng:",
+        "memberPermissions": "Yêu cầu quyền thành viên:",
+        "botPermissions": "Yêu cầu quyền BOT:",
+        "dm": "Hỗ trợ Tin nhắn trực tiếp?",
+        "ownerOnly": "Chỉ dành cho chủ BOT?"
     },
     "logs": {
         "preparing": "🔁 **Đang gửi yêu cầu tới máy tính, vui lòng đợi...**",
