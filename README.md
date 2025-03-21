@@ -13,8 +13,8 @@ Currently, it only supports Linux, with both X11 and Wayland compatibility. KDE 
     - [Supported Remote Play Applications](#supported-remote-play-applications)
   - [Features](#features)
     - [Commands coverage](#commands-coverage)
-  - [Running root commands](#running-root-commands)
-    - [List of root commands](#list-of-root-commands)
+    - [Running root commands](#running-root-commands)
+      - [List of root commands](#list-of-root-commands)
   - [Required applications](#required-applications)
     - [General](#general)
     - [Taking screenshots in Wayland](#taking-screenshots-in-wayland)
@@ -252,7 +252,7 @@ npm start
 sudo -E npm start
 ```
 
-### Autostart
+#### Autostart
 
 You can of course use your Desktop Environment's Autostart settings (or `.config/autostart`) to start Katheryne automatically after boot.
 
