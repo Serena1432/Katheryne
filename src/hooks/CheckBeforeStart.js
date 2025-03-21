@@ -22,7 +22,7 @@ const Confirmation = require("./Confirmation");
 module.exports = async function(message, client, originalAuthor, app) {
     await Katheryne.editMessage(message, {content: Language.strings.logs.checking});
     const stats = await Computer.stats();
-    if (!stats.battery.charging) {
+    if (stats.battery && !stats.battery.charging) {
         if (!(await Confirmation(Language.strings.confirmation.onBattery.format(Computer.hostname, stats.battery.percent, stats.battery.remaining), message, client, originalAuthor, false))) return false;
     }
     if (stats.gpu.find(gpu => (gpu.vendor?.toLowerCase() == "nvidia" && gpu.data == null))) {
