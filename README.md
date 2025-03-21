@@ -30,6 +30,7 @@ Currently, it only supports Linux, with both X11 and Wayland compatibility. KDE 
     - [Starting](#starting)
       - [Running Katheryne as normal user](#running-katheryne-as-normal-user)
       - [Running Katheryne as root (not recommended)](#running-katheryne-as-root-not-recommended)
+      - [Autostart](#autostart)
   - [License](#license)
 
 ## Disclaimer
@@ -248,6 +249,12 @@ npm start
 ```
 sudo -E npm start
 ```
+
+### Autostart
+
+You can of course use your Desktop Environment's Autostart settings (or `.config/autostart`) to start Katheryne automatically after boot.
+
+`pm2` is not recommended in my opinion due to it invoking the BOT before starting the DE, so it may cause some unwanted issues.
 
 ## License
 
