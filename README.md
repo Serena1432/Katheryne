@@ -149,7 +149,7 @@ For security reasons, you have to find a way to allow these commands for your us
 
 ### Installation
 
-* Clone this BOT using this command below or [download the latest source code](./archive/refs/heads/main.zip).
+* Clone this BOT using this command below or [download the latest source code](../../archive/refs/heads/main.zip).
 
 ```sh
 git clone https://github.com/Serena1432/Katheryne.git
