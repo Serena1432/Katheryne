@@ -54,7 +54,7 @@ module.exports.run = async function(client, message, args) {
             {name: Language.strings.stats.discordJSVersion, value: sanitize(require("discord.js").version), inline: true},
             {name: Language.strings.stats.model, value: sanitize(stats.model), inline: false},
             {name: Language.strings.stats.os, value: sanitize(stats.os), inline: false},
-            {name: Language.strings.stats.battery, value: sanitize(`${stats.battery.percent}%${stats.battery.charging ? " (Đang sạc)" : ""}`), inline: false},
+            {name: Language.strings.stats.battery, value: sanitize(`${stats.battery.percent}%${stats.battery.charging ? ` (${Language.stats.charging})` : ""}`), inline: false},
             {name: Language.strings.stats.cpu, value: sanitize(`${stats.cpu.name} (${stats.cpu.cores} ${Language.strings.cores} ${stats.cpu.threads} ${Language.strings.threads})\n${Language.strings.stats.governor.format(Language.strings.stats.governors[stats.cpu.governor])}`), inline: false},
             {name: Language.strings.stats.cpuUsage, value: sanitize(`${stats.cpu.usage.toFixed(2)}%`), inline: true},
             {name: Language.strings.stats.cpuTemp, value: sanitize(`${stats.cpu.temperature}°C`), inline: true},

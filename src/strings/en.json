@@ -1,0 +1,199 @@
+{
+    "generalError": "❌ **An error has occurred, please try again.**",
+    "noDM": "❌ **This command cannot be used on Direct Messages channels!**",
+    "noUserPermissions": "❌ **You don't have enough permissions on this server to run this command.**\nThis command requires you to have these permissions:\n`%1`",
+    "noBOTPermissions": "❌ **This BOT doesn't have enough permissions on this server to run this command.**\nThis command requires it to have these permissions:\n`%1`",
+    "ownerOnly": "❌ **Only the BOT owner can use this command.**",
+    "cores": "cores",
+    "threads": "threads",
+    "noArguments": "❌ **Please specify a %1!**",
+    "command": "command",
+    "and": "and",
+    "noRunningPermissions": "❌ **You can only run this command while running Steam or any whitelisted applications.**",
+    "undefined": "Undefined",
+    "on": "On",
+    "off": "Off",
+    "notInWhitelist": "❌ **You don't have permissions to use this BOT. Please contact the BOT owner and try again.**",
+    "commandNotFound": "❌ **Command not found.**",
+    "notTheAuthor": "❌ **%1, you don't have permissions to click this button.** Only the person who runs this command, <@%2>, is able to click it.",
+    "occupied": "❌ **The connection request was initiated by another member. Only that member or the BOT owner can request an application exit at this moment.**",
+    "yes": "Yes",
+    "no": "No",
+    "none": "None",
+    "ping": {
+        "description": "Test this BOT's response time.",
+        "responseTime": "✅ **Response Time:** %1ms"
+    },
+    "start": {
+        "description": "Start an application from the whitelist.",
+        "alias": "The application's alias in the whitelist.",
+        "embedTitle": "List of whitelisted applications",
+        "embedDescription": "Here is a list of whitelisted applications that the BOT owner allows everyone to run:\n\n%1\n\nUse the `%2start <alias>` command to start an application.",
+        "appNotFound": "❌ **Cannot find an application with the alias `%1` in the whitelist, please contact the BOT owner and try again.**"
+    },
+    "steam": {
+        "description": "Start Steam on the computer.",
+        "user": "Log into Steam as another Steam user on the computer. Only for BOT owner.",
+        "noSufficientPermission": "❌ **Only the BOT owner can log into Steam as another Steam user.**",
+        "starting": "Starting Steam...",
+        "stopping": "Exitting Steam...",
+        "notRunning": "❌ **The computer isn't running Steam, you don't have to do anything.**"
+    },
+    "exit": {
+        "description": "Exit all running applications.",
+        "notRunning": "❌ **The computer isn't running any applications, you don't have to do anything.**",
+        "stopping": "Exitting %1..."
+    },
+    "exec": {
+        "description": "Execute any commands on the computer. Only for BOT owner.",
+        "command": "The command you want to run.",
+        "timeout": "Command timeout, the process will exit immediately.",
+        "additionalOptions": "The %1 option is enabled.",
+        "interactive": "interactive command"
+    },
+    "eval": {
+        "description": "Execute any JavaScript commands on this BOT. Only for BOT owner.",
+        "script": "The script you want to run.",
+        "success": "✅ **Finished executing commands.**"
+    },
+    "unlock": {
+        "description": "Unlock the physical computer keyboard and mouse.",
+        "success": "✅ **Unlocked the physical keyboard and mouse on computer %1.**"
+    },
+    "lock": {
+        "description": "Lock the physical computer keyboard and mouse.",
+        "success": "✅ **Locked the physical keyboard and mouse on computer %1.**"
+    },
+    "display": {
+        "description": "Set the computer screen brightness. You can type on or off instead.",
+        "amount": "The brightness amount you want to set.",
+        "invalidAmount": "❌ **Please specify an amount between 0 and 100, `on` or `off`.**",
+        "success": "✅ **Successfully set the %1 computer brightness to %2%.**"
+    },
+    "volume": {
+        "description": "Set the computer sound volume. You can type on or off instead.",
+        "amount": "The volume amount you want to set.",
+        "invalidAmount": "❌ **Please specify an amount between 0 and 100, `on` or `off`.**",
+        "success": "✅ **Successfully set the %1 computer volume to %2%.**"
+    },
+    "screenshot": {
+        "description": "Screenshot the current computer screen.",
+        "success": "🖼️ **%1's screenshot at %2:**"
+    },
+    "stats": {
+        "description": "View the computer's current status.",
+        "title": "%1 Computer Information",
+        "nodeJSVersion": "Node.JS Version:",
+        "discordJSVersion": "Discord.JS Version:",
+        "model": "Computer Model:",
+        "os": "Operating System:",
+        "battery": "Battery:",
+        "charging": "Charging",
+        "cpu": "CPU:",
+        "cpuUsage": "CPU Usage:",
+        "cpuTemp": "CPU Temperature:",
+        "gpu": "GPU:",
+        "gpuUsage": "GPU Usage:",
+        "gpuTemp": "GPU Temperature:",
+        "ramUsage": "RAM:",
+        "vramUsage": "VRAM:",
+        "runningApp": "Running Applications:",
+        "governor": "Running in %1 mode",
+        "governors": {
+            "performance": "performance",
+            "powersave": "power saving"
+        }
+    },
+    "send": {
+        "description": "Send a message with a specific content to the computer.",
+        "message": "The message content.",
+        "noArgument": "❌ **Please specify the message content**",
+        "title": "%1 (through %2)",
+        "success": "✅ **Successfully sent the message to the computer.**"
+    },
+    "focus": {
+        "description": "Refocus the current running application.",
+        "success": "✅ **Refocused the %1 window to the screen.**"
+    },
+    "shutdown": {
+        "description": "Fully shutdown the computer.",
+        "confirmation": "**The computer will be fully shut down and this BOT will be unusable, until the BOT owner turn on the computer again and restart the BOT.** Ensure that you've finished everything before continue.\n\nDo you want to fully shutdown this computer?"  
+    },
+    "steamping": {
+        "description": "Check the connection between the user and computer through Steam.",
+        "notConnected": "❌ **There's currently no one connecting to the computer through Steam.**",
+        "success": "🔁 **Checking the Steam connection in real-time.** You can execute the `steamping` command again to stop checking.",
+        "status": "**Ping:** `%1ms` / **Bitrate:** `%2 Kbps` / **Quality:** `%3%`",
+        "timeout": "❌ **There has been no response in the last 30 seconds, please check the connection and try again.**",
+        "stopped": "✅ **Stopped checking the Steam connection.**"
+    },
+    "help": {
+        "description": "View all of this BOT's command list.",
+        "title": "BOT Command List",
+        "slogan": "\"Ad astra abyssosque! Welcome to the Adventurers' Guild.\"",
+        "invalidCommand": "❌ **Command not found.**",
+        "usage": "Usage:",
+        "memberPermissions": "Requires Member Permissions:",
+        "botPermissions": "Requires BOT Permissions:",
+        "dm": "Support DM Channels?",
+        "ownerOnly": "For BOT Owner Only?"
+    },
+    "logs": {
+        "preparing": "🔁 **Sending request to the computer, please wait...**",
+        "checking": "🔁 **Checking the computer before starting...**",
+        "alreadyRunning": "❌ **Steam or a whitelisted application is running, please exit all applications and try again.**",
+        "lockingInput": "Locking the physical inputs to prevent external interferences...",
+        "closingApps": "Exitting some running applications...",
+        "muteAudio": "Turning off the physical sound volume...",
+        "disablingBluetooth": "Disabling Bluetooth temporarily...",
+        "settingGovernor": "Setting the GPU governor to performance mode...",
+        "settingFanSpeed": "Changing the fan speed into maximum...",
+        "disablingWARP": "Turning off Cloudflare WARP coneection...",
+        "disablingKDEConnect": "Exitting KDE Connect...",
+        "unlockingInput": "Unlocking the physical inputs...",
+        "enablingBluetooth": "Turning on the Bluetooth connection...",
+        "enablingKDEConnect": "Starting KDE Connect again...",
+        "restartingApps": "Restarting some applications...",
+        "startingApp": "Starting %1...",
+        "startMonitoring": "Start monitoring new in-game screenshots...",
+        "stopMonitoring": "Stop monitoring new in-game screenshots...",
+        "startSuccess": "Successfully started.",
+        "stopSuccess": "Finished executing the command.",
+        "processExit": "Process completed with exit code %1.",
+        "checkFailed": "❌ **Not enough conditions to continue starting, the starting process has been cancelled.**",
+        "beginShutdown": "Shutting down the computer.",
+        "ownerDeclined": "❌ **The BOT owner has rejected your request.**",
+        "cancelled": "❌ **The request has been cancelled.**",
+        "steamConnected": "➡️ **An user has connected to the %1 computer through Steam.**",
+        "steamDisconnected": "⬅️ **Disconnected the computer %1 from Steam.**",
+        "highTemperature": "🔴 **The %2 computer's %1 temperature is currently too high (%3°C), you should exit the game immediately to prevent further harm to the computer.",
+        "lowBattery": "🔴 **The %1 computer's battery is currently below 20%, please plug in the charger as soon as possible.**"
+    },
+    "notifications": {
+        "starting": "%1 is requesting to start %2 on this computer. The physical keyboard and mouse will also be locked to prevent external interferences.",
+        "stopping": "%1 is requesting to exit all applications, please be patient...",
+        "shutdown": "%1 is requesting the computer to shut down, and it will be turned off soon..."
+    },
+    "screenshots": {
+        "new": "🖼️ **An in-game screenshot from %1 is detected on the %2 computer at %3:**",
+        "description": "%1 in-game screenshot"
+    },
+    "request": {
+        "approving": "🔁 **Waiting for the BOT owner to respond to your request, the maximum timeout is 30 seconds...**",
+        "description": "**%1 is waiting for your approval for this action:**\n%2\n\nClick **Accept** to approve the request, and press **Reject** to reject it.",
+        "approveButton": "Accept",
+        "rejectButton": "Reject",
+        "timeout": "❌ **Command timed out.**",
+        "approved": "✅ **Successfully approved this request.**",
+        "rejected": "✅ **Successfully declined this request.**",
+        "events": {
+            "shutdown": "Shutdown the computer",
+            "start": "Start an application"
+        }
+    },
+    "confirmation": {
+        "nvidiaDriverError": "**The NVIDIA graphics card on the %1 computer is not active, the games will use the integrated graphics and the performance will be decreased significantly.**\nPlease contact the BOT owner to solve this problem, or you can still continue playing with degraded performance.",
+        "onBattery": "The %1 computer is not plugged in and currently has %2% of battery. Please contact the BOT owner to plug in the charger.\nIf you still continue playing in this state, the performance will be decreased significantly and the computer will have about %3 minutes left before its battery runs out.\n\nAre you sure that you still want to continue?",
+        "highTemperature": "**The %1 computer's temperature is currently too high, please wait a moment for the temperature to go down before starting the game!**\nIf you continue playing games in this state, it can cause harm to the computer."
+    }
+}

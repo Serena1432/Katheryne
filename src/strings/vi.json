@@ -88,6 +88,7 @@
         "model": "Mã máy tính:",
         "os": "Hệ điều hành:",
         "battery": "Mức pin:",
+        "charging": "Đang sạc",
         "cpu": "CPU:",
         "cpuUsage": "Mức sử dụng CPU:",
         "cpuTemp": "Nhiệt độ CPU:",
@@ -178,7 +179,7 @@
         "description": "Ảnh chụp màn hình của %1"
     },
     "request": {
-        "approving": "🔁 **Đang đợi chủ BOT chấp nhận yêu cầu của bạn, thời gian tối đa là 30 giây...**",
+        "approving": "🔁 **Đang đợi chủ BOT phản hồi yêu cầu của bạn, thời gian tối đa là 30 giây...**",
         "description": "**%1 đang yêu cầu sự cho phép của bạn cho hành động:**\n%2\n\nNhấn nút **Chấp nhận** để cho phép yêu cầu, và nhấn nút **Từ chối** để từ chối yêu cầu.",
         "approveButton": "Chấp nhận",
         "rejectButton": "Từ chối",
