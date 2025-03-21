@@ -109,7 +109,7 @@ class ExecSession {
      * Exit the process.
      */
     exit() {
-        if (this.process) this.process.kill("SIGTERM");
+        if (this.process) Computer.exec(`pkill -P ${this.process.pid}`);
     }
 }
 

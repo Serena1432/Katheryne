@@ -5,6 +5,7 @@ const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppMana
 const Steam = require("../classes/Steam");
 const SessionManager = require('../classes/SessionManager');
 const Logging = require('../hooks/Logging');
+const Language = require('../classes/Language');
 
 /**
  * 
@@ -56,7 +57,21 @@ module.exports = async (client) => {
     ScreenshotMonitor.setClient(client);
 
     // Start monitoring screenshots when an application is running
-    if (Steam.isRunning() || (await WhitelistedApps.running()).length) ScreenshotMonitor.start(WhitelistedApps.toJSON());
+    if (Steam.isRunning() || (await WhitelistedApps.running()).length) {
+        ScreenshotMonitor.start(WhitelistedApps.toJSON());
+    }
+
+    // Start monitoring Steam connection
+    Steam.on("connect", (data) => {
+        SessionManager.set("logging.steam", true);
+        logChannel.send({content: Language.strings.logs.steamConnected.format(Computer.hostname)});
+    });
+    Steam.on("disconnect", (data) => {
+        SessionManager.set("logging.steam", false);
+        logChannel.send({content: Language.strings.logs.steamDisconnected.format(Computer.hostname)});
+    });
+    if (!Steam.isRunning) SessionManager.set("logging.steam", false);
+    else Steam.startMonitor();
 
     // Update BOT status
     updateStatus(client);

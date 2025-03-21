@@ -122,7 +122,7 @@
         "description": "Kiểm tra kết nối giữa người chơi và máy tính thông qua Steam.",
         "notConnected": "❌ **Chưa có ai kết nối vào máy tính của bạn thông qua Steam cả.**",
         "success": "🔁 **Đang kiểm tra kết nối của Steam trong thời gian thực.** Bạn có thể nhập lệnh `steamping` một lần nữa để dừng việc kiểm tra.",
-        "status": "**Ping:** `%1ms` / **Tốc độ bit:** %2 Kbps / **Chất lượng:** %3%",
+        "status": "**Ping:** `%1ms` / **Tốc độ bit:** `%2 Kbps` / **Chất lượng:** `%3%`",
         "timeout": "❌ **Không có phản hồi nào trong vòng 30 giây, vui lòng kiểm tra kết nối và thử lại.**",
         "stopped": "✅ **Đã dừng việc kiểm tra kết nối Steam trước đó.**"
     },

@@ -30,15 +30,15 @@ module.exports.run = async function(client, message, args) {
     if (sessions[author.id]) {
         var session = sessions[author.id];
         clearInterval(session.interval);
-        session.kill("SIGKILL");
+        Computer.exec(`pkill -P ${session.pid}`);
         delete sessions[author.id];
         return Katheryne.reply(message, {content: Language.strings.steamping.stopped});
     }
     if (!Steam.isRunning()) return Katheryne.reply(message, {content: Language.strings.noRunningPermissions});
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
-        if (!(await Steam.checkSteamLinkConnection())) return Katheryne.editMessage(msg, {content: Language.strings.steamping.notConnected});
-        var session = sessions[author.id] = Computer.spawn(`bash`, [`-c`, `journalctl -f | grep SteamNetworkingSockets`]),
+        if (!SessionManager.get("logging.steam")) return Katheryne.editMessage(msg, {content: Language.strings.steamping.notConnected});
+        var session = sessions[author.id] = Computer.spawn(`bash`, [`-c`, `journalctl -f | grep --line-buffered SteamNetworkingSockets`]),
             time = new Date().getTime();
         await Katheryne.editMessage(msg, {content: Language.strings.steamping.success});
         session.stdout.on("data", (data) => {
@@ -46,7 +46,7 @@ module.exports.run = async function(client, message, args) {
                 if (data.includes("SteamNetworkingSockets connection")) {
                     var stats = Steam.parseSteamPacketInfo(data.toString());
                     time = new Date().getTime();
-                    Katheryne.addLog(msg, {content: `${Language.strings.steamping.success}\n${Language.strings.steamping.status.format(stats.ping, stats.bitrate.toFixed(1), stats.quality.toFixed(1))}`});
+                    Katheryne.editMessage(msg, {content: `${Language.strings.steamping.success}\n${Language.strings.steamping.status.format(stats.ping, stats.bitrate?.toFixed(1), stats.quality?.toFixed(1))}`});
                 }
             }
             catch (err) {
@@ -56,7 +56,7 @@ module.exports.run = async function(client, message, args) {
         session.interval = setInterval(function() {
             if (new Date().getTime() - time >= 30000) {
                 clearInterval(session.interval);
-                session.kill("SIGKILL");
+                Computer.exec(`pkill -P ${session.pid}`);
                 Katheryne.editMessage(msg, {content: Language.strings.steamping.timeout});
                 delete sessions[author.id];
             }
