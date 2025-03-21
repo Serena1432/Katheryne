@@ -171,7 +171,9 @@ npm install
 
 ### Configuration
 
-Firstly, you should copy the `config.sample` folder into a new one, and rename it to `config`. After that, config the BOT yourself to your liking based on the instructions below.
+* Copy the `.env` file to a new one and rename it to `.env`, then edit the file and specify the token with the `TOKEN` variable.
+
+* Copy the `config.sample` folder into a new one, and rename it to `config`. After that, config the BOT yourself to your liking based on the instructions below.
 
 You can view the example of all configurations in the `config.sample` folder.
 
