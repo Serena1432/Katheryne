@@ -12,7 +12,7 @@ const Confirmation = require("../hooks/Confirmation");
 module.exports.config = {
     name: "shutdown",
     usage: "shutdown",
-    description: "Tắt hẳn máy tính từ xa.",
+    description: Language.strings.shutdown.description,
     nodm: true,
     memberPermissions: [],
     botPermissions: [],
