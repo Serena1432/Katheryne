@@ -39,6 +39,7 @@ module.exports.run = async function(client, message, args) {
             Katheryne.embed(client)
             .setTitle(command.config.name)
             .setDescription(command.config.description)
+            .setThumbnail(client.user.avatarURL({size: 256}))
             .addFields(
                 {name: Language.strings.help.usage, value: command.config.usage, inline: false},
                 {name: Language.strings.help.memberPermissions, value: command.config.memberPermissions.join(", ") || none, inline: false},
