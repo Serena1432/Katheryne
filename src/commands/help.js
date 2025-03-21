@@ -5,7 +5,7 @@ const Katheryne = require("../classes/Katheryne");
 module.exports.config = {
     name: "help",
     usage: "help <command>",
-    description: Language.strings.start.description,
+    description: Language.strings.help.description,
     nodm: false,
     memberPermissions: [],
     botPermissions: [],
