@@ -74,7 +74,7 @@ module.exports.run = async function(client, message, args) {
             {name: "Steam:", value: Steam.isRunning() ? Language.strings.on : Language.strings.off, inline: true},
             {name: "TeamViewer:", value: Computer.isProcessRunning("teamviewer") ? Language.strings.on : Language.strings.off, inline: true},
             {name: "AnyDesk:", value: Computer.isProcessRunning("anydesk") ? Language.strings.on : Language.strings.off, inline: true},
-            {name: Language.strings.stats.runningApp, value: sanitize((await WhitelistedApps.running())[0]?.name || "Không có"), inline: false}
+            {name: Language.strings.stats.runningApp, value: sanitize((await WhitelistedApps.running())[0]?.name || Language.strings.none), inline: false}
         );
         Katheryne.editMessage(msg, {embeds: [embed]});
     }
