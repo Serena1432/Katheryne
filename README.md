@@ -4,6 +4,34 @@
 
 Currently, it only supports Linux, with both X11 and Wayland compatibility. KDE Plasma is recommended since it's my development environment.
 
+## Table of Contents
+
+- [Katheryne](#katheryne)
+  - [Disclaimer](#disclaimer)
+  - [Purpose](#purpose)
+  - [Support](#support)
+    - [Supported Remote Play Applications](#supported-remote-play-applications)
+  - [Features](#features)
+    - [Commands coverage](#commands-coverage)
+  - [Running root commands](#running-root-commands)
+    - [List of root commands](#list-of-root-commands)
+  - [Required applications](#required-applications)
+    - [General](#general)
+    - [Taking screenshots in Wayland](#taking-screenshots-in-wayland)
+    - [Intel GPUs](#intel-gpus)
+  - [Usage](#usage)
+    - [Installation](#installation)
+    - [Configuration](#configuration)
+      - [`config/main.json`](#configmainjson)
+      - [`config/computer.json`](#configcomputerjson)
+      - [`config/steam.json`](#configsteamjson)
+      - [`config/whitelisted_apps.json`](#configwhitelisted_appsjson)
+      - [`config/logging.json`](#configloggingjson)
+    - [Starting](#starting)
+      - [Running Katheryne as normal user](#running-katheryne-as-normal-user)
+      - [Running Katheryne as root (not recommended)](#running-katheryne-as-root-not-recommended)
+  - [License](#license)
+
 ## Disclaimer
 
 This BOT prioritizes simplicity and convenience over security and is intended for personal or small-scale use (e.g., providing a "cloud computer" for friends or remotely managing your own device). **It is not suitable for large public servers, as I cannot guarantee security at scale.**
@@ -44,7 +72,7 @@ These features can be used directly in a Discord server, provided you have the r
 - [X] Notify when the computer isn't plugged in, the battery is low, temperature is high or a driver error, requiring physical intervention
 - [X] Check the connection between the user and computer through Steam Remote Play (experimental, may not work on some devices)
 
-**Note:** Any changes with computer settings (physical input lock, brightness, volume, etc.) will be restored after restarting the computer. So if you encounter any errors when using the BOT, you just need to restart the computer.
+**Note:** Any changes with computer settings (physical input lock, brightness, volume, etc.) will be back to normal after restarting the computer. So if you encounter any errors when using the BOT, you just need to restart the computer.
 
 ### Commands coverage
 
@@ -116,9 +144,110 @@ For security reasons, you have to find a way to allow these commands for your us
 
 * `intel-gpu-tools`
 
-## Installation
+## Usage
 
-Coming soon...
+### Installation
+
+* Clone this BOT using this command below or [download the latest source code](./archive/refs/heads/main.zip).
+
+```sh
+git clone https://github.com/Serena1432/Katheryne.git
+```
+
+* Change the current directory to the source folder:
+
+```sh
+cd Katheryne
+```
+
+* Install all the dependencies:
+
+```sh
+npm install
+```
+
+* Install all required applications listed in the **Required applications** section above, depends on your distro and your need.
+
+### Configuration
+
+Firstly, you should copy the `config.sample` folder into a new one, and rename it to `config`. After that, config the BOT yourself to your liking based on the instructions below.
+
+You can view the example of all configurations in the `config.sample` folder.
+
+#### `config/main.json`
+
+Contains the main BOT configuration.
+
+| Property | Type | Description |
+| --- | --- | --- |
+| language | `string` | BOT language. Make sure that `strings/${language}.json` exists in the BOT folder. |
+| owner_id | `string` | BOT owner's Discord ID. |
+| prefix | `string` | BOT prefix for message content based commands. |
+| whitelist | `string[]` | List of Discord ID allowed to use the BOT. |
+
+#### `config/computer.json`
+
+Contains the computer configuration.
+
+| Property | Type | Description |
+| --- | --- | --- |
+| close_processes | `string[]` | List of processes to be closed upon starting an application. |
+| start_processes | `string[]` | List of processes to be started after exitting applications. |
+| auto_mute | `boolean` | Automatically mute the physical speakers upon starting. |
+| auto_bluetooth_off | `boolean` | Automatically turn off Bluetooth upon starting. |
+| auto_performance_governor | `boolean` | Automatically set the CPU govenor to `performance` upon starting. |
+| auto_max_fan_speed | `boolean` | Automatically set the fan speed to maximum upon starting. |
+| auto_lock_input | `boolean` | Automatically lock the physical inputs upon starting. |
+
+#### `config/steam.json`
+
+Contains the Steam configuration.
+
+| Property | Type | Description |
+| --- | --- | --- |
+| default_user | `string` | Default Steam user to be logged in when using the `steam` command. Leave empty to manually select the user upon starting. |
+| wayland_enable_pipewire | `boolean` | Enable PipeWire screen capture when connecting to Steam Remote Play on Wayland. |
+| detach | `boolean` | If `true`, Steam will keep running even when the BOT stops working. |
+
+#### `config/whitelisted_apps.json`
+
+Contains a list of whitelisted apps for all users to run anytime they want.
+
+Is a JSON array containing objects with these properties:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| process | `string` | Process name (will be used to detect if the app is running or not) |
+| name | `string` | Display name to be displayed in the BOT status and statistics |
+| alias | `string` | Shortened alias for members to use with the `start` command |
+| command | `string` | Command to be executed after using the start command |
+| screenshot | `string` | In-game screenshot folder to be monitored. Leave empty if not supported. |
+| channel | `string` | Discord channel ID for in-game screenshots. Unused if `screenshot` isn't set. |
+
+#### `config/logging.json`
+
+Contains the logging configuration.
+
+| Property | Type | Description |
+| --- | --- | --- |
+| log_channel | `string` | Discord channel ID to receive logs. Leave empty if you don't want logging. |
+| steam_connection | `string` | Whether to send a log when there's a new Steam Remote Play connection. |
+| high_temperature | `string` | Whether to send a log when the computer temperature is high. |
+| low_battery | `string` | Whether to send a log when the computer battery is low. |
+
+### Starting
+
+#### Running Katheryne as normal user
+
+```
+npm start
+```
+
+#### Running Katheryne as root (not recommended)
+
+```
+sudo -E npm start
+```
 
 ## License
 
