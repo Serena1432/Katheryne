@@ -7,6 +7,7 @@ const { Client, TextChannel } = require("discord.js");
 const Language = require("../classes/Language");
 const Computer = require("../classes/Computer");
 const SessionManager = require("../classes/SessionManager");
+const loggingConfing = require("../../config/logging.json");
 
 /**
  * 
@@ -14,23 +15,25 @@ const SessionManager = require("../classes/SessionManager");
  * @param {TextChannel} logChannel Logging channel
  */
 module.exports = async function(client, logChannel) {
-    var stats = await Computer.temperature();
-    if (stats?.cpu >= 90) {
-        if (!SessionManager.get("logging.cpuTemp")) {
-            SessionManager.set("logging.cpuTemp", true);
-            logChannel.send({content: Language.strings.logs.highTemperature.format("CPU", Computer.hostname, stats.cpu)});
+    if (loggingConfing.high_temperature) {
+        var stats = await Computer.temperature();
+        if (stats?.cpu >= 90) {
+            if (!SessionManager.get("logging.cpuTemp")) {
+                SessionManager.set("logging.cpuTemp", true);
+                logChannel.send({content: Language.strings.logs.highTemperature.format("CPU", Computer.hostname, stats.cpu)});
+            }
         }
-    }
-    else {
-        if (SessionManager.get("logging.cpuTemp")) SessionManager.set("logging.cpuTemp", false);
-    }
-    if (stats?.gpu?.find(gpu => gpu >= 90)) {
-        if (!SessionManager.get("logging.gpuTemp")) {
-            SessionManager.set("logging.gpuTemp", true);
-            logChannel.send({content: Language.strings.logs.highTemperature.format("GPU", Computer.hostname, stats.gpu.find(gpu => gpu >= 90))});
+        else {
+            if (SessionManager.get("logging.cpuTemp")) SessionManager.set("logging.cpuTemp", false);
         }
-    }
-    else {
-        if (SessionManager.get("logging.gpuTemp")) SessionManager.set("logging.gpuTemp", false);
+        if (stats?.gpu?.find(gpu => gpu >= 90)) {
+            if (!SessionManager.get("logging.gpuTemp")) {
+                SessionManager.set("logging.gpuTemp", true);
+                logChannel.send({content: Language.strings.logs.highTemperature.format("GPU", Computer.hostname, stats.gpu.find(gpu => gpu >= 90))});
+            }
+        }
+        else {
+            if (SessionManager.get("logging.gpuTemp")) SessionManager.set("logging.gpuTemp", false);
+        }
     }
 }
