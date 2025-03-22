@@ -1,6 +1,6 @@
 {
     "log_channel": "1352306881850511412",
-    "steam_connection": true,
+    "steam_connection": false,
     "high_temperature": true,
     "low_battery": true
 }
