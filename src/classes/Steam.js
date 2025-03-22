@@ -1,4 +1,5 @@
 const config = require("../../config/steam.json");
+const loggingConfig = require("../../config/logging.json");
 const Computer = require("./Computer");
 const child_process = require("child_process");
 
@@ -54,6 +55,7 @@ var Steam = {
      * Start monitoring Steam Remote Play connection.
      */
     startMonitor: function() {
+        if (!loggingConfig.steam_connection) return;
         var process = this._monitorProcess = Computer.spawn(`bash`, [`-c`, `journalctl -f | grep --line-buffered -E "st.*eam.*desktop stream"`]);
         process.stdout.on("data", (data) => {
             if (data?.toString()?.includes("Starting desktop stream")) Steam.emit("connect", data.toString());
@@ -64,6 +66,7 @@ var Steam = {
      * Stop monitoring Steam Remote Play connection.
      */
     stopMonitor: function() {
+        if (!loggingConfig.steam_connection) return;
         if (this._monitorProcess) {
             Computer.exec(`pkill -P ${this._monitorProcess.pid}`);
             this._monitorProcess = null;
