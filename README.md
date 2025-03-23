@@ -240,15 +240,23 @@ Contains the logging configuration.
 
 ### Starting
 
+#### Running Katheryne through systemd-run (recommended)
+
+This is the most stable way to run in my opinion without any serious crashes. I don't know why but it works, Linux is so strange when it comes to this.
+
+```sh
+systemd-run --user --unit=Katheryne --working-directory=/.../Katheryne npm start
+```
+
 #### Running Katheryne as normal user
 
-```
+```sh
 npm start
 ```
 
 #### Running Katheryne as root (not recommended)
 
-```
+```sh
 sudo -E npm start
 ```
 
