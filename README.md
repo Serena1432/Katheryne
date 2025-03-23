@@ -201,6 +201,7 @@ Contains the computer configuration.
 | auto_performance_governor | `boolean` | Automatically set the CPU govenor to `performance` upon starting. |
 | auto_max_fan_speed | `boolean` | Automatically set the fan speed to maximum upon starting. |
 | auto_lock_input | `boolean` | Automatically lock the physical inputs upon starting. |
+| evtest_on_x11 | `boolean` | Use `evtest` instead of `xinput --disable` to lock the physical input on X11. This way is more stable than xinput but it will require root access. |
 
 #### `config/steam.json`
 
@@ -239,14 +240,6 @@ Contains the logging configuration.
 | low_battery | `string` | Whether to send a log when the computer battery is low. |
 
 ### Starting
-
-#### Running Katheryne through systemd-run (recommended)
-
-This is the most stable way to run in my opinion without any serious crashes. I don't know why but it works, Linux is so strange when it comes to this.
-
-```sh
-systemd-run --user --unit=Katheryne --working-directory=/.../Katheryne npm start
-```
 
 #### Running Katheryne as normal user
 

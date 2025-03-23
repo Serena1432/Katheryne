@@ -2,6 +2,7 @@ const child_process = require("child_process");
 const os = require("os");
 const si = require("systeminformation");
 const osu = require("node-os-utils");
+const config = require("../../config/computer.json");
 
 var Computer = {
     _inputLockInterval: null,
@@ -127,8 +128,8 @@ var Computer = {
         if (xinput.error || xinput.stderr.toString().split("\n")[0]) throw new Error(`"xinput list" command threw an unexpected error:\n${xinput.error || xinput.stderr.toString()}`);
         var lines = xinput.stdout.toString().split("\n");
         for (var line of lines) {
-            const match = line.toString().match(/⎜?\s*(.+?)\s+id=(\d+).*?\[(slave|master|floating)\s+(keyboard|pointer|slave)/i);
-            if (match) {
+            const match = line.toString().match(/⎜?\s*(.+?)\s+id=(\d+).*?\[(slave|floating)\s+(keyboard|pointer|slave)/i);
+            if (match && !line?.toLowerCase()?.includes("core")) {
                 const [, name, id, status, type] = match;
                 devices.push({id: Number(id), name: name.substring(2), type: status == "floating" ? "floating" : (type === "keyboard" ? "keyboard" : "mouse")});
             }
@@ -218,7 +219,7 @@ var Computer = {
      * Will take effect until the BOT is stopped.
      */
     lockInput: function() {
-        var devices = this.inputDevices(), commands = [], parallel = false;
+        var devices = config.evtest_on_x11 ? this.getLibInputDevices() : this.inputDevices(), commands = [], parallel = false;
         for (var device of devices) {
             if (!device.id) continue;
             if (device.xinputId) {
@@ -241,6 +242,10 @@ var Computer = {
      */
     unlockInput: function() {
         if (this._inputLockInterval) clearInterval(this._inputLockInterval);
+        if (config.evtest_on_x11) {
+            this.exec(`killall evtest`);
+            return;
+        }
         switch (this.xdgSessionType) {
             case "x11": {
                 var devices = this.inputDevices(), commands = [];
