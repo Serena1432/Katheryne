@@ -18,10 +18,10 @@ var Steam = {
      * @param {string} user Auto login as a specific user (usable for multi-user support)
      */
     start: async function(user = config.default_user) {
-        var args = ["-debug", "-console"];
+        var args = ["--user", "steam", "-debug", "-console"];
         if (user) args.push(`-login`, user);
         if (config.wayland_enable_pipewire && Computer.xdgSessionType == "wayland") args.push("-pipewire");
-        this.process = Computer.spawnAsUser(`steam`, args, config.detach);
+        this.process = Computer.spawnAsUser(`systemd-run`, args, config.detach);
         this.startMonitor();
     },
     stop: function() {
