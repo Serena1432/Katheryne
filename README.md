@@ -29,8 +29,12 @@ Currently, it only supports Linux, with both X11 and Wayland compatibility. KDE 
       - [`config/logging.json`](#configloggingjson)
     - [Starting](#starting)
       - [Running Katheryne as normal user](#running-katheryne-as-normal-user)
+      - [Enable further debugging](#enable-further-debugging)
       - [Running Katheryne as root (not recommended)](#running-katheryne-as-root-not-recommended)
       - [Autostart](#autostart)
+  - [Known issues](#known-issues)
+    - [Computer crashes after starting game while BOT is running](#computer-crashes-after-starting-game-while-bot-is-running)
+    - [Game crashes when locking/unlocking physical inputs on X11](#game-crashes-when-lockingunlocking-physical-inputs-on-x11)
   - [License](#license)
 
 ## Disclaimer
@@ -247,6 +251,24 @@ Contains the logging configuration.
 npm start
 ```
 
+#### Enable further debugging
+
+You can enable further debugging logs that contain all of the command the BOT uses to run by running one of these commands below instead of `npm start`. Remember that further debugging can output some personal information, and you should be cautious when running it in public.
+
+This is also required when reporting an issue related to the BOT.
+
+For writing the logs directly to the console window, run this command:
+
+```sh
+npm run debug
+```
+
+For writing the logs to `journal` (useful for debugging serious crashes):
+
+```sh
+npm run debug_journal
+```
+
 #### Running Katheryne as root (not recommended)
 
 ```sh
@@ -258,6 +280,20 @@ sudo -E npm start
 You can of course use your Desktop Environment's Autostart settings (or `.config/autostart`) to start Katheryne automatically after boot.
 
 `pm2` is not recommended in my opinion due to it invoking the BOT before starting the DE, so it may cause some unwanted issues.
+
+## Known issues
+
+I'm not a skilled Linux expert, so issues are unable to avoid. These are the known issues that I've experienced myself, and I'm not sure if these also work for you.
+
+### Computer crashes after starting game while BOT is running
+
+Try setting `high_temperature` in `config/logging.json` to `false` to disable high temperature warning. This logging may cause crashes on some devices and requires a force restart.
+
+### Game crashes when locking/unlocking physical inputs on X11
+
+The `xinput` commands used on X11 can be unstable on some devices, therefore it crashes the game when executing.
+
+Try setting `evtest_on_x11` in `config/computer.json` to let the lock/unlock commands use `evtest` instead of `xinput`. It's more stable but it will require root permissions.
 
 ## License
 
