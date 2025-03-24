@@ -1,5 +1,6 @@
 const {Client, Message, ChannelType} = require("discord.js");
 const Language = require("../classes/Language");
+const Katheryne = require("../classes/Katheryne");
 
 /**
  * 
@@ -30,5 +31,6 @@ module.exports = function(client, message) {
     }
     if (commandInfo.config.ownerOnly && message.author.id != client.config.owner_id) return message.reply({content: Language.strings.ownerOnly});
     if (message.author.id != client.config.owner_id && !client.config.whitelist.includes(message.author.id)) return message.reply({content: Language.strings.notInWhitelist});
+    Katheryne.debug(`Message: id = ${message.id}, command = ${command}, content = ${message.content}`);
     commandInfo.run(client, message, args);
 }

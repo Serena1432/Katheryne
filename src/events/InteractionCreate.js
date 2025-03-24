@@ -1,5 +1,6 @@
 const { Client } = require("discord.js");
 const Language = require("../classes/Language");
+const Katheryne = require("../classes/Katheryne");
 
 /**
  * 
@@ -15,6 +16,7 @@ module.exports = (client, interaction) => {
         }
         catch (err) { }
     });
+    Katheryne.debug(`Interaction: id = ${interaction.id}, type = ${interactionType}, customId = ${interaction.customId}, commandName = ${interaction.commandName}`);
     if (!interactionType) {
         interaction.reply({content: Language.strings.generalError, ephemeral: true});
         return console.error("Events/InteractionCreate: Invalid InteractionType");

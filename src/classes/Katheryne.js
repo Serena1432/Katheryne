@@ -3,6 +3,7 @@ const { Client, EmbedBuilder, Message, BaseInteraction, MessagePayload, User } =
 var Katheryne = {
     _logs: {},
     _events: {},
+    _debug: false,
     /**
      * Create an embed based on the preset.
      * @param {Client} client Discord client
@@ -73,6 +74,7 @@ var Katheryne = {
      * @returns {any?} The event data when being triggered. Returns null if timeout.
      */
     waitForEvent: function(name, timeout = 30000) {
+        Katheryne.debug(`Katheryne.waitForEvent(): Start waiting for event ${name}`);
         return new Promise((resolve, reject) => {
             var startTime = new Date().getTime(),
                 interval = setInterval(function() {
@@ -85,6 +87,7 @@ var Katheryne = {
                 if (data != undefined) {
                     clearInterval(interval);
                     Katheryne.deleteEvent(name);
+                    Katheryne.debug(`Katheryne.waitForEvent(): Event ${name} completed with data ${data}`);
                     resolve(data);
                 }
             }, 500);
@@ -96,6 +99,7 @@ var Katheryne = {
      * @param {any} value Event data
      */
     sendEvent: function(name, value) {
+        Katheryne.debug(`Katheryne.sendEvent(): Sending data ${data} to event ${name}`);
         Katheryne._events[name] = value;
     },
     /**
@@ -103,7 +107,16 @@ var Katheryne = {
      * @param {string} name Event name
      */
     deleteEvent: function(name) {
+        Katheryne.debug(`Katheryne.deleteEvent(): Deleting event ${name}`);
         delete Katheryne._events[name];
+    },
+    /**
+     * Log a more detailed information when debugging is enabled.
+     * @param {string} str Debug message
+     */
+    debug: function(str) {
+        if (!this._debug) return;
+        console.log(str);
     }
 };
 

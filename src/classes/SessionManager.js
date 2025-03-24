@@ -1,4 +1,5 @@
 const DatabaseManager = require("./DatabaseManager");
+const Katheryne = require("./Katheryne");
 
 var SessionManager = {
     _cache: {},
@@ -8,6 +9,7 @@ var SessionManager = {
      */
     load: function() {
         try {
+            Katheryne.debug(`SessionManager.load(): Loading from database`);
             return DatabaseManager.get("session");
         }
         catch (err) {
@@ -20,6 +22,7 @@ var SessionManager = {
      * @param {object} data Data object
      */
     save: function(data) {
+        Katheryne.debug(`SessionManager.save(): Saving to database`);
         DatabaseManager.set("session", data);
     },
     /**
@@ -27,6 +30,7 @@ var SessionManager = {
      * @param {string} name Property name
      */
     get: function(name) {
+        Katheryne.debug(`SessionManager.get(): ${name} = ${this._cache[name]}`);
         return this._cache[name];
     },
     /**
@@ -35,6 +39,7 @@ var SessionManager = {
      * @param {string} value Property value
      */
     set: function(name, value) {
+        Katheryne.debug(`SessionManager.set(): ${name} = ${value}`);
         this._cache[name] = value;
         this.save(this._cache);
     },
@@ -43,6 +48,7 @@ var SessionManager = {
      * @param {string} name Property name
      */
     delete: function(name) {
+        Katheryne.debug(`SessionManager.delete(): Deleting ${name}`);
         delete(this._cache[name]);
         this.save(this._cache);
     },

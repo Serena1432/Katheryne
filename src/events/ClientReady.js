@@ -6,6 +6,7 @@ const Steam = require("../classes/Steam");
 const SessionManager = require('../classes/SessionManager');
 const Logging = require('../hooks/Logging');
 const Language = require('../classes/Language');
+const Katheryne = require('../classes/Katheryne');
 
 /**
  * 
@@ -27,6 +28,11 @@ async function updateStatus(client) {
  * @param {Client} client 
  */
 module.exports = async (client) => {
+    if (process.argv.includes("--debug")) {
+        Katheryne._debug = true;
+        console.log(`Further debugging is enabled, and the logs may contain some personal information. Be cautious when running in public servers.`);
+    }
+
     console.log(`BOT started as ${client.user.tag}`);
 
     // Add slash commannds

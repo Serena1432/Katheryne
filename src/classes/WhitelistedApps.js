@@ -11,6 +11,7 @@
 const Computer = require("./Computer");
 const fs = require("fs");
 const path = require("path");
+const Katheryne = require("./Katheryne");
 
 class WhitelistedApp {
     /**
@@ -40,6 +41,7 @@ class WhitelistedApp {
      * @returns {Promise<any>}
      */
     start() {
+        Katheryne.debug(`WhitelistedApps.start(): Starting ${this.name} with env: ${JSON.stringify(process.env)}`);
         return Computer.exec(this.command);
     }
     /**
@@ -47,6 +49,7 @@ class WhitelistedApp {
      * @returns {Promise<any>}
      */
     stop() {
+        Katheryne.debug(`WhitelistedApps.stop(): Stopping ${this.name}`);
         return Computer.killProcess(this.process);
     }
     /**
@@ -68,9 +71,11 @@ class WhitelistedApp {
         if (!this.screenshot) return;
         var screenshotPath = this.screenshot;
         if (!fs.existsSync(screenshotPath)) return console.warn(`"${screenshotPath}" does not exist, ${this.name}'s screenshot folder will not be monitored`);
+        Katheryne.debug(`WhitelistedApps.monitorScreenshot(): Checking ${screenshotPath} from ${this.name}`);
         var arr = fs.readdirSync(screenshotPath), oldScreenshots = this._oldScreenshots,
             newScreenshots = arr.filter(file => !oldScreenshots.includes(file));
         this._oldScreenshots = arr;
+        if (newScreenshots.length) Katheryne.debug(`WhitelistedApps.monitorScreenshot(): New screenshots from ${this.name}: ${newScreenshots.join(", ")}`);
         return newScreenshots.map(file => path.join(screenshotPath, file));
     }
 }

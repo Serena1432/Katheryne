@@ -3,6 +3,7 @@ const { WhitelistedApp } = require("./WhitelistedApps");
 const path = require("path");
 const Language = require("./Language");
 const Computer = require("./Computer");
+const Katheryne = require("./Katheryne");
 
 var ScreenshotMonitor = {
     /**
@@ -36,9 +37,11 @@ var ScreenshotMonitor = {
             channel = client.channels.cache.get(channelId);
         if (!channel) throw new Error(`Invalid channel ${channel}`);
         for (var i = 0; i < Math.ceil(images.length / 10); i++) {
+            var files = images.slice(i * 10, Math.min((i + 1) * 10, images.length));
+            console.log(`ScreenshotMonitor.sendImages(): Sending ${files.join(", ")} to channel ${channel.id}`);
             await channel.send({
                 content: Language.strings.screenshots.new.format(name, Computer.hostname, new Date().toLocaleString()),
-                files: images.slice(i * 10, Math.min((i + 1) * 10, images.length)).map(filePath => {
+                files: files.map(filePath => {
                     return {
                         attachment: filePath,
                         name: `${path.basename(filePath)}.${path.extname(filePath)}`,
@@ -52,6 +55,7 @@ var ScreenshotMonitor = {
      * Refresh the screenshot monitoring event.
      */
     refresh: function() {
+        Katheryne.debug(`ScreenshotMonitor.refresh(): Triggering monitor event`);
         for (var i = 0; i < this._apps.length; i++) {
             var app = this._apps[i];
             if (app._noScreenshotFolder || !app.isRunning()) continue;
