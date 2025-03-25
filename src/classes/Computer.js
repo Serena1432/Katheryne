@@ -7,6 +7,8 @@ const Katheryne = require("./Katheryne");
 
 var Computer = {
     _inputLockInterval: null,
+    _brightnessLockInterval: null,
+    _brightnessAmount: null,
     username: "",
     userId: -1,
     hostname: "",
@@ -240,7 +242,7 @@ var Computer = {
         }
         var command = commands.join(parallel ? " & " : " && ");
         this.exec(command);
-        if (!parallel) {
+        if (!parallel && config.lock_timer) {
             this._inputLockInterval = setInterval((function(command) {
                 this.exec(command);
             }).bind(this, command), 10000);
@@ -250,7 +252,10 @@ var Computer = {
      * Unlock the computer's physical input devices.
      */
     unlockInput: function() {
-        if (this._inputLockInterval) clearInterval(this._inputLockInterval);
+        if (this._inputLockInterval) {
+            clearInterval(this._inputLockInterval);
+            this._inputLockInterval = null;
+        }
         if (config.evtest_on_x11) {
             this.exec(`killall evtest`);
             return;
@@ -277,6 +282,18 @@ var Computer = {
      */
     setBrightness: function(pc) {
         this.execSync(`brightnessctl set ${pc}%`);
+        if (config.lock_timer) {
+            this._brightnessAmount = pc;
+            if (!this._brightnessLockInterval) this.setBrightnessInterval();
+        }
+    },
+    /**
+     * Set the brightness lock interval.
+     */
+    setBrightnessInterval: function() {
+        this._brightnessLockInterval = setInterval((function() {
+            this.setBrightness(this._brightnessAmount);
+        }).bind(this), 10000);  
     },
     /**
      * Check if a service is active.

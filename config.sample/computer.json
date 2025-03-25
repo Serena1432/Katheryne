@@ -6,5 +6,6 @@
     "auto_performance_governor": true,
     "auto_max_fan_speed": true,
     "auto_lock_input": true,
-    "evtest_on_x11": false
+    "evtest_on_x11": false,
+    "lock_timer": true
 }

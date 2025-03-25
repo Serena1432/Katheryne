@@ -206,6 +206,7 @@ Contains the computer configuration.
 | auto_max_fan_speed | `boolean` | Automatically set the fan speed to maximum upon starting. |
 | auto_lock_input | `boolean` | Automatically lock the physical inputs upon starting. |
 | evtest_on_x11 | `boolean` | Use `evtest` instead of `xinput --disable` to lock the physical input on X11. This way is more stable than xinput but it will require root access. |
+| lock_timer | `boolean` | If `true`, the BOT will rerun the physical input lock/set brightness commands each 10 seconds to further prevent external interference. |
 
 #### `config/steam.json`
 
