@@ -7,6 +7,7 @@ const Katheryne = require("./Katheryne");
 
 var Computer = {
     _inputLockInterval: null,
+    _inputLockProcess: null,
     _brightnessLockInterval: null,
     _brightnessAmount: null,
     username: "",
@@ -241,12 +242,22 @@ var Computer = {
             parallel = true;
         }
         var command = commands.join(parallel ? " & " : " && ");
-        this.exec(command);
+        this._inputLockProcess = this.spawn(`bash`, [`-c`, command]);
         if (!parallel && config.lock_timer) {
             this._inputLockInterval = setInterval((function(command) {
                 this.exec(command);
             }).bind(this, command), 10000);
         }
+    },
+    /**
+     * Kill all evtest processes.
+     */
+    killevtest: function() {
+        if (this._inputLockProcess) {
+            this.exec(`pkill -P ${this._inputLockProcess.pid}`);
+            this._inputLockInterval = null;
+        }
+        this.exec(`killall -9 evtest`);
     },
     /**
      * Unlock the computer's physical input devices.
@@ -257,7 +268,7 @@ var Computer = {
             this._inputLockInterval = null;
         }
         if (config.evtest_on_x11) {
-            this.exec(`killall evtest`);
+            this.killevtest();
             return;
         }
         switch (this.xdgSessionType) {
@@ -271,7 +282,7 @@ var Computer = {
                 break;
             }
             case "wayland": {
-                this.exec(`killall evtest`);
+                this.killevtest();
                 break;
             }
         }
