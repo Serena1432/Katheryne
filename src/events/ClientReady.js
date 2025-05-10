@@ -90,4 +90,6 @@ module.exports = async (client) => {
             Logging(client, logChannel);
         }, 10000);
     }
+
+    Computer.sendNotification("BOT started successfully.", client.user.displayName)
 };
