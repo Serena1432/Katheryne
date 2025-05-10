@@ -27,7 +27,7 @@ module.exports.run = async function(client, message, args) {
     if (!Steam.isRunning() && !((await WhitelistedApps.running()).length)) return Katheryne.reply(message, {content: Language.strings.noRunningPermissions});
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
-        var time = new Date(), screenshotPath = path.resolve(`./${time.getTime()}.png`);
+        var time = new Date(), screenshotPath = path.resolve(`./database/${time.getTime()}.png`);
         await Computer.screenshot(screenshotPath);
         await Katheryne.editMessage(msg, {
             content: Language.strings.screenshot.success.format(Computer.hostname, time.toLocaleString()),
