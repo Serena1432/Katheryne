@@ -220,5 +220,7 @@ $RECYCLE.BIN/
 # Ignore specific folders
 database/
 config/
+*.png
+*.jpg
 
 .appenv
