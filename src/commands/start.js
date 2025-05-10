@@ -26,6 +26,14 @@ module.exports.config = {
  * @param {string[]} args 
  */
 module.exports.run = async function(client, message, args) {
+    var permissive = false, tags = ["permissive"];
+    for (var i = 0; i < tags.length; i++) {
+        var tag = tags[i];
+        if (args.includes(`-${tag}`)) {
+            eval(`${tag} = true`);
+            args.splice(args.findIndex(arg => arg == `-${tag}`), 1);
+        }
+    }
     if (!args[0]) {
         var apps = WhitelistedApps.toJSON().map(app => {
             return `* \`${app.alias}\` - **${app.name}**`;
@@ -44,13 +52,14 @@ module.exports.run = async function(client, message, args) {
         if (!await CheckBeforeStartHook(msg, client, author, app)) return Katheryne.editMessage(msg, {content: Language.strings.logs.checkFailed});
         if (!await OwnerApprovalHook(msg, client, "start", author, true)) return Katheryne.editMessage(msg, {content: Language.strings.logs.ownerDeclined});
         Computer.sendNotification(Language.strings.notifications.starting.format(author.displayName, app.name), client.user.displayName);
+        if (permissive) await Katheryne.addLog(msg, Language.strings.logs.permissive);
         await BeforeStartHook(msg, client, app);
         await Katheryne.addLog(msg, Language.strings.logs.startingApp.format(app.name));
-        SessionManager.set("currentUser", author.id);
+        if (!permissive) SessionManager.set("currentUser", author.id);
         Computer.spawnAsUser("bash", ["-c", app.command], true);
     }
     catch (err) {
         console.error(err);
-        Katheryne.addLog(msg, err.stack);
+        Katheryne.addLog(msg, err.message);
     }
 }

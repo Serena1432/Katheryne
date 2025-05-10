@@ -21,9 +21,10 @@ class ExecSession {
     }
     /**
      * Execute the command.
+     * @param {boolean} timeout Whether to automatically close the process after 60 seconds.
      * @returns Spawned process object
      */
-    execute() {
+    execute(timeout = true) {
         if (this.process) return;
         this.process = pty.spawn("bash", ["-c", "--", this.command], {
             name: "xterm",
@@ -36,7 +37,7 @@ class ExecSession {
         this.setCloseEvent();
         if (this.interactive) this.setInteractiveEvent();
         this.updateTimestamp();
-        this.setWaitTimeout();
+        if (timeout) this.setWaitTimeout();
         return this.process;
     }
     /**

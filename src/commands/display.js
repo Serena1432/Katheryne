@@ -34,6 +34,6 @@ module.exports.run = async function(client, message, args) {
     }
     catch (err) {
         console.error(err);
-        Katheryne.addLog(msg, err.stack);
+        Katheryne.addLog(msg, err.message);
     }
 }

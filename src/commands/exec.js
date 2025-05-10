@@ -21,23 +21,26 @@ module.exports.config = {
  */
 module.exports.run = async function(client, message, args) {
     if (!args[0]) return Katheryne.reply(message, Language.strings.noArguments.format(Language.strings.command));
-    var interactive = false;
-    var interactiveIndex = args.findIndex(arg => arg == "-interactive");
-    if (interactiveIndex != -1) {
-        args.splice(interactiveIndex, 1);
-        interactive = true;
+    var interactive = false, tags = ["interactive", "notimeout"];
+    for (var i = 0; i < tags.length; i++) {
+        var tag = tags[i];
+        if (args.includes(`-${tag}`)) {
+            eval(`${tag} = true`);
+            args.splice(args.findIndex(arg => arg == `-${tag}`), 1);
+        }
     }
     var options = [];
     if (interactive) options.push(Language.strings.exec.interactive);
+    if (notimeout) options.push(Language.strings.exec.notimeout);
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
         if (options.length) await Katheryne.addLog(msg, Language.strings.exec.additionalOptions.format(options.join(Language.strings.and)));
         var session = new ExecSession(msg, args.join(" "), Katheryne.author(message));
         session.interactive = interactive;
-        session.execute();
+        session.execute(!notimeout);
     }
     catch (err) {
         console.error(err);
-        Katheryne.addLog(msg, err.stack);
+        Katheryne.addLog(msg, err.message);
     }
 }

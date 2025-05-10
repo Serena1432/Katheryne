@@ -34,18 +34,18 @@ module.exports = async function(message, client, app) {
     }
     if (client.config.computer.auto_performance_governor) {
         await Katheryne.addLog(message, Language.strings.logs.settingGovernor);
-        try {await Computer.setCpuGovernor("performance")} catch (err) {await Katheryne.addLog(message, err.stack)}
+        try {await Computer.setCpuGovernor("performance")} catch (err) {await Katheryne.addLog(message, err.message)}
     }
     if (client.config.computer.auto_max_fan_speed) {
         await Katheryne.addLog(message, Language.strings.logs.settingFanSpeed);
-        try {await Computer.setFanSpeed(100)} catch (err) {await Katheryne.addLog(message, err.stack)}
+        try {await Computer.setFanSpeed(100)} catch (err) {await Katheryne.addLog(message, err.message)}
     }
     await Katheryne.addLog(message, Language.strings.logs.startMonitoring);
     ScreenshotMonitor.start(WhitelistedAppManager.toJSON());
     if (Computer.checkServiceActive("warp-svc", false)) {
         await Katheryne.addLog(message, Language.strings.logs.disablingWARP);
         try {await Computer.execAsUser(`warp-cli disconnect`)} catch (err) {
-            await Katheryne.addLog(message, err.stack);
+            await Katheryne.addLog(message, err.message);
         }
     }
     if (Computer.isProcessRunning("kdeconnectd")) {

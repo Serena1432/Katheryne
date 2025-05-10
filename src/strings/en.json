@@ -49,7 +49,8 @@
         "command": "The command you want to run.",
         "timeout": "Command timeout, the process will exit immediately.",
         "additionalOptions": "The %1 option is enabled.",
-        "interactive": "interactive command"
+        "interactive": "interactive command",
+        "notimeout": "remove timeout"
     },
     "eval": {
         "description": "Execute any JavaScript commands on this BOT. Only for BOT owner.",
@@ -167,7 +168,8 @@
         "steamConnected": "➡️ **An user has connected to the %1 computer through Steam.**",
         "steamDisconnected": "⬅️ **Disconnected the computer %1 from Steam.**",
         "highTemperature": "🔴 **The %2 computer's %1 temperature is currently too high (%3°C), you should exit the game immediately to prevent further harm to the computer.",
-        "lowBattery": "🔴 **The %1 computer's battery is currently below 20%, please plug in the charger as soon as possible.**"
+        "lowBattery": "🔴 **The %1 computer's battery is currently below 20%, please plug in the charger as soon as possible.**",
+        "permissive": "Permissive mode is enabled, anyone having permission to use this BOT will be able to stop your session."
     },
     "notifications": {
         "starting": "%1 is requesting to start %2 on this computer. The physical keyboard and mouse will also be locked to prevent external interferences.",
