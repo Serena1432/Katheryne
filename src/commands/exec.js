@@ -21,7 +21,7 @@ module.exports.config = {
  */
 module.exports.run = async function(client, message, args) {
     if (!args[0]) return Katheryne.reply(message, Language.strings.noArguments.format(Language.strings.command));
-    var interactive = false, tags = ["interactive", "notimeout"];
+    var interactive = false, notimeout = false, tags = ["interactive", "notimeout"];
     for (var i = 0; i < tags.length; i++) {
         var tag = tags[i];
         if (args.includes(`-${tag}`)) {

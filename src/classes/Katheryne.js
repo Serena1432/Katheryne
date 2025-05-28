@@ -99,7 +99,7 @@ var Katheryne = {
      * @param {any} value Event data
      */
     sendEvent: function(name, value) {
-        Katheryne.debug(`Katheryne.sendEvent(): Sending data ${data} to event ${name}`);
+        Katheryne.debug(`Katheryne.sendEvent(): Sending data ${value} to event ${name}`);
         Katheryne._events[name] = value;
     },
     /**
