@@ -40,7 +40,7 @@ module.exports.run = async function(client, message, args) {
         for (var i = 0; i < runningApps.length; i++) {
             var app = runningApps[i];
             await Katheryne.addLog(msg, Language.strings.exit.stopping.format(app.name));
-            await Computer.killProcess(app.process);
+            try {await Computer.killProcess(app.process)} catch {}
         }
         await AfterEndHook(msg, client);
         SessionManager.delete("currentUser");
