@@ -26,7 +26,7 @@ module.exports.config = {
 module.exports.run = async function(client, message, args) {
     var runningApps = await WhitelistedApps.running(), author = Katheryne.author(message);
     if (!Steam.isRunning() && !runningApps.length) return Katheryne.reply(message, {content: Language.strings.exit.notRunning});
-    var currentUser = SessionManager.get("currentUser");
+    var currentUser = SessionManager.get("currentUser"), steamUser = SessionManager.get("steamUser");
     if (currentUser && currentUser != author.id && client.config.owner_id != author.id) return Katheryne.reply(message, {content: Language.strings.occupied});
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
@@ -38,8 +38,13 @@ module.exports.run = async function(client, message, args) {
             await Katheryne.addLog(msg, Language.strings.exit.stopping.format(app.name));
             try {await Computer.killProcess(app.process)} catch {}
         }
+        await Katheryne.addLog(msg, Language.strings.logs.saveUserLS.format(steamUser));
+        await WhitelistedApps.saveLocalStorage(steamUser);
+        await Katheryne.addLog(msg, Language.strings.logs.loadOriginalLS);
+        await WhitelistedApps.loadLocalStorage();
         await AfterEndHook(msg, client);
         SessionManager.delete("currentUser");
+        SessionManager.delete("steamUser");
         await Katheryne.addLog(msg, Language.strings.logs.stopSuccess);
     }
     catch (err) {

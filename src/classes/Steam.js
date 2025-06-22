@@ -2,7 +2,7 @@ const config = require("../../config/steam.json");
 const loggingConfig = require("../../config/logging.json");
 const Computer = require("./Computer");
 const child_process = require("child_process");
-const fs = require("fs");
+const fs = require("fs-extra")
 const path = require("path");
 const Katheryne = require("./Katheryne");
 

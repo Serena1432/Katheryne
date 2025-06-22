@@ -45,17 +45,28 @@ module.exports.run = async function(client, message, args) {
         ]});
     }
     if (Steam.isRunning() || (await WhitelistedApps.running()).length) return Katheryne.reply(message, {content: Language.strings.logs.alreadyRunning});
-    var app = WhitelistedApps.get(args.join(" "));
+    var app = WhitelistedApps.get(args[0]), user = args[1], author = Katheryne.author(message), runAs = null;
+    if (user && client.users.cache.get(user)) {
+        runAs = user;
+        user = client.config.whitelist[user];
+    }
+    else user = user || client.config.whitelist[author.id] || client.config.steam.default_user;
     if (!app) return Katheryne.reply(message, {content: Language.strings.start.appNotFound.format(args.join(" "))});
-    var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing}), author = Katheryne.author(message);
+    var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
         if (!await CheckBeforeStartHook(msg, client, author, app)) return Katheryne.editMessage(msg, {content: Language.strings.logs.checkFailed});
         if (!await OwnerApprovalHook(msg, client, "start", author, true)) return Katheryne.editMessage(msg, {content: Language.strings.logs.ownerDeclined});
         Computer.sendNotification(Language.strings.notifications.starting.format(author.displayName, app.name), client.user.displayName);
         if (permissive) await Katheryne.addLog(msg, Language.strings.logs.permissive);
+        if (runAs) await Katheryne.addLog(msg, Language.strings.logs.runAs.format(client.users.cache.get(runAs).username));
         await BeforeStartHook(msg, client, app);
+        await Katheryne.addLog(msg, Language.strings.logs.saveOriginalLS);
+        await WhitelistedApps.saveLocalStorage();
+        await Katheryne.addLog(msg, Language.strings.logs.loadUserLS.format(user));
+        await WhitelistedApps.loadLocalStorage(user);
         await Katheryne.addLog(msg, Language.strings.logs.startingApp.format(app.name));
-        if (!permissive) SessionManager.set("currentUser", author.id);
+        SessionManager.set("steamUser", user);
+        if (!permissive) SessionManager.set("currentUser", runAs || author.id);
         Computer.spawnAsUser("bash", ["-c", app.command], true);
     }
     catch (err) {

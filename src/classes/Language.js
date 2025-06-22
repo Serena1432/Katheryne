@@ -1,5 +1,5 @@
 const path = require("path");
-const fs = require("fs");
+const fs = require("fs-extra")
 const Katheryne = require("./Katheryne");
 const languageFolder = path.resolve("./src/strings");
 

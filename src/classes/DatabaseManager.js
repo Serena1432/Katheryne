@@ -1,5 +1,5 @@
 const path = require("path");
-const fs = require("fs");
+const fs = require("fs-extra")
 
 const folderPath = path.resolve(`${__dirname}/../../database`);
 if (!fs.existsSync(folderPath)) fs.mkdirSync(folderPath, {recursive: true});

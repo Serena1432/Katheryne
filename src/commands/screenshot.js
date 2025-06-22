@@ -5,7 +5,7 @@ const Computer = require("../classes/Computer");
 const Steam = require("../classes/Steam");
 const WhitelistedApps = require("../classes/WhitelistedApps").WhitelistedAppManager;
 const path = require("path");
-const fs = require("fs");
+const fs = require("fs-extra")
 
 module.exports.config = {
     name: "screenshot",

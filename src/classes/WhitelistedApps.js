@@ -4,14 +4,16 @@
  * @property {string} name Display name to be displayed in the BOT status and statistics
  * @property {string} alias Shortened alias for members to use with the start command
  * @property {string} command Command to be executed after using the start command
+ * @property {string} localStorage LocalStorage/Config folder
  * @property {string} screenshot In-game screenshot folder to be monitored
  * @property {string} channel Discord channel ID for in-game screenshots
  */
 
 const Computer = require("./Computer");
-const fs = require("fs");
+const fs = require("fs-extra")
 const path = require("path");
 const Katheryne = require("./Katheryne");
+const tar = require("tar");
 
 class WhitelistedApp {
     /**
@@ -23,11 +25,13 @@ class WhitelistedApp {
         this.alias = "";
         this.command = "";
         this.screenshot = "";
+        this.localStorage = "";
         this.channel = "";
         this._oldScreenshots = [];
         var keys = Object.keys(data);
         for (var i = 0; i < keys.length; i++) this[keys[i]] = data[keys[i]];
         this.initializeScreenshots();
+        if (!fs.existsSync(path.resolve(this.localStorage))) fs.mkdirSync(path.resolve(this.localStorage), {recursive: true});
     }
     /**
      * Check whether this app is running or not.
@@ -40,7 +44,8 @@ class WhitelistedApp {
      * Start this app.
      * @returns {Promise<any>}
      */
-    start() {
+    start(username = "") {
+        var command = command[username] || command.default;
         Katheryne.debug(`WhitelistedApps.start(): Starting ${this.name} with env: ${JSON.stringify(process.env)}`);
         return Computer.exec(this.command);
     }
@@ -78,6 +83,43 @@ class WhitelistedApp {
         if (newScreenshots.length) Katheryne.debug(`WhitelistedApps.monitorScreenshot(): New screenshots from ${this.name}: ${newScreenshots.join(", ")}`);
         return newScreenshots.map(file => path.join(screenshotPath, file));
     }
+    /**
+     * Save the current LocalStorage folder to a .tar file, separated by Steam username
+     * @param {string} username Steam username
+     */
+    async saveLocalStorage(username = "") {
+        if (!this.localStorage) return;
+        var tarPath = path.resolve(`./database/${this.alias}_localStorage_${username}.tar`),
+            lsPath = path.resolve(this.localStorage);
+        await tar.c({
+            file: tarPath,
+            cwd: lsPath
+        }, ["."]);
+    }
+    /**
+     * Load the saved LocalStorage folder back to original LocalStorage folder. If not exist, copy a new one from the original
+     * @param {string} username Steam username
+     */
+    async loadLocalStorage(username = "") {
+        if (!this.localStorage) return;
+        var tarPath = path.resolve(`./database/${this.alias}_localStorage_${username}.tar`),
+            lsPath = path.resolve(this.localStorage), skipExtract = false;
+        if (!fs.existsSync(tarPath)) {
+            var originalTar = path.resolve(`./database/${this.alias}_localStorage_.tar`);
+            if (fs.existsSync(originalTar)) await fs.promises.copyFile(originalTar, tarPath);
+            else {
+                await this.saveLocalStorage(username);
+                skipExtract = true;
+            }
+        }
+        if (skipExtract) return;
+        await fs.emptyDir(lsPath);
+        await tar.x({
+            file: tarPath,
+            cwd: lsPath,
+            strip: 0
+        });
+    }
 }
 
 const WhitelistedAppManager = {
@@ -111,8 +153,31 @@ const WhitelistedAppManager = {
         }
         return runningApps;
     },
+    /**
+     * @returns {WhitelistedApp[]}
+     */
     toJSON: function() {
         return Array.from(this.apps.values());
+    },
+    /**
+     * Save the current LocalStorage folder in all games to a .tar file, separated by Steam username
+     * @param {string} username Steam username
+     */
+    saveLocalStorage: async function(username = "") {
+        var apps = this.toJSON();
+        for (var i = 0; i < apps.length; i++) {
+            await apps[i].saveLocalStorage(username);
+        }
+    },
+    /**
+     * Save the current LocalStorage folder in all games to a .tar file, separated by Steam username
+     * @param {string} username Steam username
+     */
+    loadLocalStorage: async function(username = "") {
+        var apps = this.toJSON();
+        for (var i = 0; i < apps.length; i++) {
+            await apps[i].loadLocalStorage(username);
+        }
     }
 }
 

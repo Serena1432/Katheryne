@@ -169,7 +169,11 @@
         "steamDisconnected": "⬅️ **Disconnected the computer %1 from Steam.**",
         "highTemperature": "🔴 **The %2 computer's %1 temperature is currently too high (%3°C), you should exit the game immediately to prevent further harm to the computer.",
         "lowBattery": "🔴 **The %1 computer's battery is currently below 20%, please plug in the charger as soon as possible.**",
-        "permissive": "Permissive mode is enabled, anyone having permission to use this BOT will be able to stop your session."
+        "permissive": "Permissive mode is enabled, anyone having permission to use this BOT will be able to stop your session.",
+        "saveOriginalLS": "Saving the computer owner's game login information before switching...",
+        "loadOriginalLS": "Loading back the computer owner's game login information...",
+        "saveUserLS": "Saving the Steam user %1's login information...",
+        "loadUserLS": "Loading the Steam user %1's login information..."
     },
     "notifications": {
         "starting": "%1 is requesting to start %2 on this computer. The physical keyboard and mouse will also be locked to prevent external interferences.",

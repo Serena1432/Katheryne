@@ -17,7 +17,7 @@ const client = new Client({intents: [
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMessages
 ]});
-const fs = require("fs");
+const fs = require("fs-extra")
 const path = require("path");
 const InteractionManager = require("./classes/InteractionManager");
 const CommandManager = require("./classes/CommandManager");

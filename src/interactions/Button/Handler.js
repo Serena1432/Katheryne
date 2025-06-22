@@ -27,6 +27,6 @@ module.exports = (client, interaction) => {
         }
     }
     if (command.config.ownerOnly && interaction.user.id != client.config.owner_id) return interaction.reply({content: Language.strings.ownerOnly, ephemeral: true});
-    if (interaction.user.id != client.config.owner_id && !client.config.whitelist.includes(interaction.user.id)) return interaction.reply({content: Language.strings.notInWhitelist});
+    if (interaction.user.id != client.config.owner_id && !Object.keys(client.config.whitelist).includes(interaction.user.id)) return interaction.reply({content: Language.strings.notInWhitelist});
     command.run(client, interaction);
 }

@@ -3,16 +3,26 @@
         "process": "GenshinImpact.exe",
         "name": "Genshin Impact",
         "alias": "genshin",
-        "command": "/home/murasame/StartGenshin_Diamyth.sh",
+        "command": {
+            "default": "/home/murasame/StartGenshin.sh",
+            "harpaedieheilige": "/home/murasame/StartGenshin_Diamyth.sh",
+            "miikenaeko1": "/home/murasame/StartGenshin_Shizuku.sh"
+        },
         "screenshot": "/mnt/GenshinImpact/ScreenShot",
+        "localStorage": "/mnt/GenshinImpact/GenshinImpact_Data/SDKCaches/HoYoPass",
         "channel": "1191968934635774034"
     },
     {
         "process": "StarRail.exe",
         "name": "Honkai: Star Rail",
         "alias": "hsr",
-        "command": "/home/murasame/StartHSR_Diamyth.sh",
+        "command": {
+            "default": "/home/murasame/StartHSR.sh",
+            "harpaedieheilige": "/home/murasame/StartHSR_Diamyth.sh",
+            "miikenaeko1": "/home/murasame/StartHSR_Shizuku.sh"
+        },
         "screenshot": "/mnt/StarRail/StarRail_Data/ScreenShots",
+        "localStorage": "/mnt/StarRail/StarRail_Data/SDKCaches/HoYoPass",
         "channel": "1191968934635774034"
     }
 ]
