@@ -26,6 +26,7 @@
     },
     "start": {
         "description": "Start an application from the whitelist.",
+        "user": "Start the application as another Steam/Discord user. Only for BOT owner.",
         "alias": "The application's alias in the whitelist.",
         "embedTitle": "List of whitelisted applications",
         "embedDescription": "Here is a list of whitelisted applications that the BOT owner allows everyone to run:\n\n%1\n\nUse the `%2start <alias>` command to start an application.",
@@ -33,7 +34,7 @@
     },
     "steam": {
         "description": "Start Steam on the computer.",
-        "user": "Log into Steam as another Steam user on the computer. Only for BOT owner.",
+        "user": "Log into Steam as another Steam/Discord user. Only for BOT owner.",
         "noSufficientPermission": "❌ **Only the BOT owner can log into Steam as another Steam user.**",
         "starting": "Starting Steam...",
         "stopping": "Exitting Steam...",
@@ -170,6 +171,7 @@
         "highTemperature": "🔴 **The %2 computer's %1 temperature is currently too high (%3°C), you should exit the game immediately to prevent further harm to the computer.",
         "lowBattery": "🔴 **The %1 computer's battery is currently below 20%, please plug in the charger as soon as possible.**",
         "permissive": "Permissive mode is enabled, anyone having permission to use this BOT will be able to stop your session.",
+        "runAs": "Starting with %1's specified information.",
         "saveOriginalLS": "Saving the computer owner's game login information before switching...",
         "loadOriginalLS": "Loading back the computer owner's game login information...",
         "saveUserLS": "Saving the Steam user %1's login information...",

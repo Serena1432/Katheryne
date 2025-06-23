@@ -8,6 +8,10 @@ module.exports = {
     .addStringOption(option => option
         .setName("alias")
         .setDescription(Language.strings.start.alias)
+    )
+    .addStringOption(option => option
+        .setName("user")
+        .setDescription(Language.strings.start.user)
     ),
     config: {
         nodm: true,
@@ -22,8 +26,8 @@ module.exports = {
      * @returns 
      */
     run: async (client, interaction) => {
-        const alias = interaction.options.getString("alias") || "";
+        const alias = interaction.options.getString("alias") || "", user = interaction.options.getString("user") || "";
         await interaction.deferReply();
-        await client.commands.get("start").run(client, interaction, alias.split(" "));
+        await client.commands.get("start").run(client, interaction, [alias, user]);
     }
 }
