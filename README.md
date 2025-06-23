@@ -40,6 +40,15 @@ Intel CPUs + NVIDIA GPUs are also recommended. I haven't tested AMD CPUs/GPUs, s
 ⚠️ Moonlight and other tools can be launched via remote execution but are **not officially supported**—you have to run the commands manually.<br>
 ❌ Parsec is not supported (no Linux hosting support).
 
+### Will there be support for other operating systems?
+
+If I ever decide to switch back to Windows from Linux, I might consider adding support for it. However, implementing Katheryne on Windows would be much more complex, and some features may never work due to Windows’ more restricted nature (for example, turning off the display completely — I haven’t found any reliable method for that yet).
+
+As for macOS? No chance. It’s clearly not designed for gaming.
+
+> 💡 **Fun Fact:**  
+> Early versions of Katheryne were actually made for Windows only. But after constantly running into issues with my Windows installation, I switched to Linux — and it turned out to be a much better fit for Katheryne’s design and goals.
+
 ## ✨ Features
 
 These features can be used directly in a Discord server, provided you have the required permissions:
