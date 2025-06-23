@@ -4,19 +4,31 @@
 
 Currently, it only supports Linux, with both X11 and Wayland compatibility. KDE Plasma is recommended since it's my development environment.
 
-## Disclaimer
+## ⚠️ Disclaimer
 
 This BOT prioritizes simplicity and convenience over security and is intended for personal or small-scale use (e.g., providing a "cloud computer" for friends or remotely managing your own device). **It is not suitable for large public servers, as I cannot guarantee security at scale.**
 
 Only grant permissions to trusted individuals. **USE THIS PROGRAM AT YOUR OWN RISK. I am not responsible for any damage resulting from its use.**
 
-## Purpose
+## 🎯 Purpose
 
 I originally created this BOT in 2023 to let my friends easily connect to my computer and use features remotely without relying on traditional remote control applications. It also allows me to manage my own computer while away.
 
 The initial implementation worked well, but I lost the original code recently. To prevent this from happening again, I decided to rebuild it and make it open-source.
 
-## Support
+## 🙋‍♂️ Who is this for?
+
+Katheryne is intended for **Linux power users** who want to remotely manage or share a gaming PC via Discord - with full control over sessions, user isolation, and system behavior.
+
+It's best suited for:
+
+- Self-hosters running a shared or personal "cloud gaming" setup
+- Users comfortable with Linux, Wine, and command-line configuration
+- Developers or tinkerers interested in Discord-based automation
+
+This project is **not recommended** for casual users, public servers, or non-Linux systems. This is a personal tool made open-source for learning and experimentation.
+
+## 💻 Support
 
 Katheryne works best with **KDE Plasma 6 on Linux** but is compatible with any distribution using X11 or Wayland.
 
@@ -28,7 +40,7 @@ Intel CPUs + NVIDIA GPUs are also recommended. I haven't tested AMD CPUs/GPUs, s
 ⚠️ Moonlight and other tools can be launched via remote execution but are **not officially supported**—you have to run the commands manually.<br>
 ❌ Parsec is not supported (no Linux hosting support).
 
-## Features
+## ✨ Features
 
 These features can be used directly in a Discord server, provided you have the required permissions:
 
@@ -97,7 +109,7 @@ This is the list of commands requiring root permissions:
 
 For security reasons, you have to find a way to allow these commands for your user by yourself.
 
-## Required applications
+## 📦 Required applications
 
 ### General
 
@@ -119,9 +131,9 @@ For security reasons, you have to find a way to allow these commands for your us
 
 * `intel-gpu-tools`
 
-## Usage
+## 🚀 Usage
 
-### Installation
+### 🧰 Installation
 
 * Clone this BOT using this command below or [download the latest source code](../../archive/refs/heads/main.zip).
 
@@ -143,7 +155,7 @@ npm install
 
 * Install all required applications listed in the **Required applications** section above, depends on your distro and your need.
 
-### Configuration
+### ⚙️ Configuration
 
 * Copy the `.env.sample` file to a new one and rename it to `.env`, then edit the file and specify the token with the `TOKEN` variable.
 
@@ -215,7 +227,7 @@ Contains the logging configuration.
 | high_temperature | `string` | Whether to send a log when the computer temperature is high. |
 | low_battery | `string` | Whether to send a log when the computer battery is low. |
 
-### Starting
+### 🔧 Starting
 
 #### Running Katheryne as normal user
 
@@ -253,7 +265,7 @@ You can of course use your Desktop Environment's Autostart settings (or `.config
 
 `pm2` is not recommended in my opinion due to it invoking the BOT before starting the DE, so it may cause some unwanted issues.
 
-### Special features
+### 🧩 Special features
 
 These are advanced features that require additional understanding and specific command arguments.
 
@@ -351,7 +363,7 @@ Starting with s1432_nbhz's specified information.
 
 Add the `-permissive` argument to the startup command to allow **all whitelisted users** to stop the session. This is useful when a session is shared among multiple users.
 
-## Known issues
+## 🐞 Known issues
 
 I'm not a skilled Linux expert, so issues are unable to avoid. These are the known issues that I've experienced myself, and I'm not sure if these also work for you.
 
@@ -371,6 +383,12 @@ This issue cannot be fully resolved since Katheryne cannot interact with the sys
 
 To work around this, you’ll need to create a shutdown hook script that extracts the `${alias}_localStorage_.tar` files back into their respective LocalStorage/Config folders before the system powers off.
 
-## License
+## 🧩 Contributing
+
+This project is open for **learning, exploration, and improvement**. While Katheryne is primarily a personal project, contributions are welcome as long as they respect its purpose and limitations.
+
+If you’d like to contribute fixes, improvements, or documentation, please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines before submitting a pull request.
+
+## 📝 License
 
 This BOT is licensed under the **MIT License**. You are free to use, modify, and distribute it, including for commercial purposes.
