@@ -43,8 +43,8 @@ These features can be used directly in a Discord server, provided you have the r
 - [X] Remotely execute any commands on the computer (for BOT owner only)
 - [X] Notify when the computer isn't plugged in, the battery is low, temperature is high or a driver error, requiring physical intervention
 - [X] Check the connection between the user and computer through Steam Remote Play (experimental, may not work on some devices)
-- [X] LocalStorage/Config folder separation support for each user
-- [X] Assigning different Steam account for each Discord user
+- [X] [LocalStorage/Config folder separation support for each user](#localstorageconfig-data-separation-support)
+- [X] [Assigning different Steam account for each Discord user](#assigning-a-different-steam-account-for-each-user)
 
 > [!NOTE]
 > Any changes with computer settings (physical input lock, brightness, volume, etc.) will be back to normal after restarting the computer. So if you encounter any errors when using the BOT, you just need to restart the computer.
@@ -200,8 +200,8 @@ Is a JSON array containing objects with these properties:
 | name | `string` | Display name to be displayed in the BOT status and statistics |
 | alias | `string` | Shortened alias for members to use with the `start` command |
 | command | `object` | An object with each property containing the target Steam account (key) with assigned start command (value), for example `{"default": "/home/murasame/StartGenshin.sh"}`. Use `default` to assign the default command. See [`config.sample/whitelisted_apps.json`](config.sample/whitelisted_apps.json) for more information. |
-| screenshot | `string` | In-game screenshot folder to be monitored. Leave empty if not supported. |\
-| localStorage | `string` | The game's LocalStorage/config folder for separating by Steam account username. See LocalStorage/Config separation support for more information. |
+| screenshot | `string` | In-game screenshot folder to be monitored. Leave empty if not supported. |
+| localStorage | `string` | The game's LocalStorage/config folder for separating by Steam account username. See [LocalStorage/Config data separation support](#localstorageconfig-data-separation-support) for more information. |
 | channel | `string` | Discord channel ID for in-game screenshots. Unused if `screenshot` isn't set. |
 
 #### `config/logging.json`
