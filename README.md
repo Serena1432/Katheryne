@@ -4,39 +4,6 @@
 
 Currently, it only supports Linux, with both X11 and Wayland compatibility. KDE Plasma is recommended since it's my development environment.
 
-## Table of Contents
-
-- [Katheryne](#katheryne)
-  - [Disclaimer](#disclaimer)
-  - [Purpose](#purpose)
-  - [Support](#support)
-    - [Supported Remote Play Applications](#supported-remote-play-applications)
-  - [Features](#features)
-    - [Commands coverage](#commands-coverage)
-    - [Running root commands](#running-root-commands)
-      - [List of root commands](#list-of-root-commands)
-  - [Required applications](#required-applications)
-    - [General](#general)
-    - [Taking screenshots in Wayland](#taking-screenshots-in-wayland)
-    - [Intel GPUs](#intel-gpus)
-  - [Usage](#usage)
-    - [Installation](#installation)
-    - [Configuration](#configuration)
-      - [`config/main.json`](#configmainjson)
-      - [`config/computer.json`](#configcomputerjson)
-      - [`config/steam.json`](#configsteamjson)
-      - [`config/whitelisted_apps.json`](#configwhitelisted_appsjson)
-      - [`config/logging.json`](#configloggingjson)
-    - [Starting](#starting)
-      - [Running Katheryne as normal user](#running-katheryne-as-normal-user)
-      - [Enable further debugging](#enable-further-debugging)
-      - [Running Katheryne as root (not recommended)](#running-katheryne-as-root-not-recommended)
-      - [Autostart](#autostart)
-  - [Known issues](#known-issues)
-    - [Computer crashes after starting game while BOT is running](#computer-crashes-after-starting-game-while-bot-is-running)
-    - [Game crashes when locking/unlocking physical inputs on X11](#game-crashes-when-lockingunlocking-physical-inputs-on-x11)
-  - [License](#license)
-
 ## Disclaimer
 
 This BOT prioritizes simplicity and convenience over security and is intended for personal or small-scale use (e.g., providing a "cloud computer" for friends or remotely managing your own device). **It is not suitable for large public servers, as I cannot guarantee security at scale.**
