@@ -145,7 +145,7 @@ npm install
 
 ### Configuration
 
-* Copy the `.env` file to a new one and rename it to `.env`, then edit the file and specify the token with the `TOKEN` variable.
+* Copy the `.env.sample` file to a new one and rename it to `.env`, then edit the file and specify the token with the `TOKEN` variable.
 
 * Copy the `config.sample` folder into a new one, and rename it to `config`. After that, config the BOT yourself to your liking based on the instructions below.
 
