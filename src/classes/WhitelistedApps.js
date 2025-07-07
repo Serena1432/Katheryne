@@ -127,12 +127,13 @@ const WhitelistedAppManager = {
     /**
      * Add new whitelisted apps
      * @param {WhitelistedAppInfo[]} data Whitelisted apps data
+     * @param {bool} outputConsole Whether to output the application name to the console
      */
-    add: function(data) {
+    add: function(data, outputConsole = true) {
         for (var i = 0; i < data.length; i++) {
             var app = new WhitelistedApp(data[i]);
             this.apps.set(data[i].alias, app);
-            console.log(`Added ${app.name} to the whitelisted apps.`);
+            if (outputConsole) console.log(`Added ${app.name} to the whitelisted apps.`);
         }
     },
     /**
