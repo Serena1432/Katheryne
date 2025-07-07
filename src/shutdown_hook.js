@@ -5,6 +5,7 @@ const wlAppsConfig = require("../config/whitelisted_apps.json");
 WhitelistedApps.add(wlAppsConfig, false);
 
 async function main() {
+    SessionManager.initialize();
     var user = SessionManager.get("steamUser");
     if (!user) return console.log(`No steamUser is active.`);
     console.log(`Saving ${user}'s local storage data...`);
