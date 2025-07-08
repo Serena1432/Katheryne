@@ -9,7 +9,7 @@ async function main() {
     var user = SessionManager.get("steamUser");
     if (!user) return console.log(`No steamUser is active.`);
     console.log(`Saving ${user}'s local storage data...`);
-    await WhitelistedApps.saveLocalStorage(steamUser);
+    await WhitelistedApps.saveLocalStorage(user);
     console.log(`Loading original local storage data...`);
     await WhitelistedApps.loadLocalStorage();
     console.log(`Clearing session data...`);
