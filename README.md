@@ -388,9 +388,63 @@ Try setting `evtest_on_x11` in `config/computer.json` to let the lock/unlock com
 
 ### Original LocalStorage/Config data won’t be restored if shutdown without using Katheryne
 
-This issue cannot be fully resolved since Katheryne cannot interact with the system during a shutdown unless the `shutdown` command is used.
+You just need to make the computer run `npm run shutdown_hook` before shutting down the computer. For example:
 
-To work around this, you’ll need to create a shutdown hook script that extracts the `${alias}_localStorage_.tar` files back into their respective LocalStorage/Config folders before the system powers off.
+* Create a shell script running the shutdown hook first, for example `/usr/local/bin/katheryne-shutdown-hook.sh`:
+
+```sh
+#!/bin/bash
+cd path/to/Katheryne
+/usr/bin/npm run shutdown_hook
+```
+
+* Save it and make the `.sh` executable:
+
+```sh
+chmod +x /usr/local/bin/katheryne-shutdown-hook.sh
+```
+
+* Create a systemd service in `/etc/systemd/system`, for example `katheryne-shutdown-hook.service`:
+
+```ini
+[Unit]
+Description=Katheryne shutdown hook
+DefaultDependencies=no
+Before=poweroff.target shutdown.target reboot.target halt.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/katheryne-shutdown-hook.sh
+RemainAfterExit=true
+
+[Install]
+WantedBy=poweroff.target shutdown.target reboot.target halt.target
+```
+
+> [!IMPORTANT]
+> If the localStorage folder is in an external mounted drives, you have to include them in `katheryne-shutdown-hook.service`, for example:
+>
+> ```ini
+> [Unit]
+> Description=Katheryne shutdown hook
+> DefaultDependencies=no
+> Before=umount.target poweroff.target shutdown.target reboot.target halt.target
+> RequiresMountsFor=/mnt/secondarydrive
+> ```
+
+* Save it, reload the daemon (or restart the computer) and enable the service:
+
+```sh
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl enable katheryne-shutdown-hook.service
+```
+
+* You can test by restarting the computer and checking if it runs properly:
+
+```sh
+journalctl -b -1 -u katheryne-shutdown-hook.service
+```
 
 ## 🧩 Contributing
 
