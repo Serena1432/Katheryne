@@ -7,6 +7,7 @@ const Katheryne = require("../Katheryne");
 const isAdmin = require("is-admin");
 const nircmd = require("nircmd");
 const pty = require("@lydell/node-pty");
+const toasted = require('toasted-notifier');
 
 var Computer = {
     _inputLockInterval: null,
@@ -308,7 +309,11 @@ var Computer = {
      * @param {number} time Notification timeout in miliseconds. Default is 15000.
      */
     sendNotification: async function(description, title = "", time = 15000) {
-        return await nircmd(`trayballoon "${title.replaceAll("\"", "\\\"")}" "${description.replaceAll("\"", "\\\"")}" "" ${time}`);
+        toasted.notify({
+            title,
+            message: description,
+            sound: true
+        });
     },
     /**
      * Focus on a window with specific title.
