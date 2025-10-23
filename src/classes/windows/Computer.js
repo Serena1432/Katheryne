@@ -287,7 +287,7 @@ var Computer = {
      * @param {string} process Process name
      */
     killProcess: function(process) {
-        return this.exec(`taskkill /f ${isNaN(process) ? `/im "${process}.exe"` : `/pid ${process}`}`);
+        return this.exec(`taskkill /f ${isNaN(process) ? `/im "${(process.includes(".exe")) ? `${process}` : `${process}.exe`}"` : `/pid ${process}`}`);
     },
     /**
      * Check if a process is running
