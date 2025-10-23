@@ -76,15 +76,15 @@ Most of the features work best on Linux.
 #### By operating systems
 
 | Feature | Linux (X11) | Linux (Wayland) | Windows |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | Take screenshots | ✅ | ⭕ | ✅ (1) |
 | View computer stats | ✅ | ✅ | ✅ (2) |
-| Lock/disable physical input | ✅ | 🔴 | X |
+| Lock/disable physical input | ✅ | 🔴 | ❌ |
 | Change screen brightness | 🔴 | 🔴 | ✅ (3) |
 | Mute the host audio | ✅ | ✅ | ✅ |
 | Refocus the game window | ✅ | ❌ | ✅ |
 | Remotely shutdown the computer | 🔴 | 🔴 | ✅ |
-| Set the fan speed | ❓ | ❓ |
+| Set the fan speed | 🔴 | 🔴 | ❌ |
 | Set the CPU governor | 🔴 | 🔴 | ❌ |
 | Check the running process | ✅ | ✅ | ✅ |
 
