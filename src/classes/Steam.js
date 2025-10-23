@@ -25,14 +25,14 @@ var Steam = {
         if (user) args.push(`-login`, user);
         if (config.wayland_enable_pipewire && Computer.xdgSessionType == "wayland") args.push("-pipewire");
         Katheryne.debug(`Steam.start(): Starting Steam with env: ${JSON.stringify(process.env)}`);
-        this.process = Computer.spawnAsUser(`steam`, args, config.detach, {
+        this.process = Computer.spawnAsUser(config.executable || `steam`, args, config.detach, {
             env: process.env
         });
         this.startMonitor();
     },
     stop: function() {
         this.stopMonitor();
-        Computer.exec(`killall steam`);
+        Computer.killProcess(`steam`);
         this.process = null;
     },
     isRunning: function() {
@@ -79,7 +79,7 @@ var Steam = {
         if (!loggingConfig.steam_connection) return;
         if (this._monitorProcess) {
             Katheryne.debug(`Steam.stopMonitor(): Killed monitor process with process ID ${this._monitorProcess.pid}`);
-            Computer.exec(`pkill -P ${this._monitorProcess.pid}`);
+            Computer.killProcess(`${this._monitorProcess.pid}`);
             this._monitorProcess = null;
         }
     },

@@ -26,7 +26,7 @@ module.exports = async function(message, client, app) {
     for (var process of client.config.computer.close_processes) try {await Computer.killProcess(process)} catch {}
     if (client.config.computer.auto_mute) {
         await Katheryne.addLog(message, Language.strings.logs.muteAudio);
-        Computer.setVolume(0);
+        await Computer.setVolume(0);
     }
     if (client.config.computer.auto_bluetooth_off) {
         await Katheryne.addLog(message, Language.strings.logs.disablingBluetooth);
@@ -42,15 +42,4 @@ module.exports = async function(message, client, app) {
     }
     await Katheryne.addLog(message, Language.strings.logs.startMonitoring);
     ScreenshotMonitor.start(WhitelistedAppManager.toJSON());
-    if (Computer.checkServiceActive("warp-svc", false)) {
-        await Katheryne.addLog(message, Language.strings.logs.disablingWARP);
-        try {await Computer.execAsUser(`warp-cli disconnect`)} catch (err) {
-            await Katheryne.addLog(message, err.message);
-        }
-    }
-    if (Computer.isProcessRunning("kdeconnectd")) {
-        SessionManager.set("kdeConnect", true);
-        await Katheryne.addLog(message, Language.strings.logs.disablingKDEConnect);
-        await Computer.killProcess("kdeconnectd");
-    }
 }

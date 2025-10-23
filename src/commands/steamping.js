@@ -29,7 +29,7 @@ module.exports.run = async function(client, message, args) {
     if (sessions[author.id]) {
         var session = sessions[author.id];
         clearInterval(session.interval);
-        Computer.exec(`pkill -P ${session.pid}`);
+        Computer.killProcess(`${session.pid}`);
         delete sessions[author.id];
         return Katheryne.reply(message, {content: Language.strings.steamping.stopped});
     }
@@ -55,7 +55,7 @@ module.exports.run = async function(client, message, args) {
         session.interval = setInterval(function() {
             if (new Date().getTime() - time >= 30000) {
                 clearInterval(session.interval);
-                Computer.exec(`pkill -P ${session.pid}`);
+                Computer.killProcess(`${session.pid}`);
                 Katheryne.editMessage(msg, {content: Language.strings.steamping.timeout});
                 delete sessions[author.id];
             }
