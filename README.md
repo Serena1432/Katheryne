@@ -92,13 +92,13 @@ Most of the features work best on Linux.
 * (2) Viewing Intel GPUs' statistics isn't supported yet.
 * (3) It's impossible (for me) to turn off the display completely on Windows. I'm using `nircmd` to handle the display toggle, but the display will be automatically on when moving the mouse or pressing a key.
 
-> [!TIP]
-> On Windows, running the BOT with administrator permissions is **recommended, but not required**.
-
 ✅ Fully supported without root permissions<br>
 🔴 Supported but requires root permissions<br>
 ⭕ Supported but not tested<br>
 ❌ Totally not supported
+
+> [!TIP]
+> On Windows, running the BOT with administrator permissions is **recommended, but not required**.
 
 Currently, AMD CPUs/GPUs are not properly supported as I don't have any AMD computers.
 
