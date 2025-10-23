@@ -390,7 +390,18 @@ Add the `-permissive` argument to the startup command to allow **all whitelisted
 
 ## 🐞 Known issues
 
-I'm not a skilled Linux expert, so issues are unable to avoid. These are the known issues that I've experienced myself, and I'm not sure if these also work for you.
+I'm not a skilled expert, so issues are unable to avoid. These are the known issues that I've experienced myself, and I'm not sure if these also work for you.
+
+### Windows-specific
+
+There are some known issues which only happen on Windows, but I haven't found the solutions yet:
+
+* Physical security features such as turning off the display completely or locking the physical input doesn't work on Windows. This is due to Windows' harsh restrictions.
+* I haven't found a way to set the CPU/GPU fan speed in Windows yet.
+* The captured screenshots will be cropped if the user sets the Display Size (DPI) to over 100%.
+* Some values in the `stats` and other statistics command will be undefined.
+* `exec` command will also output some gibberish characters (which are in fact, indication characters to set the command window colors).
+* Killing `steam.exe` alone without killing running games will have a big chance to have Steam auto restarting itself.
 
 ### Computer crashes after starting game while BOT is running
 
