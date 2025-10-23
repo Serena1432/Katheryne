@@ -545,6 +545,12 @@ var Computer = {
             cwd: process.env.HOME,
             env: process.env
         });
+    },
+    /**
+     * Shut the computer down.
+     */
+    shutdown: function() {
+        this.exec(`shutdown -h now`);
     }
 }
 
