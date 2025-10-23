@@ -29,7 +29,7 @@ module.exports.run = async function(client, message, args) {
     amount = Number(amount);
     var msg = await Katheryne.reply(message, {content: Language.strings.logs.preparing});
     try {
-        Computer.setVolume(amount);
+        await Computer.setVolume(amount);
         Katheryne.editMessage(msg, {content: Language.strings.volume.success.format(Computer.hostname, amount.toString())});
     }
     catch (err) {

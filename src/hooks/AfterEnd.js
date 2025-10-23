@@ -27,11 +27,6 @@ module.exports = async function(message, client, app) {
         await Katheryne.addLog(message, Language.strings.logs.enablingBluetooth);
         await Computer.setBluetooth(true);
     }
-    if (SessionManager.get("kdeConnect")) {
-        await Katheryne.addLog(message, Language.strings.logs.enablingKDEConnect);
-        Computer.spawnAsUser("kdeconnectd", [], true);
-        SessionManager.delete("kdeConnect");
-    }
     if (client.config.computer.auto_lock_input) {
         await Katheryne.addLog(message, Language.strings.logs.unlockingInput);
         Computer.unlockInput();

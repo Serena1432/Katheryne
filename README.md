@@ -2,7 +2,7 @@
 
 **Katheryne** is a work-in-progress Discord BOT designed for remote gameplay, computer management, and connectivity via Discord.
 
-Currently, it only supports Linux, with both X11 and Wayland compatibility. KDE Plasma is recommended since it's my development environment.
+Currently, it only supports Linux and Windows, which the latter is still in the early stage.
 
 ## ⚠️ Disclaimer
 
@@ -16,42 +16,43 @@ I originally created this BOT in 2023 to let my friends easily connect to my com
 
 The initial implementation worked well, but I lost the original code recently. To prevent this from happening again, I decided to rebuild it and make it open-source.
 
+In October 2025, I began to let my friend play in Windows because of instability (and restrictions) in Linux (because most of their games are Windows-exclusive). Therefore, I decided to port Katheryne into Windows (one more time).
+
 ## 🙋‍♂️ Who is this for?
 
-Katheryne is intended for **Linux power users** who want to remotely manage or share a gaming PC via Discord - with full control over sessions, user isolation, and system behavior.
+Katheryne is intended for **power users** who want to remotely manage or share a gaming PC via Discord - with full control over sessions, user isolation, and system behavior.
 
 It's best suited for:
 
 - Self-hosters running a shared or personal "cloud gaming" setup
-- Users comfortable with Linux, Wine, and command-line configuration
+- Users comfortable with command-line configuration
 - Developers or tinkerers interested in Discord-based automation
 
 This project is **not recommended** for casual users, public servers, or non-Linux systems. This is a personal tool made open-source for learning and experimentation.
 
 ## 💻 Support
 
-Katheryne works best with **KDE Plasma 6 on Linux** but is compatible with any distribution using X11 or Wayland.
+* Katheryne works best with **KDE Plasma 6 on Linux** but is compatible with any distribution using X11 or Wayland.
+
+* **Windows support is still in a very early stage**. Features are not guaranteed to work flawlessly, and bugs/glitches may happen anytime. However, most of the basic features still work as if it's running on Linux.
 
 Intel CPUs + NVIDIA GPUs are also recommended. I haven't tested AMD CPUs/GPUs, so be prepared for potential issues.
 
 ### Supported Remote Play Applications
 
-✅ Steam Link / Remote Play (official support)<br>
-⚠️ Moonlight and other tools can be launched via remote execution but are **not officially supported**—you have to run the commands manually.<br>
-❌ Parsec is not supported (no Linux hosting support).
+Currently, I only write some supporting features for **Steam Link / Remote Play**.
 
-### Will there be support for other operating systems?
+Moonlight and other tools can be launched via remote execution but are **not officially supported**, so you have to run the commands manually.
 
-If I ever decide to switch back to Windows from Linux, I might consider adding support for it. However, implementing Katheryne on Windows would be much more complex, and some features may never work due to Windows’ more restricted nature (for example, turning off the display completely — I haven’t found any reliable method for that yet).
+### Will there be support for macOS?
 
-As for macOS? No chance. It’s clearly not designed for gaming.
-
-> 💡 **Fun Fact:**  
-> Early versions of Katheryne were actually made for Windows only. But after constantly running into issues with my Windows installation, I switched to Linux — and it turned out to be a much better fit for Katheryne’s design and goals.
+No chance. macOS is clearly not designed for gaming, and playing Windows games on macOS is absolutely a nightmare.
 
 ## ✨ Features
 
-These features can be used directly in a Discord server, provided you have the required permissions:
+These features can be used directly in a Discord server, provided you have the required permissions.
+
+Most of the features work best on Linux.
 
 - [X] Run whitelisted applications remotely using commands/built-in integrations
 - [X] Take screenshots and monitor system stats
@@ -70,32 +71,40 @@ These features can be used directly in a Discord server, provided you have the r
 > [!NOTE]
 > Any changes with computer settings (physical input lock, brightness, volume, etc.) will be back to normal after restarting the computer. So if you encounter any errors when using the BOT, you just need to restart the computer.
 
-### Commands coverage
+### Platform commands coverage
 
-| Feature | X11 | Wayland | Intel | NVIDIA |
+#### By operating systems
+
+| Feature | Linux (X11) | Linux (Wayland) | Windows |
 | --- | --- | --- | --- | --- |
-| Take screenshots | ✅ | ⭕ | ✅ | ✅ |
-| View computer stats | ✅ | ✅ | 🔴| ✅ |
-| Lock/disable physical input | ✅ | 🔴 | ❓ | ❓ |
-| Change screen brightness | 🔴 | 🔴 | 🔴 | ⭕ |
-| Mute the host audio | ✅ | ✅ | ✅ | ⭕ |
-| Refocus the game window | ✅ | ❌ | ❓ | ❓ |
-| Remotely shutdown the computer | 🔴 | 🔴 | ❓ | ❓ |
-| Set the fan speed | ❓ | ❓ | 🔴 | 🔴 |
-| Set the CPU governor | 🔴 | 🔴 | 🔴 | ❓ |
-| Check the running process | ✅ | ✅ | ❓ | ❓ |
+| Take screenshots | ✅ | ⭕ | ✅ (1) |
+| View computer stats | ✅ | ✅ | ✅ (2) |
+| Lock/disable physical input | ✅ | 🔴 | X |
+| Change screen brightness | 🔴 | 🔴 | ✅ (3) |
+| Mute the host audio | ✅ | ✅ | ✅ |
+| Refocus the game window | ✅ | ❌ | ✅ |
+| Remotely shutdown the computer | 🔴 | 🔴 | ✅ |
+| Set the fan speed | ❓ | ❓ |
+| Set the CPU governor | 🔴 | 🔴 | ❌ |
+| Check the running process | ✅ | ✅ | ✅ |
+
+* (1) May experience cropping issues if display size is set to over than 100% (e.g. 125% or 150%).
+* (2) Viewing Intel GPUs' statistics isn't supported yet.
+* (3) It's impossible (for me) to turn off the display completely on Windows. I'm using `nircmd` to handle the display toggle, but the display will be automatically on when moving the mouse or pressing a key.
+
+> [!TIP]
+> On Windows, running the BOT with administrator permissions is **recommended, but not required**.
 
 ✅ Fully supported without root permissions<br>
 🔴 Supported but requires root permissions<br>
 ⭕ Supported but not tested<br>
-❌ Totally not supported<br>
-❓ Not related
+❌ Totally not supported
 
 Currently, AMD CPUs/GPUs are not properly supported as I don't have any AMD computers.
 
 *To protect privacy, some features will only be available when a **whitelisted game/application is running**.*
 
-### Running root commands
+### Running root commands (Linux)
 
 To run commands that require root permissions, you can do one of these ways below:
 
@@ -105,7 +114,7 @@ To run commands that require root permissions, you can do one of these ways belo
     * Steam and some games will have some glitches, and tends to have a higher ping when Katheryne is running as root (idk why but it's what it is)
 * Or don't use these commands at all
 
-#### List of root commands
+#### List of root commands (Linux)
 
 This is the list of commands requiring root permissions:
 
@@ -120,7 +129,9 @@ For security reasons, you have to find a way to allow these commands for your us
 
 ## 📦 Required applications
 
-### General
+### Linux
+
+#### General
 
 * `brightnessctl` (for brightness control)
 * `scrot` (for X11 screenshot)
@@ -130,15 +141,19 @@ For security reasons, you have to find a way to allow these commands for your us
 * `evtest` (for Wayland physical input locking)
 * `rfkill` (for enabling/disabling Bluetooth)
 
-### Taking screenshots in Wayland
+#### Taking screenshots in Wayland
 
 * `gnome-screenshot` (for GNOME-based desktop environments)
 * `spectacle` (for KDE Plasma)
 * `grim` (for other desktop environments)
 
-### Intel GPUs
+#### Intel GPUs
 
 * `intel-gpu-tools`
+
+### Windows
+
+Nothing for now besides Node.js and maybe Git. `nircmd` will be automatically installed upon setting up the BOT.
 
 ## 🚀 Usage
 
@@ -205,6 +220,7 @@ Contains the Steam configuration.
 
 | Property | Type | Description |
 | --- | --- | --- |
+| executable | `string` | Steam executable path. Usually required if you use Windows, otherwise use `steam` which is set up in `PATH` instead. |
 | default_user | `string` | Default Steam user to be logged in when using the `steam` command. Leave empty to manually select the user upon starting. |
 | wayland_enable_pipewire | `boolean` | Enable PipeWire screen capture when connecting to Steam Remote Play on Wayland. |
 | detach | `boolean` | If `true`, Steam will keep running even when the BOT stops working. |
@@ -256,13 +272,13 @@ For writing the logs directly to the console window, run this command:
 npm run debug
 ```
 
-For writing the logs to `journal` (useful for debugging serious crashes):
+For writing the logs to `journal` on Linux (useful for debugging serious crashes):
 
 ```sh
 npm run debug_journal
 ```
 
-#### Running Katheryne as root (not recommended)
+#### Running Katheryne as root on Linux (not recommended)
 
 ```sh
 sudo -E npm start
@@ -270,7 +286,7 @@ sudo -E npm start
 
 #### Autostart
 
-You can of course use your Desktop Environment's Autostart settings (or `.config/autostart`) to start Katheryne automatically after boot.
+You can of course use your Desktop Environment's Autostart settings (or Task Scheduler on Windows) to start Katheryne automatically after boot.
 
 `pm2` is not recommended in my opinion due to it invoking the BOT before starting the DE, so it may cause some unwanted issues.
 

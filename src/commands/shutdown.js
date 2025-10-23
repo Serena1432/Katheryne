@@ -50,7 +50,7 @@ module.exports.run = async function(client, message, args) {
         SessionManager.delete("currentUser");
         SessionManager.delete("steamUser");
         await Katheryne.addLog(msg, Language.strings.logs.beginShutdown);
-        Computer.exec(`shutdown -h now`);
+        Computer.shutdown();
     }
     catch (err) {
         console.error(err);

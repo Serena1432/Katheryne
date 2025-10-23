@@ -2,7 +2,6 @@ const { Message, ChatInputCommandInteraction } = require("discord.js");
 const Computer = require("./Computer");
 const Katheryne = require("./Katheryne");
 const Language = require("./Language");
-const pty = require("node-pty");
 
 class ExecSession {
     /**
@@ -26,13 +25,7 @@ class ExecSession {
      */
     execute(timeout = true) {
         if (this.process) return;
-        this.process = pty.spawn("bash", ["-c", "--", this.command], {
-            name: "xterm",
-            cols: 80,
-            rows: 30,
-            cwd: process.env.HOME,
-            env: process.env
-        });
+        this.process = Computer.spawnTerminal(this.command);
         this.setStdoutEvent();
         this.setCloseEvent();
         if (this.interactive) this.setInteractiveEvent();
@@ -110,7 +103,7 @@ class ExecSession {
      * Exit the process.
      */
     exit() {
-        if (this.process) Computer.exec(`pkill -P ${this.process.pid}`);
+        if (this.process) Computer.killProcess(`${this.process.pid}`);
     }
 }
 
